@@ -22,7 +22,7 @@ angular.module('myApp.controllers', []).
             };
             $scope.showDialog = function (shop) {
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
-                if (!angular.isUndefined($scope.selectedShop.googleShopId)) {
+                if (!angular.isUndefined($scope.selectedShop.googlePlaceId)) {
                     googleFactory.getOpeningHours().success(function (data) {
                         $scope.selectedShop.rating = data + " \/ 5";
                     });

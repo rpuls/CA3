@@ -10,6 +10,7 @@ import entity.CityInfo;
 import entity.Shop;
 import entity.User;
 import enums.Category;
+import java.util.Date;
 
 /**
  *
@@ -26,7 +27,9 @@ public class ShopMapper {
     private String website;
     private Category category;
     private String description;
-    private String googleShopId;
+    private String googlePlaceId;
+    private double rating;
+    private Date googleUpdated;
     private CityInfo cityInfo;
     private User user;
     //open/close hours
@@ -64,7 +67,9 @@ public class ShopMapper {
         }    
         category = shop.getCategory();
         description = shop.getDescription();
-        googleShopId = shop.getGoogleShopId();
+        googlePlaceId = shop.getGooglePlaceId();
+        rating = shop.getRating();
+        googleUpdated = shop.getGoogleUpdated();
         dayNullOpen = shop.getDayNullOpen();
         dayNullClose = shop.getDayNullClose();
         dayOneOpen = shop.getDayOneOpen();
@@ -85,13 +90,37 @@ public class ShopMapper {
 
     }
 
-    public String getPlaceId() {
-        return googleShopId;
+    public String getGooglePlaceId() {
+        return googlePlaceId;
     }
 
-    public void setPlaceId(String googleShopId) {
-        this.googleShopId = googleShopId;
+    public void setGooglePlaceId(String googleShopId) {
+        this.googlePlaceId = googleShopId;
 
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public Date getGoogleUpdated() {
+        return googleUpdated;
+    }
+
+    public void setGoogleUpdated(Date googleUpdated) {
+        this.googleUpdated = googleUpdated;
     }
 
     public String getName() {

@@ -30,10 +30,10 @@ angular.module('myApp.factories', []).
             var gObject = {};
             gObject.getOpeningHours = function () {
                 var shop = selectedShopFac.getSelectedShop();
-                var googleShopId = shop.googleShopId;
-                    console.log(googleShopId);
+                var googlePlaceId = shop.googlePlaceId;
+                    console.log(googlePlaceId);
                     return $http({
-                        url: 'api/shop/get/rating/' + googleShopId,
+                        url: 'api/shop/get/rating/' + googlePlaceId,
                         skipAuthorization: true,
                         method: 'GET'
                     });

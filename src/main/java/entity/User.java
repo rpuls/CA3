@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -13,10 +14,10 @@ import security.PasswordStorage;
 @Entity(name = "SEED_USER")
 public class User implements IUser, Serializable {
 
-    private String passwordHash;
-
     @Id
+    @Column(length = 15)
     private String userName;
+    private String passwordHash;
 
     @ManyToMany
     List<Role> roles;

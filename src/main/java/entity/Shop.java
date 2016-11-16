@@ -45,8 +45,10 @@ public class Shop implements Serializable {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    private String googleShopId;
-
+    private String googlePlaceId;
+    private double rating;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date googleUpdated;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updated;
@@ -91,7 +93,7 @@ public class Shop implements Serializable {
             Category category, Date updated, String street, String houseNumber,
             int dayNullOpen, int dayNullClose, int dayOneOpen, int dayOneClose, int dayTwoOpen, int dayTwoClose,
             int dayThreeOpen, int dayThreeClose, int dayFourOpen, int dayFourClose, int dayFiveOpen,
-            int dayFiveClose, int daySixOpen, int daySixClose, String googleShopId, double x, double y, double angle) {
+            int dayFiveClose, int daySixOpen, int daySixClose, String googlePlaceId, double rating, Date googleUpdated, double x, double y, double angle) {
         this(name, email, phone, description, website, category, street, houseNumber, updated);
         this.dayNullOpen = dayNullOpen;
         this.dayNullClose = dayNullClose;
@@ -107,7 +109,9 @@ public class Shop implements Serializable {
         this.dayFiveClose = dayFiveClose;
         this.daySixOpen = daySixOpen;
         this.daySixClose = daySixClose;
-        this.googleShopId = googleShopId;
+        this.googlePlaceId = googlePlaceId;
+        this.rating = rating;
+        this.googleUpdated = googleUpdated;
         this.x = x;
         this.y = y;
         this.angle = angle;
@@ -185,12 +189,28 @@ public class Shop implements Serializable {
         this.category = category;
     }
 
-    public String getGoogleShopId() {
-        return googleShopId;
+    public String getGooglePlaceId() {
+        return googlePlaceId;
     }
 
-    public void setGoogleShopId(String googleShopId) {
-        this.googleShopId = googleShopId;
+    public void setGooglePlaceId(String googlePlaceId) {
+        this.googlePlaceId = googlePlaceId;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public Date getGoogleUpdated() {
+        return googleUpdated;
+    }
+
+    public void setGoogleUpdated(Date googleUpdated) {
+        this.googleUpdated = googleUpdated;
     }
 
     public Date getUpdated() {

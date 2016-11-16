@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-click="editShop(shop)" ng-repeat="shop in shops">
+                    <tr ng-click="editShop(shop)" ng-repeat="shop in shops | filter: shopfilter">
                         <td>{{shop.id}}</td>
                         <td>{{shop.category| categoryfilter }}</td>
                         <td>{{shop.name}}</td>
