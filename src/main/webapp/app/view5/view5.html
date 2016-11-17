@@ -1,29 +1,30 @@
 <div class="container">
-    <h2>Number of Shops: {{shops.length}}</h2>
-    <input type="search" ng-model="shopfilter" placeholder="Filter shops">
-
-    <div class= row>
-        <div class="col-md-9">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>CATEGORY</td>
-                        <td>NAME</td>
-                        <td>USER</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-click="editShop(shop)" ng-repeat="shop in shops | filter: shopfilter">
-                        <td>{{shop.id}}</td>
-                        <td>{{shop.category| categoryfilter }}</td>
-                        <td>{{shop.name}}</td>
-                        <td>{{shop.user}}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" value="Number of Shops: {{shops.length}}" readonly>
+            </div>
+            <div class="col-md-8">
+                <input type="search" class="form-control" ng-model="shopfilter" placeholder="Filter shops">
+            </div>
         </div>
-
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CATEGORY</th>
+                    <th>NAME</th>
+                    <th>USER</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-click="editShop(shop)" ng-repeat="shop in shops| filter: shopfilter">
+                    <td>{{shop.id}}</td>
+                    <td>{{shop.category| categoryfilter }}</td>
+                    <td>{{shop.name}}</td>
+                    <td>{{shop.user}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
 </div>
