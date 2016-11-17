@@ -8,6 +8,7 @@ package security;
 import entity.Shop;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,11 +24,15 @@ public interface IUserFacade {
 
     IUser getUserByUserId(String id);
     
-    public Shop create(Shop shop);
+    public boolean needGoogleUpdate();
+    
+    public void googleUpdated();
+    
+    public Shop createShop(Shop shop);
     
     public List<Shop> getAllShops();
     
-    public void update(Shop shop) throws NonexistentEntityException, Exception;
+    public void updateShop(Shop shop) throws NonexistentEntityException, Exception;
     
     public void delete(Integer id) throws NonexistentEntityException;
     

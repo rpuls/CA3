@@ -11,6 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Shop;
+import facades.GoogleUpdatedJpaController;
 import facades.UserFacade;
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,17 +73,36 @@ public class ShopRest {
     public String getGoogleData(@PathParam("placeId") String placeId) throws IOException {
         JsonObject jsonObject;
         JsonObject rating;
-        String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+        String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
                 + placeId + "&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0";
         jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
         return jsonObject.get("result").getAsJsonObject().get("rating").toString();
     }
 
+    public void googleUpdate() throws IOException, Exception {
+        
+        if (facade.needGoogleUpdate()) {
+            List<entity.Shop> shops = facade.getAllShops();
+            for (Shop shop : shops) {
+                String placeId = shop.getGooglePlaceId();
+                if (placeId != null) {
+                    String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
+                            + placeId + "&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0";
+                    JsonObject jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
+                    JsonObject result = jsonObject.get("result").getAsJsonObject();
+                    shop.setRating(result.get("rating").getAsDouble());
+                    facade.updateShop(shop);
+                }
+            }
+            facade.googleUpdated();
+        }
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String getAllShops() {
-
+    public String getAllShops() throws IOException, Exception {
+        googleUpdate();
         List<entity.Shop> shops = facade.getAllShops();
         List<jsonmappers.ShopMapper> shopmappers = new ArrayList<>();
 
@@ -109,17 +129,17 @@ public class ShopRest {
     @Path("add")
     public String addShop(String content) {
         Shop s = gson.fromJson(content, Shop.class);
-        Shop newShop = facade.create(s);
+        Shop newShop = facade.createShop(s);
         return gson.toJson(newShop);
     }
-    
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Path("edit")
     public void editShop(String content) throws Exception {
         Shop s = gson.fromJson(content, Shop.class);
-        facade.update(s);
+        facade.updateShop(s);
     }
 
 }

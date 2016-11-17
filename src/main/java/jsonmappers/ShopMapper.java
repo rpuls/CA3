@@ -29,7 +29,6 @@ public class ShopMapper {
     private String description;
     private String googlePlaceId;
     private double rating;
-    private Date googleUpdated;
     private CityInfo cityInfo;
     private User user;
     //open/close hours
@@ -69,7 +68,6 @@ public class ShopMapper {
         description = shop.getDescription();
         googlePlaceId = shop.getGooglePlaceId();
         rating = shop.getRating();
-        googleUpdated = shop.getGoogleUpdated();
         dayNullOpen = shop.getDayNullOpen();
         dayNullClose = shop.getDayNullClose();
         dayOneOpen = shop.getDayOneOpen();
@@ -113,14 +111,6 @@ public class ShopMapper {
 
     public void setRating(double rating) {
         this.rating = rating;
-    }
-
-    public Date getGoogleUpdated() {
-        return googleUpdated;
-    }
-
-    public void setGoogleUpdated(Date googleUpdated) {
-        this.googleUpdated = googleUpdated;
     }
 
     public String getName() {

@@ -62,12 +62,12 @@ public class FacadeTest {
   }
   
   
-  // really stupid test to see if the method to create a shop works
+  // really stupid test to see if the method to createShop a shop works
   @Test
     public void createShopTest() {
         
         Shop s = new Shop("ToysRUS", "email@em.dk", "12345678", "Toy store", "www.trs.dk", Category.PAPE, "street", "houseNumber", new Date());
-        Shop found = facade.create(s);
+        Shop found = facade.createShop(s);
         assertEquals(found.getName(),"ToysRUS");
     }
     
