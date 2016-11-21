@@ -91,6 +91,20 @@ public class ShopRest {
                     JsonObject jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
                     JsonObject result = jsonObject.get("result").getAsJsonObject();
                     shop.setRating(result.get("rating").getAsDouble());
+//                    shop.setDayNullOpen(result.get("place.opening_hours.periods[1].open.time").getAsInt());
+//                    shop.setDayNullClose(0);
+//                    shop.getDayOneOpen();
+//                    shop.getDayOneClose();
+//                    shop.getDayTwoOpen();
+//                    shop.getDayTwoClose();
+//                    shop.getDayThreeOpen();
+//                    shop.getDayThreeClose();
+//                    shop.getDayFourOpen();
+//                    shop.getDayFourClose();
+//                    shop.getDayFiveOpen();
+//                    shop.getDayFiveClose();
+//                    shop.getDaySixOpen();
+//                    shop.getDaySixClose();
                     facade.updateShop(shop);
                 }
             }
