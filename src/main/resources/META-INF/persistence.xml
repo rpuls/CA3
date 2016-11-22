@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://46.101.219.35:3306/CA3DB?zeroDateTimeBehavior=convertToNull"/>
+            <property name="javax.persistence.jdbc.user" value="CAuser"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="10CA31"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <!--<property name="javax.persistence.sql-load-script-source" value="scripts/populate.sql"/>-->
+            <!--<property name="javax.persistence.sql-load-script-source" value="scripts/shops.sql"/>-->
+            <!--<property name="javax.persistence.sql-load-script-source" value="scripts/insert shops-undone.sql"/>-->
+            <property name="eclipselink.canonicalmodel.subpackage" value="development"/>
+        </properties>
+    </persistence-unit>
   
     <persistence-unit name="PU_TEST" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
