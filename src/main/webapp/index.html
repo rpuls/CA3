@@ -15,6 +15,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&language=en&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0"></script>
 
         
         <!-- In production use:
@@ -40,10 +41,11 @@
         <script src="app/components/factories.js"></script>
         <script src="app/components/services.js"></script>   
         <script src="app/components/controllers.js"></script>
-        <!--<link href="style.css" rel="stylesheet" type="text/css"/>-->
+        <!-- analytics tools -->
+        <script src="app/analytics/googleanalytics.js"></script>
 
     </head>
-    <body ng-app="myApp">
+    <body ng-app="myApp" onload="javascript:initGeolocation()">
         <div class="">
 
             <nav class="navbar navbar-static-top  navbar-default " role="navigation" ng-controller="AppLoginCtrl">
