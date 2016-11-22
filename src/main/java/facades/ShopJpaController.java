@@ -6,6 +6,7 @@
 package facades;
 
 import entity.Shop;
+import entity.User;
 import facades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -131,6 +132,22 @@ public class ShopJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void setUserForShop(User user, int shopId) {
+        EntityManager em = getEntityManager();
+        try {
+            Shop shop = em.find(Shop.class, shopId);
+            em.getTransaction().begin();
+            shop.setUser(user);
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
         } finally {
             em.close();
         }

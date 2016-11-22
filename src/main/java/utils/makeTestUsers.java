@@ -19,9 +19,8 @@ public class makeTestUsers {
       UserFacade facade = new UserFacade(Persistence.createEntityManagerFactory("PU"));
     try {
       System.out.println("Creating TEST Users");
-      if (em.find(User.class, "user") == null) {
         em.getTransaction().begin();
-//        Role userRole = new Role("User");
+        Role userRole = new Role("User");
 //        Role adminRole = new Role("Admin");
 //        User user = new User("user", "test");
 //        user.addRole(userRole);
@@ -37,13 +36,13 @@ public class makeTestUsers {
 //        em.persist(both);
 //        em.getTransaction().commit();
 //        System.out.println("Created TEST Users");
-        Role role = facade.getUserRole("User");
-        User shopOwner = new User("Shop_Owner","test");
-        shopOwner.addRole(role);
+//        Role role = facade.getUserRole("User");
+        User shopOwner = new User("owner","test");
+        shopOwner.addRole(userRole);
         em.persist(shopOwner);
         em.getTransaction().commit();
         System.out.println("Created Shop User");
-      }
+      
     } catch (Exception ex) {
       Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
         System.out.println("GET's IN HERE: rollback");

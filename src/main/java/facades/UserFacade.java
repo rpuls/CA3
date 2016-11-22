@@ -48,9 +48,6 @@ public class UserFacade implements IUserFacade {
     @Override
     public List<String> authenticateUser(String userName, String password) {
         IUser user = getUserByUserId(userName);
-        System.out.println("USERNAME entered:" + userName);
-        System.out.println("PASSWORD entered:" + password);
-        System.out.println("user from DB:" + user.getUserName() + user.getPassword());
         try {
             return user != null && PasswordStorage.verifyPassword(password, user.getPassword()) ? user.getRolesAsStrings() : null;
         } catch (PasswordStorage.CannotPerformOperationException | PasswordStorage.InvalidHashException ex) {
@@ -107,31 +104,19 @@ public class UserFacade implements IUserFacade {
         }
     }
     
-    public User addUser(User p) {
+    public User addUser(User user) {
         EntityManager em = getEntityManager();
         
         try {
             em.getTransaction().begin();
-            String hashPW = PasswordStorage.createHash(p.getPassword());
-            p.setPassword(hashPW);
-            em.persist(p);
+            em.persist(user);
             em.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e);
-            
+        } catch (Exception ex) {
+            Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
+             em.getTransaction().rollback();     
         } finally {
             em.close();
         }
-            return p;
+            return user;
     }
-    
-    public Role getUserRole(String roleName) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(Role.class, roleName);
-        } finally {
-            em.close();
-        }
-    }
-
 }

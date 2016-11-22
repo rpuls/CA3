@@ -76,4 +76,16 @@ public class User implements IUser, Serializable {
         return userName;
     }
 
+    public List<Shop> getShops() {
+        return shops;
+    }
+
+    public void addShop(Shop shop) {
+        if (shops == null) {
+            shops = new ArrayList();
+        }
+        shops.add(shop);
+        shop.setUser(this);
+    }
+
 }

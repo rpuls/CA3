@@ -1,11 +1,14 @@
 package test;
 
 import entity.Role;
+import entity.Shop;
 import entity.User;
+import facades.ShopJpaController;
 import facades.UserFacade;
 import java.util.HashMap;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import security.IUser;
 import security.PasswordStorage;
 
 public class Structure
@@ -21,13 +24,17 @@ public class Structure
 //        Persistence.generateSchema("PU", null);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade facade = new UserFacade(emf);
-//        User p = new User("VINTRO_user","test");
-        Role r = facade.getUserRole("User");
-//        p.addRole(r);
-//        facade.addUser(p);
-        User p1 = new User("TEMPLE_user","test");
-        p1.addRole(r);
-        facade.addUser(p1);
+//        Role r = new Role("User");
+//        User p1 = new User("vintro_user","test");
+//        p1.addRole(r);
+//        facade.addUser(p1);
+
+        ShopJpaController ctrl = new ShopJpaController(emf);
+        User user = (User) facade.getUserByUserId("vintro_user");
+//        Shop shop = ctrl.findShopByName("VINTRO");
+        Shop shop = ctrl.findShop(124);
+        user.addShop(shop);
+        ctrl.setUserForShop(user, 124);
         
     }
 }

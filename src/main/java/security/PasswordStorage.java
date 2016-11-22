@@ -159,8 +159,6 @@ public class PasswordStorage
         // Compare the hashes in constant time. The password is correct if
         // both hashes match.
         
-            System.out.println("PASSWORD entered:"+hash);
-            System.out.println("PASSWORD from DB:"+testHash);
         return slowEquals(hash, testHash);
     }
 
@@ -169,9 +167,6 @@ public class PasswordStorage
         int diff = a.length ^ b.length;
         for(int i = 0; i < a.length && i < b.length; i++)
             diff |= a[i] ^ b[i];
-        System.out.println("BYTE A" + a);
-        System.out.println("BYTE B" + b);
-        System.out.println("DIFF" + diff);
         return diff == 0;
     }
 
