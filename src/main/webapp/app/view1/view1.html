@@ -14,14 +14,13 @@
     .shop {
         position: absolute;
         font-size: 0.7vw;
-
     }
+
 </style>
 <script>
-    
     var positions = [{name: "Nørreport_Station", gps_pos: new google.maps.LatLng(55.6831194, 12.5715059), css_pos: {top: "96.5%", left: "45%"}}];
     positions.push({name: "Nørrebro_Station", gps_pos: new google.maps.LatLng(55.7008504, 12.5356172), css_pos: {top: "3%", left: "45%"}});
-    
+
     function initGeolocation() {
         if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -29,30 +28,30 @@
             console.log('Geolocation is not supported');
         }
     }
-    
+
     function errorCallback() {}
-    
+
     function successCallback(position) {
-        
+
         var _yourCord = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        
+
         min = google.maps.geometry.spherical.computeDistanceBetween(positions[0].gps_pos, _yourCord);
-        positionsIndex=0;
+        positionsIndex = 0;
         for (var i = 1; i < positions.length; i++) {
             dist = google.maps.geometry.spherical.computeDistanceBetween(positions[i].gps_pos, _yourCord);
-            if(min>dist){
-                min=dist;
-                positionsIndex=i;
+            if (min > dist) {
+                min = dist;
+                positionsIndex = i;
             }
         }
-        
+
         console.log(positions[positionsIndex].name);
-        
-        $("#mapPos").css("left",positions[positionsIndex].css_pos.left);
-        $("#mapPos").css("top",positions[positionsIndex].css_pos.top);
-        
+
+        $("#mapPos").css("left", positions[positionsIndex].css_pos.left);
+        $("#mapPos").css("top", positions[positionsIndex].css_pos.top);
+
     }
-    
+
 </script>
 
 </head>
@@ -60,11 +59,17 @@
 
     <div id="mapDiv" map-dir="">
         <div  ng-repeat="shop in shops">
-            <span ng-click="showDialog(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
+            <span ng-click="showDialog(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
+                  -webkit-transform: rotate({{shop.angle}}deg); 
+                  -moz-transform: rotate({{shop.angle}}deg); 
+                  -o-transform: rotate({{shop.angle}}deg);
+                  transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
             <span  id="mapPos" style="position: absolute; width: 100%; height: auto;">
                 <img class="img-responsive" ng-src="app/view1/images/dot.png" style="width: 1.5%; height: 1.5%; opacity: 0.5; filter: alpha(opacity=50);"/>
 
             </span>
         </div>
     </div>
+
+
 

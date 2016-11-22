@@ -9,8 +9,3 @@ angular.module('myApp.view1', ['ngRoute'])
                     controllerAs: 'ctrl'
                 });
             }]);
-
-       
-        
-        
-
