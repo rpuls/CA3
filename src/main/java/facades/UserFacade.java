@@ -1,6 +1,7 @@
 package facades;
 
 import entity.GoogleUpdated;
+import entity.Role;
 import entity.Shop;
 import security.IUserFacade;
 import entity.User;
@@ -47,6 +48,9 @@ public class UserFacade implements IUserFacade {
     @Override
     public List<String> authenticateUser(String userName, String password) {
         IUser user = getUserByUserId(userName);
+        System.out.println("USERNAME entered:" + userName);
+        System.out.println("PASSWORD entered:" + password);
+        System.out.println("user from DB:" + user.getUserName() + user.getPassword());
         try {
             return user != null && PasswordStorage.verifyPassword(password, user.getPassword()) ? user.getRolesAsStrings() : null;
         } catch (PasswordStorage.CannotPerformOperationException | PasswordStorage.InvalidHashException ex) {
@@ -100,6 +104,33 @@ public class UserFacade implements IUserFacade {
             googleUpdated.create(new GoogleUpdated(new Date()));
         }  catch (Exception ex) {
             Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public User addUser(User p) {
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            String hashPW = PasswordStorage.createHash(p.getPassword());
+            p.setPassword(hashPW);
+            em.persist(p);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            
+        } finally {
+            em.close();
+        }
+            return p;
+    }
+    
+    public Role getUserRole(String roleName) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Role.class, roleName);
+        } finally {
+            em.close();
         }
     }
 
