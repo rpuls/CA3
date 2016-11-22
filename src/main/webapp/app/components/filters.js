@@ -114,7 +114,7 @@ angular.module('myApp.filters', [])
                         out = "LEARN & SCHOOL";
                         break;
                     case "HINS":
-                        out = " HELP - I NEED SOMEBODY";
+                        out = "HELP - I NEED SOMEBODY";
                         break;
                     case "HOHY":
                         out = "HOME & HYGGE";
