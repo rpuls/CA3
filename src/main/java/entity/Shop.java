@@ -67,7 +67,7 @@ public class Shop implements Serializable {
     // @Column(name = "CITYINFO")
     @JoinColumn(name = "CITYINFO", referencedColumnName = "ZIP")
     private CityInfo cityInfo;
-
+    
     //open/close hours
     private int dayNullOpen;
     private int dayNullClose;
