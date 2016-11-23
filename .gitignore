@@ -11,5 +11,5 @@ derby.log
 
 nb-configuration.xml
 
-/src/main/resources/META-INF
+/src/main/resources/META-INF/persistence.xml
 /nbproject/
