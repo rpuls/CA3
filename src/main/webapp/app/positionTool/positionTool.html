@@ -14,6 +14,7 @@
     .shop {
         position: absolute;
         font-size: 0.7vw;
+        cursor: pointer;
     }
 
 </style>
@@ -21,23 +22,23 @@
 
 </head>
 <body>
-    <div ng-controller="placeShopCtrl" class="container">
-        <form class="form-horizontal" ng-submit="saveShop()">
+    <div class="container">
+        <form class="form-horizontal" ng-submit="saveShop(selectedShop)">
             <fieldset>
                 <div class="col-xs-4">
-                    <input type="text" ng-model="shop.name" class="form-control" id="name" placeholder="Name">
+                    <input type="text" ng-model="selectedShop.name" class="form-control" id="name" placeholder="Name">
                 </div>
                 <div class="col-xs-2">
-                    <input type="text" ng-model="shop.x" class="form-control" id="x" placeholder="x"> 
+                    <input type="text" ng-model="selectedShop.x" class="form-control" id="x" placeholder="x"> 
                 </div>
                 <div class="col-xs-2">
-                    <input type="text" ng-model="shop.y" class="form-control" id="y" placeholder="y">
+                    <input type="text" ng-model="selectedShop.y" class="form-control" id="y" placeholder="y">
                 </div>
                 <div class="col-xs-2">
-                    <input type="text" ng-model="shop.angle" class="form-control" id="angle" placeholder="degrees">
+                    <input type="text" ng-model="selectedShop.angle" class="form-control" id="angle" placeholder="degrees">
                 </div>
                 <div class="col-xs-1">
-                    <button ng-click="placeShop(shop)" class="btn btn-primary">place shop</button>
+                    <button ng-click="placeShop()" class="btn btn-primary">place shop</button>
                 </div>
                 <div class="col-xs-1">
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -48,15 +49,14 @@
 
 
 
-    <div ng-controller="positionCtrl" id="mapDiv" map-dir="">
+    <div id="mapDiv" map-dir="">
         <div  ng-repeat="shop in shops">
-            <span ng-click="selectShop(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
+            <span draggable ng-click="selectShop(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
                   -webkit-transform: rotate({{shop.angle}}deg); 
                   -moz-transform: rotate({{shop.angle}}deg); 
                   -o-transform: rotate({{shop.angle}}deg);
                   transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
         </div>
     </div>
-
 
 

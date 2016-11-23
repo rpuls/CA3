@@ -46,7 +46,7 @@ angular.module('myApp.controllers', []).
                         $http.post('api/shop/add', $scope.shop)
                                 .success(function (data) {
                                     $timeout(function () {
-                                        $location.path("#/view4");
+                                        $location.path("/view5");
                                     }, 100);
                                 })
                                 .error(function (data) {
@@ -56,7 +56,7 @@ angular.module('myApp.controllers', []).
                         $http.post('api/shop/edit', $scope.shop)
                                 .success(function (data) {
                                     $timeout(function () {
-                                        $location.path("#/view4");
+                                        $location.path("/view5");
                                     }, 100);
                                 })
                                 .error(function (data) {
