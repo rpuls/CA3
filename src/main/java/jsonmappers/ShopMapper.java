@@ -30,7 +30,7 @@ public class ShopMapper {
     private String googlePlaceId;
     private double rating;
     private CityInfo cityInfo;
-    private User user;
+    private UserMapper user;
     //open/close hours
     private int dayNullOpen;
     private int dayNullClose;
@@ -59,7 +59,7 @@ public class ShopMapper {
         phone = shop.getPhone();
         email = shop.getEmail();
         cityInfo = shop.getCityInfo();
-        user = shop.getUser();
+        user = new UserMapper(shop.getUser());
         website = shop.getWebsite();
         if(website == null){
             website="NA";
@@ -185,11 +185,11 @@ public class ShopMapper {
         this.cityInfo = cityInfo;
     }
 
-    public User getUser() {
+    public UserMapper getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserMapper user) {
         this.user = user;
     }
 
