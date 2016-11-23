@@ -4,6 +4,7 @@ import enums.Category;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Shop implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
     private static final long serialVersionUID = 1L;

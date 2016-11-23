@@ -10,6 +10,8 @@ import entity.User;
 import facades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -137,17 +139,15 @@ public class ShopJpaController implements Serializable {
         }
     }
     
-    public void setUserForShop(User user, int shopId) {
+    public void setUserForShop(User user,Shop shop) {
         EntityManager em = getEntityManager();
         try {
-            Shop shop = em.find(Shop.class, shopId);
             em.getTransaction().begin();
-            shop.setUser(user);
+            em.persist(shop);
             em.getTransaction().commit();
-
         } catch (Exception e) {
-            System.out.println(e);
-            throw e;
+            System.out.println("ROLLBACK!!!!"+e.getMessage());
+             em.getTransaction().rollback();   
         } finally {
             em.close();
         }
