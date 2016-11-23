@@ -59,11 +59,15 @@ public class ShopMapper {
         phone = shop.getPhone();
         email = shop.getEmail();
         cityInfo = shop.getCityInfo();
-        user = new UserMapper(shop.getUser());
+        if (shop.getUser() != null) {
+            user = new UserMapper(shop.getUser());
+        } else{
+            user = null;
+        }
         website = shop.getWebsite();
-        if(website == null){
-            website="NA";
-        }    
+        if (website == null) {
+            website = "NA";
+        }
         category = shop.getCategory();
         description = shop.getDescription();
         googlePlaceId = shop.getGooglePlaceId();
@@ -192,7 +196,7 @@ public class ShopMapper {
     public void setUser(UserMapper user) {
         this.user = user;
     }
-
+    
     public int getDayNullOpen() {
         return dayNullOpen;
     }
