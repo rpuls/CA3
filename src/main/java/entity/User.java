@@ -21,10 +21,10 @@ public class User implements IUser, Serializable {
     private String passwordHash;
 
     @ManyToMany
-    List<Role> roles;
+    private transient List<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    private List<Shop> shops;
+    private transient List<Shop> shops;
 
     public User() {
     }

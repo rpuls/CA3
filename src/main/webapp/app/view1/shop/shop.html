@@ -33,6 +33,9 @@
     .mr5{
         margin-right: 5px;
     }
+    .mb5{
+        margin-bottom: 5px;
+    }
     .mb10{
         margin-bottom: 10px;
     }
@@ -91,37 +94,37 @@
         </div>
         <div class="col-xs-12 col-md-6 mb10">
             <div class="">
-                <div class="label label-info col-xs-5">ADDRESS:</div>
+                <div class="label label-info col-xs-5 mb5">ADDRESS:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.street}} {{selectedShop.houseNumber}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5">CITY:</div>
+                <div class="label label-info col-xs-5 mb5">CITY:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.cityInfo.zipCode}} {{selectedShop.cityInfo.city}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5">PHONE:</div>
+                <div class="label label-info col-xs-5 mb5">PHONE:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.phone | phoneFilter}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5">EMAIL:</div>
+                <div class="label label-info col-xs-5 mb5">EMAIL:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.email}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5">OPENING HOURS:</div>
+                <div class="label label-info col-xs-5 mb5">OPENING HOURS:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.dayNullOpen | hourFilter}} - {{selectedShop.dayNullClose | hourFilter}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5">WEBSITE:</div> 
-                <div class="spanAsBlock col-xs-7"><a href="{{selectedShop.website | hrefFilter}}">{{selectedShop.website | linkTxtFilter}}</a></div>
+                <div class="label label-info col-xs-5 mb5">WEBSITE:</div> 
+                <div class="spanAsBlock col-xs-7"><a href="{{selectedShop.website | hrefFilter}}">l {{selectedShop.website | linkTxtFilter}}</a></div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5">RATING:</div>
+                <div class="label label-info col-xs-5 mb5">RATING:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.rating}}</div>
                 <div class="clearfix"></div>
             </div> <!-- {{selectedGoogleShop.result.rating}}-->
