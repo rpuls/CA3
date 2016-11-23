@@ -21,7 +21,7 @@ public class User implements IUser, Serializable {
     private String passwordHash;
 
     @ManyToMany
-    private transient List<Role> roles;
+    private List<Role> roles;
 
     @OneToMany(mappedBy = "user")
     private transient List<Shop> shops;

@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 public class Shop implements Serializable {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private User user;
+    private transient User user;
 
     private static final long serialVersionUID = 1L;
     @Id
