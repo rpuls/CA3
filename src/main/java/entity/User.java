@@ -23,7 +23,7 @@ public class User implements IUser, Serializable {
     List<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    private List<Shop> shops;
+    private transient List<Shop> shops;
 
     public User() {
     }

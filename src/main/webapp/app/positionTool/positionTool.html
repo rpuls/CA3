@@ -1,0 +1,62 @@
+<style>
+    #mapDiv {
+        background-image: url("app/view1/images/clean-map.png");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        width:100%;
+    }
+
+    .shop {
+        position: absolute;
+        font-size: 0.7vw;
+    }
+
+</style>
+
+
+</head>
+<body>
+    <div ng-controller="placeShopCtrl" class="container">
+        <form class="form-horizontal" ng-submit="saveShop()">
+            <fieldset>
+                <div class="col-xs-4">
+                    <input type="text" ng-model="shop.name" class="form-control" id="name" placeholder="Name">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="shop.x" class="form-control" id="x" placeholder="x"> 
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="shop.y" class="form-control" id="y" placeholder="y">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="shop.angle" class="form-control" id="angle" placeholder="degrees">
+                </div>
+                <div class="col-xs-1">
+                    <button ng-click="placeShop(shop)" class="btn btn-primary">place shop</button>
+                </div>
+                <div class="col-xs-1">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+
+    <div ng-controller="positionCtrl" id="mapDiv" map-dir="">
+        <div  ng-repeat="shop in shops">
+            <span ng-click="selectShop(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
+                  -webkit-transform: rotate({{shop.angle}}deg); 
+                  -moz-transform: rotate({{shop.angle}}deg); 
+                  -o-transform: rotate({{shop.angle}}deg);
+                  transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
+        </div>
+    </div>
+
+
+

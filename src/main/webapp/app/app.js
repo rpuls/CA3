@@ -13,6 +13,7 @@ angular.module('myApp', [
   'myApp.view4',
   'myApp.view5',
   'myApp.userEditShop',
+  'myApp.positionTool',
   'myApp.documentation',
   'myApp.filters',
   'myApp.directives',
