@@ -8,7 +8,7 @@ angular.module('myApp', [
   'ui.bootstrap',
   'myApp.security',
   'myApp.view1',
-  'myApp.view2',
+  'myApp.login',
   'myApp.view3',
   'myApp.shopDetailsView',
   'myApp.view5',
