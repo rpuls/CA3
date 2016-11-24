@@ -1,7 +1,6 @@
 package facades;
 
 import entity.GoogleUpdated;
-import entity.Role;
 import entity.Shop;
 import security.IUserFacade;
 import entity.User;
@@ -57,25 +56,30 @@ public class UserFacade implements IUserFacade {
     }
 
     //Create
+    @Override
     public Shop createShop(Shop shop) {
         return shopCtrl.create(shop);
     }
 
     //Retrieve
+    @Override
     public List<Shop> getAllShops() {
         return shopCtrl.findShopEntities();
     }
     //Retrieve
+    @Override
     public List<Shop> getShopByUser(String username) {
         return shopCtrl.findShopByUser(username);
     }
 
     //Update
+    @Override
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception {
         shopCtrl.edit(shop);
     }
 
     //Delete
+    @Override
     public void delete(Integer id) throws NonexistentEntityException {
         shopCtrl.destroy(id);
     }
@@ -122,5 +126,24 @@ public class UserFacade implements IUserFacade {
             em.close();
         }
             return user;
+    }
+    
+    public void setUserToAShop(User user, int shop){
+        shopCtrl.setUserToAShop(user, shop);
+    }
+    
+    public String getShopUser(int shopId){
+        EntityManager em = getEntityManager();
+        String username = "";
+        try {
+            Shop shop = em.find(Shop.class, shopId);
+            username = shop.getUser().getUserName();
+        } catch (Exception ex) {
+            Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
+             em.getTransaction().rollback();     
+        } finally {
+            em.close();
+        }
+        return username;
     }
 }

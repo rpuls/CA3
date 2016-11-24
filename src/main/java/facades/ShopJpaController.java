@@ -7,18 +7,13 @@ package facades;
 
 import entity.Shop;
 import entity.User;
-import entity.development.Shop_;
 import facades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -135,7 +130,6 @@ public class ShopJpaController implements Serializable {
             String query = "SELECT s FROM Shop s WHERE s.user.userName=:user";
            Query q = em.createQuery(query);
             q.setParameter("user", user);
-//            q.executeUpdate();
             return q.getResultList();
 
         } finally {
@@ -173,22 +167,15 @@ public class ShopJpaController implements Serializable {
     public void setUserToAShop(User user,int shopId){
         EntityManager em = getEntityManager();
         try {
-//            Shop s = findShop(shopId);
-//            String query = "UPDATE Shop SET user.userName=:user WHERE id=:id";
-//            Query q = em.createQuery(query);
-//            q.setParameter("user", user.getUserName());
-//            q.setParameter("id", shopId);
-//            q.executeUpdate();
+            Shop shop = em.find(Shop.class, shopId);
 
-                Shop shop = em.find(Shop.class, shopId);
- 
-    em.getTransaction().begin();
-    shop.setUser(user);
-    shop.setUsername(user.getUserName());
-    em.getTransaction().commit();
+            em.getTransaction().begin();
+            shop.setUser(user);
+            shop.setUsername(user.getUserName());
+            em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("ROLLBACK!!!!"+e.getMessage());
-             em.getTransaction().rollback();  
+            System.out.println("ROLLBACK!!!!" + e.getMessage());
+            em.getTransaction().rollback();  
             
         } finally {
             em.close();

@@ -27,12 +27,12 @@ public class Structure
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade facade = new UserFacade(emf);
         Role r = new Role("User");
-        User p1 = new User("temple_user","test");
+        User p1 = new User("susu_user","test");
         p1.addRole(r);
-        facade.addUser(p1);
+//        facade.addUser(p1);
 
         ShopJpaController ctrl = new ShopJpaController(emf);
-        ctrl.setUserToAShop(p1, 125);
+        ctrl.setUserToAShop(p1, 298);
         
     }
 }
