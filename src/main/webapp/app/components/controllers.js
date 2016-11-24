@@ -30,7 +30,7 @@ angular.module('myApp.controllers', []).
                     $scope.selectedShop.rating = "no ratings";
                 }
                 $uibModal.open({
-                    templateUrl: 'app/view1/shop/shop.html',
+                    templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
                 });
             };
@@ -90,7 +90,7 @@ angular.module('myApp.controllers', []).
                     $scope.selectedShop.rating = "no ratings";
                 }
                 $uibModal.open({
-                    templateUrl: 'app/view1/shop/shop.html',
+                    templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
                 });
             };

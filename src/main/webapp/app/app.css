@@ -29,9 +29,7 @@ ol.list > li:before {
     counter-increment: li-counter;
 }
 input:invalid {
-  background: hsla(0, 90%, 70%, 1);
+  border: red;
+  border-style: solid;
 }
 
-input:valid {
-  background: hsla(100, 90%, 70%, 1);
-}

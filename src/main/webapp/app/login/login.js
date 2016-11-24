@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.login', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/login', {
@@ -19,7 +19,7 @@ angular.module('myApp.view2', ['ngRoute'])
                     $rootScope.$broadcast("loginEvent",{token:data.token, status:true});
                       $timeout(function(){
                           
-                      $location.path("#/view1");
+                      $location.path("#/home");
                       },100);
                     })
                     .error(function (data) {
