@@ -38,7 +38,11 @@ angular.module('myApp.directives', [])
                     element.bind('click',function (event) {
                         if ( window.confirm(msg) ) {
                             scope.$eval(clickAction);
+                            event.preventDefault();
+//                            $location.path('/shopDetailsView');
                         }
+//                        if(event && !confirmed){
+//                        }
                     });
                 }
             };

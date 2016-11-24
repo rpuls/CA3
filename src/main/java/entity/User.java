@@ -89,4 +89,8 @@ public class User implements IUser, Serializable {
         shop.setUser(this);
     }
 
+    public void setUserName(String username) {
+        this.userName = username;
+    }
+
 }

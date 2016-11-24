@@ -32,7 +32,8 @@
           <div class="form-group">
             <label for="Website" class="control-label col-xs-3"><span class="label label-info">WEBSITE:</span></label>
             <div class="col-xs-6">
-              {{shop.website}}
+                <!--<a href="{{shop.website}}">{{shop.website}}</a>-->
+                {{shop.website}}
             </div>
           </div>
           <div class="form-group">
@@ -63,43 +64,43 @@
                     <div class="form-group">
                         <label for="Monday" class="control-label col-xs-3"><span class="label label-info">MONDAY:</span></label>
                         <div class="col-xs-6">
-                            {{shop.dayNullOpen}} - {{shop.dayNullClose}}
+                            {{shop.dayNullOpen | hourFilter }} - {{shop.dayNullClose | hourFilter}}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Tuesday" class="control-label col-xs-3"><span class="label label-info">TUESDAY:</span></label>
                         <div class="col-xs-6">
-                            {{shop.dayOneOpen}} - {{shop.dayOneClose}}
+                            {{shop.dayOneOpen | hourFilter }} - {{shop.dayOneClose | hourFilter}}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Wednesday" class="control-label col-xs-3"><span class="label label-info">WEDNESDAY:</span></label>
                         <div class="col-xs-6">
-                            {{shop.dayTwoOpen}} - {{shop.dayTwoClose}}
+                            {{shop.dayTwoOpen | hourFilter }} - {{shop.dayTwoClose | hourFilter }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Thursday" class="control-label col-xs-3"><span class="label label-info">THURSDAY:</span></label>
                         <div class="col-xs-6">
-                            {{shop.dayThreeOpen}} - {{shop.dayThreeClose}}
+                            {{shop.dayThreeOpen | hourFilter }} - {{shop.dayThreeClose | hourFilter }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Friday" class="control-label col-xs-3"><span class="label label-info">FRIDAY:</span></label>
                         <div class="col-xs-6">
-                            {{shop.dayFourOpen}} - {{shop.dayFourClose}}
+                            {{shop.dayFourOpen | hourFilter }} - {{shop.dayFourClose | hourFilter }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Saturday" class="control-label col-xs-3"><span class="label label-info">SATURDAY</span></label>
                         <div class="col-xs-6">
-                            {{shop.dayFiveOpen}} - {{shop.dayFiveClose}}
+                            {{shop.dayFiveOpen | hourFilter }} - {{shop.dayFiveClose | hourFilter }}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Sunday" class="control-label col-xs-3"><span class="label label-info">SUNDAY:</span></label>
                         <div class="col-xs-6">
-                            {{shop.daySixOpen}} - {{shop.daySixClose}}
+                            {{shop.daySixOpen | hourFilter }} - {{shop.daySixClose | hourFilter }}
                         </div>
                     </div>
                 </fieldset>

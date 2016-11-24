@@ -156,7 +156,7 @@ public class ShopJpaController implements Serializable {
         }
     }
     
-    public void setUserForShop(User user,Shop shop) {
+    public void addShopWithUser(User user,Shop shop) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -169,5 +169,32 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public void setUserToAShop(User user,int shopId){
+        EntityManager em = getEntityManager();
+        try {
+//            Shop s = findShop(shopId);
+//            String query = "UPDATE Shop SET user.userName=:user WHERE id=:id";
+//            Query q = em.createQuery(query);
+//            q.setParameter("user", user.getUserName());
+//            q.setParameter("id", shopId);
+//            q.executeUpdate();
+
+                Shop shop = em.find(Shop.class, shopId);
+ 
+    em.getTransaction().begin();
+    shop.setUser(user);
+    shop.setUsername(user.getUserName());
+    em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("ROLLBACK!!!!"+e.getMessage());
+             em.getTransaction().rollback();  
+            
+        } finally {
+            em.close();
+        }
+    }
+    
+    
     
 }
