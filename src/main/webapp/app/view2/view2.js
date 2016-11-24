@@ -9,10 +9,12 @@ angular.module('myApp.view2', ['ngRoute'])
             });
           }])
 
-     .controller('LogInCtrl', ["$window","$rootScope","$location","$http","$scope","$timeout",function($window,$rootScope,$location,$http,$scope,$timeout) {
+     .controller('LogInCtrl', ["$window","$rootScope","$location","$http","$scope","$timeout","userFactory",function($window,$rootScope,$location,$http,$scope,$timeout,userFactory) {
+             
    $scope.login = function () {
             $http.post('api/login', $scope.user)
                     .success(function (data) {
+                      userFactory.setUser($scope.user.username);
                       $window.sessionStorage.id_token = data.token;
                     $rootScope.$broadcast("loginEvent",{token:data.token, status:true});
                       $timeout(function(){

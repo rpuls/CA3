@@ -1,0 +1,134 @@
+
+<div class="container">
+
+<div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
+     <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" value="Number of Shops: {{shops.length}}" readonly>
+            </div>
+        </div>
+    
+        <form class="form-horizontal" ng-repeat="shop in shops| filter: shopfilter">
+        <fieldset >
+          <legend>Shop ID: {{shop.id}}</legend>
+          <div class="form-group">
+            <label for="category" class="control-label col-xs-3" ><span class="label label-info">CATEGORY:</span></label>
+            <div class="col-xs-6">
+              {{shop.category| categoryfilter }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Name" class="control-label col-xs-3"><span class="label label-info">NAME:</span></label>
+            <div class="col-xs-6">
+              {{shop.name}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Description" class="control-label col-xs-3"><span class="label label-info">DESCRIPTION:</span></label>
+            <div class="col-xs-6">
+              {{shop.description}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Website" class="control-label col-xs-3"><span class="label label-info">WEBSITE:</span></label>
+            <div class="col-xs-6">
+              {{shop.website}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Email" class="control-label col-xs-3"><span class="label label-info">EMAIL:</span></label>
+            <div class="col-xs-6">
+              {{shop.email}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Phone" class="control-label col-xs-3"><span class="label label-info">PHONE:</span></label>
+            <div class="col-xs-6">
+              {{shop.phone}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="Address" class="control-label col-xs-3"><span class="label label-info">ADDRESS:</span></label>
+            <div class="col-xs-6">
+              {{shop.street}} {{shop.houseNumber}}
+            </div>
+          </div>
+          
+        </fieldset>
+          <!--
+            opening hours
+            -->
+                <fieldset>
+                    <legend>Opening hours. <i>format: 0000 - 2359</i></legend>
+                    <div class="form-group">
+                        <label for="Monday" class="control-label col-xs-3"><span class="label label-info">MONDAY:</span></label>
+                        <div class="col-xs-6">
+                            {{shop.dayNullOpen}} - {{shop.dayNullClose}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Tuesday" class="control-label col-xs-3"><span class="label label-info">TUESDAY:</span></label>
+                        <div class="col-xs-6">
+                            {{shop.dayOneOpen}} - {{shop.dayOneClose}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Wednesday" class="control-label col-xs-3"><span class="label label-info">WEDNESDAY:</span></label>
+                        <div class="col-xs-6">
+                            {{shop.dayTwoOpen}} - {{shop.dayTwoClose}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Thursday" class="control-label col-xs-3"><span class="label label-info">THURSDAY:</span></label>
+                        <div class="col-xs-6">
+                            {{shop.dayThreeOpen}} - {{shop.dayThreeClose}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Friday" class="control-label col-xs-3"><span class="label label-info">FRIDAY:</span></label>
+                        <div class="col-xs-6">
+                            {{shop.dayFourOpen}} - {{shop.dayFourClose}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Saturday" class="control-label col-xs-3"><span class="label label-info">SATURDAY</span></label>
+                        <div class="col-xs-6">
+                            {{shop.dayFiveOpen}} - {{shop.dayFiveClose}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Sunday" class="control-label col-xs-3"><span class="label label-info">SUNDAY:</span></label>
+                        <div class="col-xs-6">
+                            {{shop.daySixOpen}} - {{shop.daySixClose}}
+                        </div>
+                    </div>
+                </fieldset>
+           
+            <!--
+            Position
+            -->
+                <fieldset>
+                    <legend>Position on map</legend>
+                    <div class="form-group">
+                        <label for="x" class="control-label col-xs-3"><span class="label label-info">X:</span></label>
+                        <div class="col-xs-4">
+                            {{shop.x}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="y" class="control-label col-xs-3"><span class="label label-info">Y:</span></label>
+                        <div class="col-xs-4">
+                            {{shop.y}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="angle" class="control-label col-xs-3"><span class="label label-info">ANGLE:</span></label>
+                        <div class="col-xs-4">
+                            {{shop.angle}} degrees
+                        </div>
+                    </div>
+        </fieldset>
+            <button ng-click="editShop(shop)">MAKE SOME CHANGES</button>
+      </form>
+    </div>
+ </div>

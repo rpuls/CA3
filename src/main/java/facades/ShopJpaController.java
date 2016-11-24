@@ -7,6 +7,7 @@ package facades;
 
 import entity.Shop;
 import entity.User;
+import entity.development.Shop_;
 import facades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -121,6 +124,20 @@ public class ShopJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Shop.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Shop> findShopByUser(String user) {
+        EntityManager em = getEntityManager();
+        try {
+            String query = "SELECT s FROM Shop s WHERE s.user.userName=:user";
+           Query q = em.createQuery(query);
+            q.setParameter("user", user);
+//            q.executeUpdate();
+            return q.getResultList();
+
         } finally {
             em.close();
         }

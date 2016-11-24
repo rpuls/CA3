@@ -65,6 +65,10 @@ public class UserFacade implements IUserFacade {
     public List<Shop> getAllShops() {
         return shopCtrl.findShopEntities();
     }
+    //Retrieve
+    public List<Shop> getShopByUser(String username) {
+        return shopCtrl.findShopByUser(username);
+    }
 
     //Update
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception {

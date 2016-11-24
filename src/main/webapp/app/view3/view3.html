@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
-        <form class="form-horizontal" ng-submit="saveShop()">
+        <form class="form-horizontal">
             <div class="col-md-6">
                 <fieldset >
                     <legend>SHOP: {{shop.id}}</legend>
@@ -161,7 +161,27 @@
                 </fieldset>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <!--DOES NOTHING YET-->
+<!--            <div class="form-group">
+                <h4>Upload on file select</h4>
+
+                <button ngf-select="uploadFiles($files)" multiple 
+                        accept="image/*">Select Files</button>
+                <br>
+                <br>Files:
+                <ul>
+                    <li ng-repeat="f in files" style="font:smaller">
+                        {{f.name}}
+                    </li>
+                </ul>
+                <span class="progress" ng-show="progress >= 0">
+                    <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                </span>
+                {{errorMsg}}
+            </div>-->
+
+
+            <button ng-click="saveShop()" ng-confirm-click="Are you sure you want save these changes?">Save</button>
         </form>
     </div>
 </div>

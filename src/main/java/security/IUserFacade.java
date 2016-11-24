@@ -35,5 +35,6 @@ public interface IUserFacade {
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception;
     
     public void delete(Integer id) throws NonexistentEntityException;
+     public List<Shop> getShopByUser(String username);
     
 }

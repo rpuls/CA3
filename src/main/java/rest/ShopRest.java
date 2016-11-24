@@ -126,6 +126,21 @@ public class ShopRest {
 
         return gson.toJson(shopmappers);
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("usershop/{user}")
+    public String getUserShop(@PathParam("user") String user) throws IOException, Exception {
+        googleUpdate();
+        List<entity.Shop> shops = facade.getShopByUser(user);
+        List<jsonmappers.ShopMapper> shopmappers = new ArrayList<>();
+
+        for (entity.Shop shop : shops) {
+            shopmappers.add(new ShopMapper(shop));
+        }
+
+        return gson.toJson(shopmappers);
+    }
 
     /**
      * PUT method for updating or creating an instance of ShopRest

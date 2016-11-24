@@ -11,6 +11,21 @@ angular.module('myApp.factories', []).
                 getInfo: getInfo
             };
         })
+                .factory('userFactory', function () {
+            var username = "";
+            return {
+                getUser: function () {
+                    return username;
+                },
+                setUser: function (user) {
+                    username = user;
+                    return username;
+                }
+
+            };
+        })
+        
+        
         .factory('selectedShopFac', function () {
             var selectedShop = {};
             return {

@@ -22,6 +22,10 @@ angular.module('myApp.services', [])
             shop.getShops = function () {
                 return $http.get('api/shop/all'); //<--<-- rest API
             };
+            shop.getUserShop = function (username) {
+                var url = 'api/shop/usershop/'+username;
+                return $http.get(url); //<--<-- rest API
+            };
             return shop;
 
         });
