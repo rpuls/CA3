@@ -34,6 +34,14 @@ angular.module('myApp.positionTool', ['ngRoute'])
                     $location.path('/positionTool');
                     $http.post('api/shop/add', shop)
                             .success(function (data) {
+                                ShopService.getShops().then(
+                                        function (response) {
+                                            $scope.shops = response.data;
+                                            $scope.selectedShop = $scope.shops[$scope.shops.length-1];
+                                        },
+                                        function (response) {
+                                            console.log(response.data.toString());
+                                        });
                             })
                             .error(function (data) {
                                 console.log("ERROR");
@@ -41,52 +49,60 @@ angular.module('myApp.positionTool', ['ngRoute'])
                 } else {
                     $http.post('api/shop/edit', shop)
                             .success(function (data) {
+                                ShopService.getShops().then(
+                                        function (response) {
+                                            $scope.shops = response.data;
+                                        },
+                                        function (response) {
+                                            console.log(response.data.toString());
+                                        });
                             })
                             .error(function (data) {
                                 console.log("ERROR");
                             });
+                    $scope.selectedShop = {};
                 }
             };
-            
-            $scope.placeShop = function(){
+
+            $scope.placeShop = function () {
                 $scope.selectedShop = selectedShopFac.getSelectedShop();
             }
-            
+
         })
 
         .directive('draggable', function ($document, selectedShopFac) {
-                return {
-                    //controller: 'positionCtrl',
-                    link: function (scope, element, controller) {
-                        var startX = 0, startY = 0;
-                        var dragBox = angular.element( document.querySelector( '#mapDiv' ) );
-                        var dragBoxWidth = parseInt(dragBox.css('width'));
-                        var dragBoxHeight = parseInt(dragBox.css('height'));
+            return {
+                //controller: 'positionCtrl',
+                link: function (scope, element, controller) {
+                    var startX = 0, startY = 0;
+                    var dragBox = angular.element(document.querySelector('#mapDiv'));
+                    var dragBoxWidth = parseInt(dragBox.css('width'));
+                    var dragBoxHeight = parseInt(dragBox.css('height'));
 
-                        element.on('mousedown', function (event) {
-                            // Prevent default dragging of selected content
-                            controller.selectedShop = scope.shop;  //selectedShopFac.setSelectedShop(scope.shop);
-                            event.preventDefault();
-                            startX = event.pageX - parseInt(element.css('left'));
-                            startY = event.pageY - parseInt(element.css('top'));
-                            $document.on('mousemove', mousemove);
-                            $document.on('mouseup', mouseup);
+                    element.on('mousedown', function (event) {
+                        // Prevent default dragging of selected content
+                        controller.selectedShop = scope.shop;  //selectedShopFac.setSelectedShop(scope.shop);
+                        event.preventDefault();
+                        startX = event.pageX - parseInt(element.css('left'));
+                        startY = event.pageY - parseInt(element.css('top'));
+                        $document.on('mousemove', mousemove);
+                        $document.on('mouseup', mouseup);
+                    });
+
+                    function mousemove(event) {
+                        var y = event.pageY - startY;
+                        var x = event.pageX - startX;
+                        element.css({
+                            left: x / dragBoxWidth * 100 + '%',
+                            top: y / dragBoxHeight * 100 + '%'
                         });
-
-                        function mousemove(event) {
-                            var y = event.pageY - startY;
-                            var x = event.pageX - startX;
-                            element.css({
-                                left: x/dragBoxWidth*100 + '%',
-                                top: y/dragBoxHeight*100 + '%'
-                            }); 
-                        }
-
-                        function mouseup() {
-                            $document.off('mousemove', mousemove);
-                            $document.off('mouseup', mouseup);
-                        }
                     }
-                };
-            });
+
+                    function mouseup() {
+                        $document.off('mousemove', mousemove);
+                        $document.off('mouseup', mouseup);
+                    }
+                }
+            };
+        });
 ;
