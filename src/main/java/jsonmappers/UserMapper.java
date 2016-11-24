@@ -42,7 +42,6 @@ public class UserMapper {
         }
 
         //passwordHash=user.getPassword();
-//        
         
     }
 

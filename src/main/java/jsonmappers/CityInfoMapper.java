@@ -21,6 +21,9 @@ public class CityInfoMapper {
         zipcode = cityInfo.getZipCode();
     }
 
+    public CityInfoMapper() {
+    }
+
     public String getCity() {
         return city;
     }

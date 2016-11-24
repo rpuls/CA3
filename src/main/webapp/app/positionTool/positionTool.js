@@ -5,11 +5,15 @@ angular.module('myApp.positionTool', ['ngRoute'])
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/positionTool', {
                     templateUrl: 'app/positionTool/positionTool.html',
+                    controller: 'positionCtrl',
+                    controllerAs: 'ctrl'
                 });
             }])
-        .controller('positionCtrl', function ($scope, $location, ShopService, selectedShopFac) {
-            $scope.positionCtrl = [];
-            $scope.selectedShop = selectedShopFac.setSelectedShop({});
+
+
+        .controller('positionCtrl', function ($scope, $http, $location, $timeout, ShopService, selectedShopFac) {
+            $scope.shops = [];
+            $scope.selectedShop = selectedShopFac.getSelectedShop();
             ShopService.getShops().then(
                     function (response) {
                         $scope.shops = response.data;
@@ -17,40 +21,72 @@ angular.module('myApp.positionTool', ['ngRoute'])
                     function (response) {
                         console.log(response.data.toString());
                     });
-            
+
             $scope.selectShop = function (shop) {
-                selectedShopFac.setSelectedShop(shop);
-                $location.path('/positionTool');
+                $scope.selectedShop = shop;
+//                console.log($scope.selectedShop);
+//                selectedShopFac.setSelectedShop(shop);
+            };
+
+            $scope.saveShop = function (shop) {
+
+                if (angular.isUndefined(shop.id)) {
+                    $location.path('/positionTool');
+                    $http.post('api/shop/add', shop)
+                            .success(function (data) {
+                            })
+                            .error(function (data) {
+                                console.log("ERROR");
+                            });
+                } else {
+                    $http.post('api/shop/edit', shop)
+                            .success(function (data) {
+                            })
+                            .error(function (data) {
+                                console.log("ERROR");
+                            });
+                }
             };
             
+            $scope.placeShop = function(){
+                $scope.selectedShop = selectedShopFac.getSelectedShop();
+            }
+            
         })
-        .controller('placeShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", function ($location, $http, $scope, $timeout, selectedShopFac) {
 
-                $scope.shop = selectedShopFac.getSelectedShop();
+        .directive('draggable', function ($document, selectedShopFac) {
+                return {
+                    //controller: 'positionCtrl',
+                    link: function (scope, element, controller) {
+                        var startX = 0, startY = 0;
+                        var dragBox = angular.element( document.querySelector( '#mapDiv' ) );
+                        var dragBoxWidth = parseInt(dragBox.css('width'));
+                        var dragBoxHeight = parseInt(dragBox.css('height'));
 
-                $scope.saveShop = function () {
+                        element.on('mousedown', function (event) {
+                            // Prevent default dragging of selected content
+                            controller.selectedShop = scope.shop;  //selectedShopFac.setSelectedShop(scope.shop);
+                            event.preventDefault();
+                            startX = event.pageX - parseInt(element.css('left'));
+                            startY = event.pageY - parseInt(element.css('top'));
+                            $document.on('mousemove', mousemove);
+                            $document.on('mouseup', mouseup);
+                        });
 
-                    if(angular.isUndefined($scope.shop.id)){
-                        $http.post('api/shop/add', $scope.shop)
-                                .success(function (data) {
-                                    $timeout(function () {
-                                        $location.path("#/view4");
-                                    }, 100);
-                                })
-                                .error(function (data) {
-                                    console.log("ERROR");
-                                });
-                    }else{
-                        $http.post('api/shop/edit', $scope.shop)
-                                .success(function (data) {
-                                    $timeout(function () {
-                                        $location.path("#/view4");
-                                    }, 100);
-                                })
-                                .error(function (data) {
-                                    console.log("ERROR");
-                                });
+                        function mousemove(event) {
+                            var y = event.pageY - startY;
+                            var x = event.pageX - startX;
+                            element.css({
+                                left: x/dragBoxWidth*100 + '%',
+                                top: y/dragBoxHeight*100 + '%'
+                            }); 
+                        }
+
+                        function mouseup() {
+                            $document.off('mousemove', mousemove);
+                            $document.off('mouseup', mouseup);
+                        }
                     }
                 };
-
-            }]);
+            });
+;
