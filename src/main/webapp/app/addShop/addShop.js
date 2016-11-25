@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.addShop', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider.when('/view3', {
-                    templateUrl: 'app/view3/view3.html',
+                $routeProvider.when('/addShop', {
+                    templateUrl: 'app/addShop/addShop.html',
                     controller: 'addShopCtrl'
                 });
             }]);

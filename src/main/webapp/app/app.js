@@ -9,7 +9,7 @@ angular.module('myApp', [
   'myApp.security',
   'myApp.home',
   'myApp.login',
-  'myApp.view3',
+  'myApp.addShop',
   'myApp.shopDetailsView',
   'myApp.view5',
   'myApp.userEditShop',
