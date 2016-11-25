@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Shop implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private User user;
 
     private static final long serialVersionUID = 1L;
@@ -386,6 +386,10 @@ public class Shop implements Serializable {
 
     public void setAngle(double angle) {
         this.angle = angle;
+    }
+    
+    public void setUsername(String username){
+        this.user.setUserName(username);
     }
 
 }

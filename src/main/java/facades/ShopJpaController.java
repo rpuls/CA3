@@ -7,18 +7,13 @@ package facades;
 
 import entity.Shop;
 import entity.User;
-import entity.development.Shop_;
 import facades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -135,7 +130,6 @@ public class ShopJpaController implements Serializable {
             String query = "SELECT s FROM Shop s WHERE s.user.userName=:user";
            Query q = em.createQuery(query);
             q.setParameter("user", user);
-//            q.executeUpdate();
             return q.getResultList();
 
         } finally {
@@ -156,7 +150,7 @@ public class ShopJpaController implements Serializable {
         }
     }
     
-    public void setUserForShop(User user,Shop shop) {
+    public void addShopWithUser(User user,Shop shop) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -169,5 +163,25 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public void setUserToAShop(User user,int shopId){
+        EntityManager em = getEntityManager();
+        try {
+            Shop shop = em.find(Shop.class, shopId);
+
+            em.getTransaction().begin();
+            shop.setUser(user);
+            shop.setUsername(user.getUserName());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("ROLLBACK!!!!" + e.getMessage());
+            em.getTransaction().rollback();  
+            
+        } finally {
+            em.close();
+        }
+    }
+    
+    
     
 }

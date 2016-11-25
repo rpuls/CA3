@@ -73,7 +73,7 @@ angular.module('myApp.security', [])
             $scope.isAdmin = false;
             $scope.isUser = false;
             delete $window.sessionStorage.id_token;
-            $location.path("/view1");
+            $location.path("/home");
           };
 
           $rootScope.openErrorModal = function (text) {

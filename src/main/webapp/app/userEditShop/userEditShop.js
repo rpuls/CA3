@@ -5,8 +5,7 @@ angular.module('myApp.userEditShop', ['ngRoute'])
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/userEditShop', {
                     templateUrl: 'app/userEditShop/userEditShop.html',
-                    controller: 'ShopCtrl',
-                    controllerAs: 'ctrl'
+                    controller: 'addShopCtrl'
                 });
             }]);
 

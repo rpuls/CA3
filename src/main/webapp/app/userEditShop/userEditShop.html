@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
-        <form class="form-horizontal" ng-submit="saveShop()">
+        <form class="form-horizontal">
             <div class="col-md-6">
                 <fieldset>
                     <legend>SHOP</legend>
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="Email" class="control-label col-xs-3"><span class="label label-info">EMAIL:</span></label>
                         <div class="col-xs-9">
-                            <input type="text" ng-model="shop.email" class="form-control" id="email" placeholder="Email" maxlength="50">
+                            <input type="email" ng-model="shop.email" class="form-control" id="email" placeholder="Email" maxlength="50" for="email">
                         </div>
                     </div>
                     <div class="form-group">
@@ -44,7 +44,7 @@
                         <label for="Address" class="control-label col-xs-3"><span class="label label-info">ADDRESS:</span></label>
                         <div class="col-xs-9">
                             <input type="text" ng-model="shop.street" class="form-control" id="street" placeholder="Street Address" readonly>
-                            <input type="text" ng-model="shop.housenumber" class="form-control" id="houseNumber" placeholder="House Number" readonly>
+                            <input type="text" ng-model="shop.houseNumber" class="form-control" id="houseNumber" placeholder="House Number" readonly>
                         </div>
                     </div>
                 </fieldset>
@@ -58,56 +58,75 @@
                     <div class="form-group">
                         <label for="Monday" class="control-label col-xs-3"><span class="label label-info">MONDAY:</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.dayNullOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.dayNullClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.dayNullOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.dayNullClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Tuesday" class="control-label col-xs-3"><span class="label label-info">TUESDAY:</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.dayOneOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.dayOneClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.dayOneOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.dayOneClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Wednesday" class="control-label col-xs-3"><span class="label label-info">WEDNESDAY:</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.dayTwoOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.dayTwoClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.dayTwoOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.dayTwoClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Thursday" class="control-label col-xs-3"><span class="label label-info">THURSDAY:</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.dayThreeOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.dayThreeClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.dayThreeOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.dayThreeClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Friday" class="control-label col-xs-3"><span class="label label-info">FRIDAY:</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.dayFourOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.dayFourClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.dayFourOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.dayFourClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Saturday" class="control-label col-xs-3"><span class="label label-info">SATURDAY</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.dayFiveOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.dayFiveClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.dayFiveOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.dayFiveClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Sunday" class="control-label col-xs-3"><span class="label label-info">SUNDAY:</span></label>
                         <div class="col-xs-4">
-                            <input type="text" ng-model="shop.daySixOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4">
-                            <input type="text" ng-model="shop.daySixClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4">
+                            <input type="number" ng-model="shop.daySixOpen" class="form-control" id="street" placeholder="open from" maxlength="4" minlength="4" max="2359">
+                            <input type="number" ng-model="shop.daySixClose" class="form-control" id="houseNumber" placeholder="scloses at" maxlength="4" minlength="4" max="2359">
                         </div>
                     </div>
                 </fieldset>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+                  <!--DOES NOTHING YET-->
+<!--            <div class="form-group">
+                <h4>Upload on file select</h4>
+
+                <button ngf-select="uploadFiles($files)" multiple 
+                        accept="image/*">Select Files</button>
+                <br>
+                <br>Files:
+                <ul>
+                    <li ng-repeat="f in files" style="font:smaller">
+                        {{f.name}}
+                    </li>
+                </ul>
+                <span class="progress" ng-show="progress >= 0">
+                    <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                </span>
+                {{errorMsg}}
+            </div>-->
+            
+            <button ng-click="saveShop()" ng-confirm-click="Are you sure you want save changes?">Save</button>
         </form>
     </div>
 </div>

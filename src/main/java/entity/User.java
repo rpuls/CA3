@@ -20,7 +20,7 @@ public class User implements IUser, Serializable {
     private String userName;
     private String passwordHash;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.PERSIST)
     private List<Role> roles;
 
     @OneToMany(mappedBy = "user")
@@ -34,11 +34,6 @@ public class User implements IUser, Serializable {
         this.passwordHash = PasswordStorage.createHash(password);
     }
 
-//  public User(String userName, String passwordHash,List<String> roles) {
-//    this.userName = userName;
-//    this.passwordHash = passwordHash;
-//    //this.roles = roles;
-//  }
     public void addRole(Role role) {
         if (roles == null) {
             roles = new ArrayList();
@@ -87,6 +82,10 @@ public class User implements IUser, Serializable {
         }
         shops.add(shop);
         shop.setUser(this);
+    }
+
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
 }

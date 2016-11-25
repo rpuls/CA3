@@ -10,6 +10,7 @@ import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
 import io.restassured.parsing.Parser;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -204,6 +205,21 @@ public class InitialSeedRestIntegrationTest {
         .body(newshop)
         .when().post("/api/shop/add").then()
         .statusCode(200);
+    }
+    
+    /**
+     * Test for getting shops by a user
+     */
+    @Test
+    public void testGetShopByUser() {
+                given().
+                pathParam("user", "vintro_user")
+                .when()
+                .get("/api/shop/usershop/{user}")
+                .then()
+                .statusCode(200)
+                .body("name", equalTo(Arrays.asList("VINTRO")));
+
     }
     
 }

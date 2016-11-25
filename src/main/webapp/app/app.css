@@ -28,3 +28,8 @@ ol.list > li:before {
     content: counter(li-counter);
     counter-increment: li-counter;
 }
+input:invalid {
+  border: red;
+  border-style: solid;
+}
+
