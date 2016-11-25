@@ -18,7 +18,7 @@ angular.module('myApp.controllers', []).
                     });
             $scope.editShop = function (shop) {
                 selectedShopFac.setSelectedShop(shop);
-                $location.path('/view3');
+                $location.path('/addShop');
             };
             $scope.showDialog = function (shop) {
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
