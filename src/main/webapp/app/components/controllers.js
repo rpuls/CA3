@@ -36,38 +36,53 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", function ($location, $http, $scope, $timeout, selectedShopFac) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac,userAdminFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
                 $scope.saveShop = function () {
-
-                    if(angular.isUndefined($scope.shop.id)){
-                        $http.post('api/shop/add', $scope.shop)
-                                .success(function (data) {
-                                    $timeout(function () {
-                                        $location.path("#/shopDetailsView");
-                                    }, 100);
-                                })
-                                .error(function (data) {
-                                    console.log("ERROR");
-                                });
-                    }else{
-                        $http.post('api/shop/edit', $scope.shop)
-                                .success(function (data) {
-                                    $timeout(function () {
-                                        $location.path("#/shopDetailsView");
-                                    }, 100);
-                                })
-                                .error(function (data) {
-                                    console.log("ERROR");
-                                });
+                    isAdmin = userAdminFactory.getIsAdmin();
+                    isUser = userAdminFactory.getIsUser();
+                    if (isAdmin) {
+                        if (angular.isUndefined($scope.shop.id)) {
+                            $http.post('api/shop/add', $scope.shop)
+                                    .success(function (data) {
+                                        $timeout(function () {
+                                            $location.path("#/shopDetailsView");
+                                        }, 100);
+                                    })
+                                    .error(function (data) {
+                                        console.log("ERROR");
+                                    });
+                        } else {
+                            $http.post('api/shop/edit', $scope.shop)
+                                    .success(function (data) {
+                                        $timeout(function () {
+                                            $location.path("#/shopDetailsView");
+                                        }, 100);
+                                    })
+                                    .error(function (data) {
+                                        console.log("ERROR");
+                                    });
+                        }
                     }
+                    if(isUser){
+                        $http.post('api/shop/user/edit', $scope.shop)
+                                    .success(function (data) {
+                                        $timeout(function () {
+                                            $location.path("#/shopDetailsView");
+                                        }, 100);
+                                    })
+                                    .error(function (data) {
+                                        console.log("ERROR");
+                                    });
+                    }
+
                 };
 
             }])
-        .controller('userShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory, userFactory){
- $scope.shops = [];
+        .controller('userShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory, userFactory) {
+            $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getUserShop(userFactory.getUser()).then(
                     function (response) {
@@ -94,8 +109,6 @@ angular.module('myApp.controllers', []).
                     scope: $scope
                 });
             };
- 
-});
 
-
+        });
 

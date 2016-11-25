@@ -24,6 +24,17 @@ angular.module('myApp.factories', []).
 
             };
         })
+                
+        .factory('userAdminFactory', function () {
+                    var isAdmin = false;
+                    var isUser = false;
+                    return {
+                getIsAdmin: function(){ return isAdmin; },
+                setIsAdmin: function(input){ isAdmin = input; },
+                getIsUser: function(){ return isUser; },
+                setIsUser: function(input){ isUser = input; }
+            };
+        })
         
         
         .factory('selectedShopFac', function () {
