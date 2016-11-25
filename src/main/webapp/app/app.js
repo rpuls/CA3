@@ -11,7 +11,7 @@ angular.module('myApp', [
   'myApp.login',
   'myApp.addShop',
   'myApp.shopDetailsView',
-  'myApp.view5',
+  'myApp.shopsList',
   'myApp.userEditShop',
   'myApp.positionTool',
   'myApp.documentation',
