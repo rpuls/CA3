@@ -1,5 +1,5 @@
 angular.module('myApp.security', [])
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, $timeout) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, $timeout,userAdminFactory) {
 
           $rootScope.$on('logOutEvent', function () {
             $scope.logout();
@@ -94,7 +94,7 @@ angular.module('myApp.security', [])
           var init = function () {
             var token = $window.sessionStorage.id_token;
             if (token) {
-              initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper);
+              initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper,userAdminFactory);
             }
           };
           init();// and fire it after definition
@@ -127,7 +127,7 @@ angular.module('myApp.security', [])
 
 
 
-function initializeFromToken($scope, token, jwtHelper) {
+function initializeFromToken($scope, token, jwtHelper,userAdminFactory) {
   $scope.isAuthenticated = true;
   var tokenPayload = jwtHelper.decodeToken(token);
   $scope.username = tokenPayload.username;
@@ -136,9 +136,11 @@ function initializeFromToken($scope, token, jwtHelper) {
   tokenPayload.roles.forEach(function (role) {
     if (role === "Admin") {
       $scope.isAdmin = true;
+      userAdminFactory.setIsAdmin(true);
     }
     if (role === "User") {
       $scope.isUser = true;
+      userAdminFactory.setIsUser(true);
     }
   });
 }
