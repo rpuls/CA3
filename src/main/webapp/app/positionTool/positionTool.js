@@ -69,7 +69,7 @@ angular.module('myApp.positionTool', ['ngRoute'])
 
             $scope.placeShop = function () {
                 $scope.selectedShop = selectedShopFac.getSelectedShop();
-            }
+            };
 
         })
 
