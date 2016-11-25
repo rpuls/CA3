@@ -12,6 +12,7 @@ angular.module('myApp.positionTool', ['ngRoute'])
 
 
         .controller('positionCtrl', function ($scope, $http, $location, $timeout, ShopService, selectedShopFac) {
+            $scope.buttonText = "+";
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.getSelectedShop();
             ShopService.getShops().then(
@@ -24,10 +25,11 @@ angular.module('myApp.positionTool', ['ngRoute'])
 
             $scope.selectShop = function (shop) {
                 $scope.selectedShop = shop;
-//                console.log($scope.selectedShop);
-//                selectedShopFac.setSelectedShop(shop);
+                $scope.buttonText = "Save";
             };
-
+            $scope.placeShopMode = function(){
+                $scope.buttonText = "Place";
+            };
             $scope.saveShop = function (shop) {
 
                 if (angular.isUndefined(shop.id)) {
@@ -38,6 +40,7 @@ angular.module('myApp.positionTool', ['ngRoute'])
                                         function (response) {
                                             $scope.shops = response.data;
                                             $scope.selectedShop = $scope.shops[$scope.shops.length-1];
+                                            $scope.buttonText = "+";
                                         },
                                         function (response) {
                                             console.log(response.data.toString());
