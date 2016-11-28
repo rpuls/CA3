@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
-        <form class="form-horizontal">
+        <form class="form-horizontal" ng-submit="uploadFile()">
             <div class="col-md-6">
                 <fieldset>
                     <legend>SHOP</legend>
@@ -113,20 +113,32 @@
                             <input type="file" name="file" multiple 
                                    onchange="angular.element(this).scope().uploadedFile(this)" />
                         </div>-->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="myFileField">Select a file: You can only add 4 images. </label>
-                            <input type="file" file-model="myFile"  class="form-control" id ="myFileField"/>
+            <!--            <div class="panel panel-default">
+                            <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="myFileField">Select a file: You can only add 4 images. </label>
+                                        <input type="file" ng-model="shop.pictures" class="form-control" id ="myFileField" />
+                                    </div>
+                                    <button ng-click="uploadFile()" class = "btn btn-primary">Upload File</button>
+                            </div>
                         </div>
-                        <button ng-click="uploadFile()" class = "btn btn-primary">Upload File</button>
-                    </form>
+                        <div>{{serverResponse}}</div>-->
+            <div class="panel panel-default">
+            <input type="file" ng-file-select="onFileSelect($files)">
+            <div class="progress" style="margin-top: 20px;">
+                <div class="progress-bar" progress-bar="uploadProgress" role="progressbar">
+                    <span ng-bind="uploadProgress"></span>
+                    <span>%</span>
                 </div>
             </div>
-            <div>{{serverResponse}}</div>
-
-            <button ng-click="saveShop()" ng-confirm-click="Are you sure you want save changes?" data-ng-submit="addFile()">Save</button>
+            
+                    <button ng-click="uploadFile()">
+                    <span>Upload File</span>
+                  </button>
+            </div>
+            <br>
+            <br>
+                <button class="btn btn-primary" ng-click="saveShop()"ng-confirm-click="Are you sure you want save changes?">Save</button>
         </form>
     </div>
 </div>
