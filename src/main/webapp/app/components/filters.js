@@ -24,8 +24,6 @@ angular.module('myApp.filters', [])
                         + phoneNumber.substr(5, 2) + ' '
                         + phoneNumber.substr(7, 2) + ' '
                         + phoneNumber.substring(9, phoneNumber.length);
-
-
                 return phoneNumber;
             };
 
