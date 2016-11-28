@@ -36,7 +36,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory","UploadService","fileUploadService", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, UploadService, fileUploadService) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -79,6 +79,38 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
+//                
+//                $scope.uploadedFile = function (element) {
+//                    $scope.$apply(function ($scope) {
+//                        $scope.files = element.files;
+//                    });
+//                };
+//                
+//                $scope.addFile = function () {
+//                    UploadService.uploadfile($scope.files,
+//                            function (msg) // success
+//                            {
+//                                console.log('uploaded');
+//                            },
+//                            function (msg) // error
+//                            {
+//                                console.log('error');
+//                            });
+//                };
+
+        $scope.uploadFile = function () {
+            var file = $scope.myFile;
+            var uploadUrl = "/api/shop/user/file", //Url of webservice/api/server
+                promise = fileUploadService.uploadFileToUrl(file, uploadUrl);
+ 
+            promise.then(function (response) {
+                $scope.serverResponse = response;
+            }, function () {
+                $scope.serverResponse = 'An error has occurred';
+            });
+        };
+ 
+
 
             }])
         .controller('catController', function ($scope) {

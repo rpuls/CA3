@@ -107,26 +107,26 @@
                 </fieldset>
             </div>
 
-                  <!--DOES NOTHING YET-->
-<!--            <div class="form-group">
-                <h4>Upload on file select</h4>
+            <!--IMAGES UPLOAD-->
+            <!--            <div class="form-group">
+                            <label for="Images" class="control-label col-xs-3"><span class="label label-info">Add images: (You can only add up to 4 images)</span></label>
+                            <input type="file" name="file" multiple 
+                                   onchange="angular.element(this).scope().uploadedFile(this)" />
+                        </div>-->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="myFileField">Select a file: You can only add 4 images. </label>
+                            <input type="file" file-model="myFile"  class="form-control" id ="myFileField"/>
+                        </div>
+                        <button ng-click="uploadFile()" class = "btn btn-primary">Upload File</button>
+                    </form>
+                </div>
+            </div>
+            <div>{{serverResponse}}</div>
 
-                <button ngf-select="uploadFiles($files)" multiple 
-                        accept="image/*">Select Files</button>
-                <br>
-                <br>Files:
-                <ul>
-                    <li ng-repeat="f in files" style="font:smaller">
-                        {{f.name}}
-                    </li>
-                </ul>
-                <span class="progress" ng-show="progress >= 0">
-                    <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-                </span>
-                {{errorMsg}}
-            </div>-->
-            
-            <button ng-click="saveShop()" ng-confirm-click="Are you sure you want save changes?">Save</button>
+            <button ng-click="saveShop()" ng-confirm-click="Are you sure you want save changes?" data-ng-submit="addFile()">Save</button>
         </form>
     </div>
 </div>
