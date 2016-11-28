@@ -36,7 +36,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac,userAdminFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -66,21 +66,48 @@ angular.module('myApp.controllers', []).
                                     });
                         }
                     }
-                    if(isUser){
+                    if (isUser) {
                         $http.post('api/shop/user/edit', $scope.shop)
-                                    .success(function (data) {
-                                        $timeout(function () {
-                                            $location.path("#/shopDetailsView");
-                                        }, 100);
-                                    })
-                                    .error(function (data) {
-                                        console.log("ERROR");
-                                    });
+                                .success(function (data) {
+                                    $timeout(function () {
+                                        $location.path("#/shopDetailsView");
+                                    }, 100);
+                                })
+                                .error(function (data) {
+                                    console.log("ERROR");
+                                });
                     }
 
                 };
 
             }])
+        .controller('catController', function ($scope) {
+            $scope.catList = [
+                {name: 'CUCA'},
+                {name: 'FOOD'},
+                {name: 'TAWA'},
+                {name: 'ETHN'},
+                {name: 'DRIN'},
+                {name: 'BEER'},
+                {name: 'SEDL'},
+                {name: 'MUSI'},
+                {name: 'CURI'},
+                {name: 'PAPE'},
+                {name: 'BEBS'},
+                {name: 'LESC'},
+                {name: 'HINS'},
+                {name: 'HOHY'},
+                {name: 'CONV'},
+                {name: 'HAND'},
+                {name: 'SHFA'},
+                {name: 'WINE'},
+                {name: 'VINT'},
+                {name: 'VINY'}
+            ];
+        })
+
+
+
         .controller('userShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory, userFactory) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
