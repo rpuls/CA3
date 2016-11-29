@@ -126,7 +126,7 @@ $scope.upload = function(){
 
 
 
-        .controller('userShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory, userFactory) {
+        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, userFactory) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getUserShop(userFactory.getUser()).then(
@@ -140,26 +140,11 @@ $scope.upload = function(){
                 selectedShopFac.setSelectedShop(shop);
                 $location.path('/userEditShop');
             };
-            $scope.showDialog = function (shop) {
-                $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
-                if (!angular.isUndefined($scope.selectedShop.googlePlaceId)) {
-                    googleFactory.getOpeningHours().success(function (data) {
-                        $scope.selectedShop.rating = data + " \/ 5";
-                    });
-                } else {
-                    $scope.selectedShop.rating = "no ratings";
-                }
-                $uibModal.open({
-                    templateUrl: 'app/home/shop/shop.html',
-                    scope: $scope
-                });
-            };
-
         })
 
         .controller('LocationController', function ($scope, geolocationFactory) {
 
-            $scope.$geolocation = geolocationFactory
+            $scope.geolocation = geolocationFactory
 
             // basic usage
             geolocationFactory.getCurrentPosition().then(function (location) {
@@ -173,7 +158,6 @@ $scope.upload = function(){
                 enableHighAccuracy: true
             });
             $scope.coords = geolocationFactory.position.coords; // this is regularly updated
-            $scope.position = geolocationFactory.position.mapPosition;
             $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
 ;

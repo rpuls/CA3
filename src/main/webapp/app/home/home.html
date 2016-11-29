@@ -16,6 +16,13 @@
         font-size: 0.7vw;
         cursor: pointer;
     }
+    
+    .mapPos {
+        width: 1.5%; 
+        height: 1.5%; 
+        opacity: 0.5; 
+        filter: alpha(opacity=50);
+    }
 
 </style>
 </head>
@@ -29,21 +36,15 @@
                   -o-transform: rotate({{shop.angle}}deg);
                   transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
         </div>
-        <span ng-controller="LocationController"  id="mapPos" style="position: absolute; width: 100%; height: auto;">
-            <img class="img-responsive" ng-src="app/home/images/dot.png" style="width: 1.5%; height: 1.5%; opacity: 0.5; filter: alpha(opacity=50);"/>
-<!--        THIS DEMONSTRATES THAT WE CAN GET LONG&LAT FROM THE NEW LOCATION SERVICE
-            <h1>Basic (fetch once)</h1>
-            Latitude: {{location.coords.latitude}}
-            <br />
-            Longitude: {{location.coords.longitude}}
-            <br />
-            Timestamp: {{location.timestamp}}
+        <span ng-controller="LocationController"  id="mapPos" style="left: {{mapPos.x}}%; top: {{mapPos.y}}%;">
+            <img class="img-responsive" ng-src="app/home/images/dot.png" style=""/>
+        THIS DEMONSTRATES THAT WE CAN GET LONG&LAT FROM THE NEW LOCATION SERVICE
             <h1>Advanced (fetch once)</h1>
-            Latitude: {{$geolocation.position.coords.latitude}}
+            Latitude: {{geolocation.position.coords.latitude}}
             <br />
-            Longitude: {{$geolocation.position.coords.longitude}}
+            Longitude: {{geolocation.position.coords.longitude}}
             <br />
-            Timestamp: {{$geolocation.position.timestamp | date}}s-->
+            Timestamp: {{geolocation.position.timestamp | date}}s
         </span>
     </div>
 

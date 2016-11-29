@@ -11,7 +11,7 @@ angular.module('myApp.factories', []).
                 getInfo: getInfo
             };
         })
-                .factory('userFactory', function () {
+        .factory('userFactory', function () {
             var username = "";
             return {
                 getUser: function () {
@@ -24,19 +24,27 @@ angular.module('myApp.factories', []).
 
             };
         })
-                
+
         .factory('userAdminFactory', function () {
-                    var isAdmin = false;
-                    var isUser = false;
-                    return {
-                getIsAdmin: function(){ return isAdmin; },
-                setIsAdmin: function(input){ isAdmin = input; },
-                getIsUser: function(){ return isUser; },
-                setIsUser: function(input){ isUser = input; }
+            var isAdmin = false;
+            var isUser = false;
+            return {
+                getIsAdmin: function () {
+                    return isAdmin;
+                },
+                setIsAdmin: function (input) {
+                    isAdmin = input;
+                },
+                getIsUser: function () {
+                    return isUser;
+                },
+                setIsUser: function (input) {
+                    isUser = input;
+                }
             };
         })
-        
-        
+
+
         .factory('selectedShopFac', function () {
             var selectedShop = {};
             return {
@@ -49,82 +57,96 @@ angular.module('myApp.factories', []).
                 }
 
             };
-        })        
-        .factory('geolocationFactory', ['$rootScope', '$window', '$q', function($rootScope, $window, $q) {
+        })
+        .factory('geolocationFactory', function ($rootScope, $window, $q, mapPositionFactory) {
 
-        function supported() {
-            return 'geolocation' in $window.navigator;
-        }
+            function supported() {
+                return 'geolocation' in $window.navigator;
+            }
 
-        var retVal = {
-            getCurrentPosition: function(options) {
-                var deferred = $q.defer();
-                if(supported()) {
-                    $window.navigator.geolocation.getCurrentPosition(
-                        function(position) {
-                            $rootScope.$apply(function() {
-                                retVal.position.coords = position.coords;
-                                retVal.position.timestamp = position.timestamp;
-                                deferred.resolve(position);
-                            });
-                        },
-                        function(error) {
-                            $rootScope.$apply(function() {
-                                deferred.reject({error: error});
-                            });
-                        }, options);
-                } else {
-                    deferred.reject({error: {
-                        code: 2,
-                        message: 'This web browser does not support HTML5 Geolocation'
-                    }});
-                }
-                return deferred.promise;
-            },
-
-            watchPosition: function(options) {
-                if(supported()) {
-                    if(!this.watchId) {
-                        this.watchId = $window.navigator.geolocation.watchPosition(
-                            function(position) {
-                                $rootScope.$apply(function() {
-                                    retVal.position.coords = position.coords;
-                                    retVal.position.timestamp = position.timestamp;
-                                    delete retVal.position.error;
-                                    $rootScope.$broadcast('$geolocation.position.changed', position);
-                                });
-                            },
-                            function(error) {
-                                $rootScope.$apply(function() {
-                                    retVal.position.error = error;
-                                    delete retVal.position.coords;
-                                    delete retVal.position.timestamp;
-                                    $rootScope.$broadcast('$geolocation.position.error', error);
-                                });
-                            }, options);
+            var retVal = {
+                getCurrentPosition: function (options) {
+                    var deferred = $q.defer();
+                    if (supported()) {
+                        $window.navigator.geolocation.getCurrentPosition(
+                                function (position) {
+                                    $rootScope.$apply(function () {
+                                        retVal.position.coords = position.coords;
+                                        retVal.mapPosition = mapPositionFactory.
+                                                console.log(position.coords);
+                                        retVal.position.timestamp = position.timestamp;
+                                        deferred.resolve(position);
+                                    });
+                                },
+                                function (error) {
+                                    $rootScope.$apply(function () {
+                                        deferred.reject({error: error});
+                                    });
+                                }, options);
+                    } else {
+                        deferred.reject({error: {
+                                code: 2,
+                                message: 'This web browser does not support HTML5 Geolocation'
+                            }});
                     }
-                } else {
-                    retVal.position = {
-                        error: {
-                            code: 2,
-                            message: 'This web browser does not support HTML5 Geolocation'
+                    return deferred.promise;
+                },
+                watchPosition: function (options) {
+                    if (supported()) {
+                        if (!this.watchId) {
+                            this.watchId = $window.navigator.geolocation.watchPosition(
+                                    function (position) {
+                                        $rootScope.$apply(function () {
+                                            retVal.position.coords = position.coords;
+                                            retVal.position.timestamp = position.timestamp;
+                                            delete retVal.position.error;
+                                            $rootScope.$broadcast('$geolocation.position.changed', position);
+                                        });
+                                    },
+                                    function (error) {
+                                        $rootScope.$apply(function () {
+                                            retVal.position.error = error;
+                                            delete retVal.position.coords;
+                                            delete retVal.position.timestamp;
+                                            $rootScope.$broadcast('$geolocation.position.error', error);
+                                        });
+                                    }, options);
                         }
-                    };
+                    } else {
+                        retVal.position = {
+                            error: {
+                                code: 2,
+                                message: 'This web browser does not support HTML5 Geolocation'
+                            }
+                        };
+                    }
+                },
+                clearWatch: function () {
+                    if (this.watchId) {
+                        $window.navigator.geolocation.clearWatch(this.watchId);
+                        delete this.watchId;
+                    }
+                },
+                position: {}
+            };
+
+            return retVal;
+        })
+        .factory('mapPositionFactory', function () {
+            var func = {
+                calculateMapPos: function (realPosition) {
+                    var yourCord = realPosition;
+
+                    min = google.maps.geometry.spherical.computeDistanceBetween(positions[0].gps_pos, yourCord);
+                    positionsIndex = 0;
+                    for (var i = 1; i < positions.length; i++) {
+                        dist = google.maps.geometry.spherical.computeDistanceBetween(positions[i].gps_pos, yourCord);
+                        if (min > dist) {
+                            min = dist;
+                            positionsIndex = i;
+                        }
+                    }
                 }
-            },
-
-            clearWatch: function() {
-                if(this.watchId) {
-                    $window.navigator.geolocation.clearWatch(this.watchId);
-                    delete this.watchId;
-                }
-            },
-
-            position: {}
-        };
-
-        return retVal;
-    }]);
-
-
-
+            };
+            return func;
+        });
