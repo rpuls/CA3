@@ -65,7 +65,8 @@ angular.module('myApp.factories', []).
                     });
             };
             return gObject;
-        });
+        })
+        ;
 
 
 
