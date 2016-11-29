@@ -6,7 +6,7 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getShops().then(
@@ -22,13 +22,6 @@ angular.module('myApp.controllers', []).
             };
             $scope.showDialog = function (shop) {
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
-                if (!angular.isUndefined($scope.selectedShop.googlePlaceId)) {
-                    googleFactory.getOpeningHours().success(function (data) {
-                        $scope.selectedShop.rating = data + " \/ 5";
-                    });
-                } else {
-                    $scope.selectedShop.rating = "no ratings";
-                }
                 $uibModal.open({
                     templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
