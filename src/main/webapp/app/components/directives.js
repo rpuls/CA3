@@ -49,13 +49,17 @@ angular.module('myApp.directives', [])
             restrict: 'A', 
             link: function (scope, elm, attrs) {
                 elm.bind('change', function () {
+                   
                     scope.$apply(function () {
                         $parse(attrs.fileInput)
                                 .assign(scope, elm[0].files);
+                         if(!scope.$$phase){
                                 scope.$apply();
+                            }
                     });
+                
                     });
-                    
+                
                     }};
             })
 .directive('progressBar', [
