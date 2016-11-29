@@ -29,7 +29,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory","fileUploadService","$upload", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, fileUploadService, $upload) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", "fileUploadService", "$upload", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, fileUploadService, $upload) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -84,29 +84,29 @@ angular.module('myApp.controllers', []).
 //                $scope.serverResponse = 'An error has occurred';
 //            });
 //        };
- 
-            $scope.model = {};
-            $scope.selectedFile = [];
-            $scope.uploadProgress = 0;
 
-            $scope.uploadFile = function () {
-                var file = $scope.selectedFile[0];
-                $scope.upload = $upload.upload({
-                    url: 'api/shop/upload',
-                    method: 'POST',
-                    data: angular.toJson($scope.model),
-                    file: file
-                }).progress(function (evt) {
-                    $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
-                }).success(function (data) {
-                    //do something
-                });
-            };
-
-            $scope.onFileSelect = function ($files) {
+                $scope.model = {};
+                $scope.selectedFile = [];
                 $scope.uploadProgress = 0;
-                $scope.selectedFile = $files;
-            };
+
+                $scope.uploadFile = function () {
+                    var file = $scope.selectedFile[0];
+                    $scope.upload = $upload.upload({
+                        url: 'api/shop/upload',
+                        method: 'POST',
+                        data: angular.toJson($scope.model),
+                        file: file
+                    }).progress(function (evt) {
+                        $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
+                    }).success(function (data) {
+                        //do something
+                    });
+                };
+
+                $scope.onFileSelect = function ($files) {
+                    $scope.uploadProgress = 0;
+                    $scope.selectedFile = $files;
+                };
 
             }])
         .controller('catController', function ($scope) {
@@ -165,5 +165,26 @@ angular.module('myApp.controllers', []).
                 });
             };
 
+        })
+
+        .controller('LocationController', function ($scope, geolocationFactory) {
+
+            $scope.$geolocation = geolocationFactory
+
+            // basic usage
+            geolocationFactory.getCurrentPosition().then(function (location) {
+                $scope.location = location
+            });
+
+            // regular updates
+            geolocationFactory.watchPosition({
+                timeout: 100,
+                maximumAge: 2,
+                enableHighAccuracy: true
+            });
+            $scope.coords = geolocationFactory.position.coords; // this is regularly updated
+            $scope.position = geolocationFactory.position.mapPosition;
+            $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
+;
 

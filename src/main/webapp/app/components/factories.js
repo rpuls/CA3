@@ -50,7 +50,7 @@ angular.module('myApp.factories', []).
 
             };
         })        
-        .factory('$geolocation', ['$rootScope', '$window', '$q', function($rootScope, $window, $q) {
+        .factory('geolocationFactory', ['$rootScope', '$window', '$q', function($rootScope, $window, $q) {
 
         function supported() {
             return 'geolocation' in $window.navigator;
@@ -124,8 +124,7 @@ angular.module('myApp.factories', []).
         };
 
         return retVal;
-    }])
-        ;
+    }]);
 
 
 
