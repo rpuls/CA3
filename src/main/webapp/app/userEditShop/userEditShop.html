@@ -1,6 +1,7 @@
 <div class="container">
     <div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
-        <form class="form-horizontal" ng-submit="uploadFile()">
+        <!--<form class="form-horizontal" ng-submit="uploadFile()">-->
+        <form class="form-horizontal">
             <div class="col-md-6">
                 <fieldset>
                     <legend>SHOP</legend>
@@ -124,21 +125,17 @@
                         </div>
                         <div>{{serverResponse}}</div>-->
             <div class="panel panel-default">
-            <input type="file" ng-file-select="onFileSelect($files)">
-            <div class="progress" style="margin-top: 20px;">
-                <div class="progress-bar" progress-bar="uploadProgress" role="progressbar">
-                    <span ng-bind="uploadProgress"></span>
-                    <span>%</span>
+                <div class="form-group">
+                    <label for="picture">Upload Images:</label> 
+                    <input type="file" 
+                           file-input="files" multiple />
+                    <li ng-repeat="file in files">{{file.name}}</li>
                 </div>
+                
             </div>
-            
-                    <button ng-click="uploadFile()">
-                    <span>Upload File</span>
-                  </button>
-            </div>
-            <br>
-            <br>
-                <button class="btn btn-primary" ng-click="saveShop()"ng-confirm-click="Are you sure you want save changes?">Save</button>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary" ng-click="saveShop()"ng-confirm-click="Are you sure you want save changes?">Save</button>
+
         </form>
     </div>
-</div>
