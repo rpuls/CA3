@@ -29,7 +29,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", "fileUploadService", "$upload", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, fileUploadService, $upload) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -53,6 +53,8 @@ angular.module('myApp.controllers', []).
                                         $timeout(function () {
                                             $location.path("#/shopDetailsView");
                                         }, 100);
+                                        $scope.upload();
+//          console.log("here at success post");
                                     })
                                     .error(function (data) {
                                         console.log("ERROR");
@@ -72,66 +74,62 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
+                
+         $scope.filesChanged = function(elm){
+             $scope.files = elm.files;
+             $scope.$apply();
 
-//        $scope.uploadFile = function () {
-//            var file = $scope.myFile;
-//            var uploadUrl = "/api/shop/upload", //Url of webservice/api/server
-//                promise = fileUploadService.uploadFileToUrl(file, uploadUrl);
-// 
-//            promise.then(function (response) {
-//                $scope.serverResponse = response;
-//            }, function () {
-//                $scope.serverResponse = 'An error has occurred';
-//            });
-//        };
-
-                $scope.model = {};
-                $scope.selectedFile = [];
-                $scope.uploadProgress = 0;
-
-                $scope.uploadFile = function () {
-                    var file = $scope.selectedFile[0];
-                    $scope.upload = $upload.upload({
-                        url: 'api/shop/upload',
-                        method: 'POST',
-                        data: angular.toJson($scope.model),
-                        file: file
-                    }).progress(function (evt) {
-                        $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
-                    }).success(function (data) {
-                        //do something
-                    });
-                };
-
-                $scope.onFileSelect = function ($files) {
-                    $scope.uploadProgress = 0;
-                    $scope.selectedFile = $files;
-                };
+$scope.upload = function(){
+        var fd = new FormData();
+        angular.forEach($scope.files, function(file){
+            fd.append('file', file);
+        });
+         };
+          console.log("here at upload()");
+      $http.post('api/shop/upload', $scope.files,
+      {
+          transformRequest: angular.identity,
+          headers:{
+              'Content-Type': undefined
+          }})
+                  .success(function(data){
+                      console.log(data);
+          });
+      };
 
             }])
         .controller('catController', function ($scope) {
-            $scope.catList = [
-                {id: '1',name: 'CUCA'},
-                {id: '2',name: 'FOOD'},
-                {id: '3',name: 'TAWA'},
-                {id: '4',name: 'ETHN'},
-                {id: '5',name: 'DRIN'},
-                {id: '6',name: 'BEER'},
-                {id: '7',name: 'SEDL'},
-                {id: '8',name: 'MUSI'},
-                {id: '9',name: 'CURI'},
-                {id: '10',name: 'PAPE'},
-                {id: '11',name: 'BEBS'},
-                {id: '12',name: 'LESC'},
-                {id: '13',name: 'HINS'},
-                {id: '14',name: 'HOHY'},
-                {id: '15',name: 'CONV'},
-                {id: '16',name: 'HAND'},
-                {id: '17',name: 'SHFA'},
-                {id: '18',name: 'WINE'},
-                {id: '19',name: 'VINT'},
-                {id: '20',name: 'VINY'}
-            ];
+            $scope.filterOptions = {
+                
+                categories: [
+                    {id: '1', name: 'CUCA'},
+                    {id: '2', name: 'FOOD'},
+                    {id: '3', name: 'TAWA'},
+                    {id: '4', name: 'ETHN'},
+                    {id: '5', name: 'DRIN'},
+                    {id: '6', name: 'BEER'},
+                    {id: '7', name: 'SEDL'},
+                    {id: '8', name: 'MUSI'},
+                    {id: '9', name: 'CURI'},
+                    {id: '10', name: 'PAPE'},
+                    {id: '11', name: 'BEBS'},
+                    {id: '12', name: 'LESC'},
+                    {id: '13', name: 'HINS'},
+                    {id: '14', name: 'HOHY'},
+                    {id: '15', name: 'CONV'},
+                    {id: '16', name: 'HAND'},
+                    {id: '17', name: 'SHFA'},
+                    {id: '18', name: 'WINE'},
+                    {id: '19', name: 'VINT'},
+                    {id: '20', name: 'VINY'},
+                    {id: '21', name: 'Show All'}
+                ]
+            };
+
+            $scope.filterItem = {
+                category: $scope.filterOptions.categories[20]
+            };
+
         })
 
 
