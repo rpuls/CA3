@@ -17,7 +17,7 @@
         cursor: pointer;
     }
     
-    .mapPos {
+    .dot {
         width: 1.5%; 
         height: 1.5%; 
         opacity: 0.5; 
@@ -37,7 +37,7 @@
                   transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
         </div>
         <span ng-controller="LocationController"  id="mapPos" style="left: {{mapPos.x}}%; top: {{mapPos.y}}%;">
-            <img class="img-responsive" ng-src="app/home/images/dot.png" style=""/>
+            <img class="img-responsive" ng-src="app/home/images/dot.png" id="dot"/>
         THIS DEMONSTRATES THAT WE CAN GET LONG&LAT FROM THE NEW LOCATION SERVICE
             <h1>Advanced (fetch once)</h1>
             Latitude: {{geolocation.position.coords.latitude}}
