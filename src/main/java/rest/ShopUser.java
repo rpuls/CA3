@@ -54,7 +54,9 @@ public class ShopUser {
     @Produces({MediaType.MULTIPART_FORM_DATA})
     @Path("upload")
     public void uploadFile(String content) throws Exception {
-        
+        //create a folder
+        //get the path
+        //store in db
     }
 
   
