@@ -1,6 +1,5 @@
 <div class="container">
     <div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
-        <!--<form class="form-horizontal" ng-submit="uploadFile()">-->
         <form class="form-horizontal">
             <div class="col-md-6">
                 <fieldset>
@@ -109,28 +108,12 @@
             </div>
 
             <!--IMAGES UPLOAD-->
-            <!--            <div class="form-group">
-                            <label for="Images" class="control-label col-xs-3"><span class="label label-info">Add images: (You can only add up to 4 images)</span></label>
-                            <input type="file" name="file" multiple 
-                                   onchange="angular.element(this).scope().uploadedFile(this)" />
-                        </div>-->
-            <!--            <div class="panel panel-default">
-                            <div class="panel-body">
-                                    <div class="form-group">
-                                        <label for="myFileField">Select a file: You can only add 4 images. </label>
-                                        <input type="file" ng-model="shop.pictures" class="form-control" id ="myFileField" />
-                                    </div>
-                                    <button ng-click="uploadFile()" class = "btn btn-primary">Upload File</button>
-                            </div>
-                        </div>
-                        <div>{{serverResponse}}</div>-->
-            <div class="panel panel-default">
                 <div class="form-group">
                     <label for="picture">Upload Images:</label> 
                     <input type="file" 
                            file-input="files" multiple />
                     <li ng-repeat="file in files">{{file.name}}</li>
-                </div>
+
                 
             </div>
                 <br>

@@ -53,13 +53,12 @@ angular.module('myApp.controllers', []).
                                         $timeout(function () {
                                             $location.path("#/shopDetailsView");
                                         }, 100);
-                                        
-          console.log("here at success post");
+                                        $scope.upload();
+//          console.log("here at success post");
                                     })
                                     .error(function (data) {
                                         console.log("ERROR");
                                     });
-                                    $scope.upload();
                         }
                     }
                     if (isUser) {
