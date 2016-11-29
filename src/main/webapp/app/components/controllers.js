@@ -6,7 +6,7 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getShops().then(
@@ -22,13 +22,6 @@ angular.module('myApp.controllers', []).
             };
             $scope.showDialog = function (shop) {
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
-                if (!angular.isUndefined($scope.selectedShop.googlePlaceId)) {
-                    googleFactory.getOpeningHours().success(function (data) {
-                        $scope.selectedShop.rating = data + " \/ 5";
-                    });
-                } else {
-                    $scope.selectedShop.rating = "no ratings";
-                }
                 $uibModal.open({
                     templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
@@ -36,7 +29,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", "fileUploadService", "$upload", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, fileUploadService, $upload) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -78,6 +71,41 @@ angular.module('myApp.controllers', []).
                                 });
                     }
 
+                };
+
+//        $scope.uploadFile = function () {
+//            var file = $scope.myFile;
+//            var uploadUrl = "/api/shop/upload", //Url of webservice/api/server
+//                promise = fileUploadService.uploadFileToUrl(file, uploadUrl);
+// 
+//            promise.then(function (response) {
+//                $scope.serverResponse = response;
+//            }, function () {
+//                $scope.serverResponse = 'An error has occurred';
+//            });
+//        };
+
+                $scope.model = {};
+                $scope.selectedFile = [];
+                $scope.uploadProgress = 0;
+
+                $scope.uploadFile = function () {
+                    var file = $scope.selectedFile[0];
+                    $scope.upload = $upload.upload({
+                        url: 'api/shop/upload',
+                        method: 'POST',
+                        data: angular.toJson($scope.model),
+                        file: file
+                    }).progress(function (evt) {
+                        $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
+                    }).success(function (data) {
+                        //do something
+                    });
+                };
+
+                $scope.onFileSelect = function ($files) {
+                    $scope.uploadProgress = 0;
+                    $scope.selectedFile = $files;
                 };
 
             }])
@@ -137,5 +165,26 @@ angular.module('myApp.controllers', []).
                 });
             };
 
+        })
+
+        .controller('LocationController', function ($scope, geolocationFactory) {
+
+            $scope.$geolocation = geolocationFactory
+
+            // basic usage
+            geolocationFactory.getCurrentPosition().then(function (location) {
+                $scope.location = location
+            });
+
+            // regular updates
+            geolocationFactory.watchPosition({
+                timeout: 100,
+                maximumAge: 2,
+                enableHighAccuracy: true
+            });
+            $scope.coords = geolocationFactory.position.coords; // this is regularly updated
+            $scope.position = geolocationFactory.position.mapPosition;
+            $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
+;
 
