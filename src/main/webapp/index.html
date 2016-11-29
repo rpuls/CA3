@@ -71,7 +71,7 @@
                     </ul>
                     <div ng-controller="catController">
                         <select name="catergorySelect" id="categorySelect" ng-model="filterItem.category" ng-options="category.name | categoryfilter for category in filterOptions.categories">
-                            <!--<option ng-repeat="category in data.categoryOptions" value="{{category.id}}">{{category.name}}</option>-->
+                            <!--<option ng-repeat="category in filterOptions.categories" value="{{category.id}}">{{category.name}}</option>-->
                         </select>
                     </div>
                     <div>
