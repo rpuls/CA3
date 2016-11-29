@@ -139,16 +139,17 @@ angular.module('myApp.factories', []).
             var func = {
                 calculateMapPos: function (realPosition) {
                     var yourCord = realPosition;
-
-                    min = google.maps.geometry.spherical.computeDistanceBetween(positions[0].gps_pos, yourCord);
-                    positionsIndex = 0;
+                    var yourCordGoogle = new google.maps.LatLng(yourCord.latitude, yourCord.longitude);
+                    var min = google.maps.geometry.spherical.computeDistanceBetween(positions[0].gps_pos, yourCordGoogle);
+                    var positionsIndex = 0;
                     for (var i = 1; i < positions.length; i++) {
-                        dist = google.maps.geometry.spherical.computeDistanceBetween(positions[i].gps_pos, yourCord);
+                        var dist = google.maps.geometry.spherical.computeDistanceBetween(positions[i].gps_pos, yourCordGoogle);
                         if (min > dist) {
                             min = dist;
                             positionsIndex = i;
                         }
                     }
+                    return positions[positionsIndex];
                 }
             };
             return func;

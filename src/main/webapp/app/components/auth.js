@@ -143,7 +143,7 @@ function initializeFromToken($scope, token, jwtHelper,userAdminFactory) {
       userAdminFactory.setIsUser(true);
     }
   });
-}
+};
 
 function clearUserDetails($scope) {
   $scope.username = "";
