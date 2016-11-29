@@ -72,8 +72,8 @@ angular.module('myApp.factories', []).
                                 function (position) {
                                     $rootScope.$apply(function () {
                                         retVal.position.coords = position.coords;
-                                        retVal.mapPosition = mapPositionFactory.
-                                                console.log(position.coords);
+                                        retVal.mapPosition = mapPositionFactory.calculateMapPos(position);
+                                        console.log(position.coords);
                                         retVal.position.timestamp = position.timestamp;
                                         deferred.resolve(position);
                                     });
@@ -133,6 +133,9 @@ angular.module('myApp.factories', []).
             return retVal;
         })
         .factory('mapPositionFactory', function () {
+            var positions = [{name: "Nørreport_Station", gps_pos: new google.maps.LatLng(55.6831194, 12.5715059), css_pos: {top: "96.5%", left: "45%"}}];
+            positions.push({name: "Nørrebro_Station", gps_pos: new google.maps.LatLng(55.7008504, 12.5356172), css_pos: {top: "3%", left: "45%"}});
+            
             var func = {
                 calculateMapPos: function (realPosition) {
                     var yourCord = realPosition;

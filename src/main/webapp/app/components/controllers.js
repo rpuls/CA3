@@ -159,5 +159,5 @@ $scope.upload = function(){
             $scope.coords = geolocationFactory.position.coords; // this is regularly updated
             $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
-;
+
 
