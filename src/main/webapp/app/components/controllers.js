@@ -150,11 +150,11 @@ $scope.upload = function(){
 
         .controller('LocationController', function ($scope, geolocationFactory) {
 
-            $scope.geolocation = geolocationFactory
+            $scope.geolocation = geolocationFactory;
 
             // basic usage
             geolocationFactory.getCurrentPosition().then(function (location) {
-                $scope.location = location
+                $scope.location = location;
             });
 
             // regular updates
