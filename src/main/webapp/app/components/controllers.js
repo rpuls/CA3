@@ -36,7 +36,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory","fileUploadService","$upload", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, fileUploadService, $upload) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -79,6 +79,41 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
+
+//        $scope.uploadFile = function () {
+//            var file = $scope.myFile;
+//            var uploadUrl = "/api/shop/upload", //Url of webservice/api/server
+//                promise = fileUploadService.uploadFileToUrl(file, uploadUrl);
+// 
+//            promise.then(function (response) {
+//                $scope.serverResponse = response;
+//            }, function () {
+//                $scope.serverResponse = 'An error has occurred';
+//            });
+//        };
+ 
+            $scope.model = {};
+            $scope.selectedFile = [];
+            $scope.uploadProgress = 0;
+
+            $scope.uploadFile = function () {
+                var file = $scope.selectedFile[0];
+                $scope.upload = $upload.upload({
+                    url: 'api/shop/upload',
+                    method: 'POST',
+                    data: angular.toJson($scope.model),
+                    file: file
+                }).progress(function (evt) {
+                    $scope.uploadProgress = parseInt(100.0 * evt.loaded / evt.total, 10);
+                }).success(function (data) {
+                    //do something
+                });
+            };
+
+            $scope.onFileSelect = function ($files) {
+                $scope.uploadProgress = 0;
+                $scope.selectedFile = $files;
+            };
 
             }])
         .controller('catController', function ($scope) {
