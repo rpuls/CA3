@@ -6,7 +6,7 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, googleFactory) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getShops().then(
@@ -22,13 +22,6 @@ angular.module('myApp.controllers', []).
             };
             $scope.showDialog = function (shop) {
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
-                if (!angular.isUndefined($scope.selectedShop.googlePlaceId)) {
-                    googleFactory.getOpeningHours().success(function (data) {
-                        $scope.selectedShop.rating = data + " \/ 5";
-                    });
-                } else {
-                    $scope.selectedShop.rating = "no ratings";
-                }
                 $uibModal.open({
                     templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
@@ -108,26 +101,26 @@ $scope.upload = function(){
             }])
         .controller('catController', function ($scope) {
             $scope.catList = [
-                {name: 'CUCA'},
-                {name: 'FOOD'},
-                {name: 'TAWA'},
-                {name: 'ETHN'},
-                {name: 'DRIN'},
-                {name: 'BEER'},
-                {name: 'SEDL'},
-                {name: 'MUSI'},
-                {name: 'CURI'},
-                {name: 'PAPE'},
-                {name: 'BEBS'},
-                {name: 'LESC'},
-                {name: 'HINS'},
-                {name: 'HOHY'},
-                {name: 'CONV'},
-                {name: 'HAND'},
-                {name: 'SHFA'},
-                {name: 'WINE'},
-                {name: 'VINT'},
-                {name: 'VINY'}
+                {id: '1',name: 'CUCA'},
+                {id: '2',name: 'FOOD'},
+                {id: '3',name: 'TAWA'},
+                {id: '4',name: 'ETHN'},
+                {id: '5',name: 'DRIN'},
+                {id: '6',name: 'BEER'},
+                {id: '7',name: 'SEDL'},
+                {id: '8',name: 'MUSI'},
+                {id: '9',name: 'CURI'},
+                {id: '10',name: 'PAPE'},
+                {id: '11',name: 'BEBS'},
+                {id: '12',name: 'LESC'},
+                {id: '13',name: 'HINS'},
+                {id: '14',name: 'HOHY'},
+                {id: '15',name: 'CONV'},
+                {id: '16',name: 'HAND'},
+                {id: '17',name: 'SHFA'},
+                {id: '18',name: 'WINE'},
+                {id: '19',name: 'VINT'},
+                {id: '20',name: 'VINY'}
             ];
         })
 
@@ -162,5 +155,26 @@ $scope.upload = function(){
                 });
             };
 
+        })
+
+        .controller('LocationController', function ($scope, geolocationFactory) {
+
+            $scope.$geolocation = geolocationFactory
+
+            // basic usage
+            geolocationFactory.getCurrentPosition().then(function (location) {
+                $scope.location = location
+            });
+
+            // regular updates
+            geolocationFactory.watchPosition({
+                timeout: 100,
+                maximumAge: 2,
+                enableHighAccuracy: true
+            });
+            $scope.coords = geolocationFactory.position.coords; // this is regularly updated
+            $scope.position = geolocationFactory.position.mapPosition;
+            $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
+;
 
