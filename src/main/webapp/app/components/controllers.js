@@ -110,28 +110,37 @@ angular.module('myApp.controllers', []).
 
             }])
         .controller('catController', function ($scope) {
-            $scope.catList = [
-                {id: '1',name: 'CUCA'},
-                {id: '2',name: 'FOOD'},
-                {id: '3',name: 'TAWA'},
-                {id: '4',name: 'ETHN'},
-                {id: '5',name: 'DRIN'},
-                {id: '6',name: 'BEER'},
-                {id: '7',name: 'SEDL'},
-                {id: '8',name: 'MUSI'},
-                {id: '9',name: 'CURI'},
-                {id: '10',name: 'PAPE'},
-                {id: '11',name: 'BEBS'},
-                {id: '12',name: 'LESC'},
-                {id: '13',name: 'HINS'},
-                {id: '14',name: 'HOHY'},
-                {id: '15',name: 'CONV'},
-                {id: '16',name: 'HAND'},
-                {id: '17',name: 'SHFA'},
-                {id: '18',name: 'WINE'},
-                {id: '19',name: 'VINT'},
-                {id: '20',name: 'VINY'}
-            ];
+            $scope.filterOptions = {
+                
+                categories: [
+                    {id: '1', name: 'CUCA'},
+                    {id: '2', name: 'FOOD'},
+                    {id: '3', name: 'TAWA'},
+                    {id: '4', name: 'ETHN'},
+                    {id: '5', name: 'DRIN'},
+                    {id: '6', name: 'BEER'},
+                    {id: '7', name: 'SEDL'},
+                    {id: '8', name: 'MUSI'},
+                    {id: '9', name: 'CURI'},
+                    {id: '10', name: 'PAPE'},
+                    {id: '11', name: 'BEBS'},
+                    {id: '12', name: 'LESC'},
+                    {id: '13', name: 'HINS'},
+                    {id: '14', name: 'HOHY'},
+                    {id: '15', name: 'CONV'},
+                    {id: '16', name: 'HAND'},
+                    {id: '17', name: 'SHFA'},
+                    {id: '18', name: 'WINE'},
+                    {id: '19', name: 'VINT'},
+                    {id: '20', name: 'VINY'},
+                    {id: '21', name: 'Show All'}
+                ]
+            };
+
+            $scope.filterItem = {
+                category: $scope.filterOptions.categories[20]
+            };
+
         })
 
 
