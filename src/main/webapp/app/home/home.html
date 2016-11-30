@@ -16,12 +16,17 @@
         font-size: 0.7vw;
         cursor: pointer;
     }
-    
+
     .dot {
-        width: 1.5%; 
-        height: 1.5%; 
+        width: 1vw;
         opacity: 0.5; 
         filter: alpha(opacity=50);
+    }
+
+    .yourPos {
+        position: absolute;
+        font-size: 1vw;
+        white-space: nowrap;
     }
 
 </style>
@@ -36,10 +41,10 @@
                   -o-transform: rotate({{shop.angle}}deg);
                   transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
         </div>
-        <span ng-controller="LocationController"  id="mapPos" style="left: {{geolocation.mapPosition.css_pos.left}}; top: {{geolocation.mapPosition.css_pos.top}};">
-            <img class="img-responsive" ng-src="app/home/images/dot.png" id="dot"/>
-        </span>
+        <div ng-controller="LocationController" class="yourPos" style="left: {{geolocation.mapPosition.css_pos.left}}%; top: {{geolocation.mapPosition.css_pos.top}}%;">
+            <img class="dot" ng-src="app/home/images/dot.png"/>
+            <span>You are {{geolocation.mapPosition.dist| distMeter}}m from {{geolocation.mapPosition.name}}</span>
+        </div>
     </div>
-
 
 
