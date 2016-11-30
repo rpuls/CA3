@@ -5,6 +5,7 @@
  */
 package facades;
 
+import entity.Picture;
 import entity.Shop;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
@@ -177,6 +178,36 @@ public class ShopJpaController implements Serializable {
             System.out.println("ROLLBACK!!!!" + e.getMessage());
             em.getTransaction().rollback();  
             
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void addFiles(int shopId, List<Picture> images){
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            for (Picture image : images) {
+                image.setShopId(shopId);
+                em.persist(image);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("ROLLBACK!!!!"+e.getMessage());
+             em.getTransaction().rollback();   
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Picture> getFilesByShop(int shopId){
+        EntityManager em = getEntityManager();
+        try {
+            String query = "SELECT p FROM Picture p WHERE p.shop.id=:shopId";
+           Query q = em.createQuery(query);
+            q.setParameter("shopId", shopId);
+            return q.getResultList();
+
         } finally {
             em.close();
         }
