@@ -87,7 +87,6 @@ angular.module('myApp.factories', []).
                                     $rootScope.$apply(function () {
                                         retVal.position.coords = position.coords;
                                         retVal.mapPosition = mapPositionFactory.calculateMapPos(position);
-                                        console.log(position.coords);
                                         retVal.position.timestamp = position.timestamp;
                                         deferred.resolve(position);
                                     });
@@ -147,12 +146,12 @@ angular.module('myApp.factories', []).
             return retVal;
         })
         .factory('mapPositionFactory', function () {
-            var positions = [{name: "Nørreport_Station", gps_pos: new google.maps.LatLng(55.6831194, 12.5715059), css_pos: {top: "96.5%", left: "45%"}}];
-            positions.push({name: "Nørrebro_Station", gps_pos: new google.maps.LatLng(55.7008504, 12.5356172), css_pos: {top: "3%", left: "45%"}});
-            
+            var positions = [{name: "Nørreport St.", gps_pos: new google.maps.LatLng(55.6831194, 12.5715059), css_pos: {top: "96.5", left: "45"}}];
+            positions.push({name: "Nørrebro St.", gps_pos: new google.maps.LatLng(55.7008504, 12.5356172), css_pos: {top: "3", left: "45"}});
+
             var func = {
                 calculateMapPos: function (realPosition) {
-                    var yourCord = realPosition;
+                    var yourCord = realPosition.coords;
                     var yourCordGoogle = new google.maps.LatLng(yourCord.latitude, yourCord.longitude);
                     var min = google.maps.geometry.spherical.computeDistanceBetween(positions[0].gps_pos, yourCordGoogle);
                     var positionsIndex = 0;
@@ -163,7 +162,9 @@ angular.module('myApp.factories', []).
                             positionsIndex = i;
                         }
                     }
-                    return positions[positionsIndex];
+                    var result = positions[positionsIndex];
+                    result.dist = min;
+                    return result;
                 }
             };
             return func;

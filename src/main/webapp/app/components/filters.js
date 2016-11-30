@@ -70,6 +70,13 @@ angular.module('myApp.filters', [])
             };
 
         })
+        
+        .filter('distMeter', function () {
+            return function(decimal){
+                return Math.round(decimal / 25) * 25;
+            };
+        })
+        
         .filter('catFilter', function () {
 
             return function (data) {
