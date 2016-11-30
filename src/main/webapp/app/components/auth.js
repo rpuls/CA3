@@ -136,11 +136,9 @@ function initializeFromToken($scope, token, jwtHelper,userAdminFactory) {
   tokenPayload.roles.forEach(function (role) {
     if (role === "Admin") {
       $scope.isAdmin = true;
-      userAdminFactory.setIsAdmin(true);
     }
     if (role === "User") {
       $scope.isUser = true;
-      userAdminFactory.setIsUser(true);
     }
   });
 };
