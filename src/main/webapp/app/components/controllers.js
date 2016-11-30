@@ -34,8 +34,9 @@ angular.module('myApp.controllers', []).
                 $scope.shop = selectedShopFac.getSelectedShop();
 
                 $scope.saveShop = function () {
-                    isAdmin = userAdminFactory.getIsAdmin();
-                    isUser = userAdminFactory.getIsUser();
+                    var isAdmin = userAdminFactory.getIsAdmin();
+                    var isUser = userAdminFactory.getIsUser();
+                    console.log(isAdmin);
                     if (isAdmin) {
                         if (angular.isUndefined($scope.shop.id)) {
                             $http.post('api/shop/add', $scope.shop)
