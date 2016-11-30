@@ -54,8 +54,6 @@ angular.module('myApp.controllers', []).
                                         $timeout(function () {
                                             $location.path("#/shopDetailsView");
                                         }, 100);
-                                        $scope.upload();
-//          console.log("here at success post");
                                     })
                                     .error(function (data) {
                                         console.log("ERROR");
@@ -65,6 +63,7 @@ angular.module('myApp.controllers', []).
                     if (isUser) {
                         $http.post('api/shop/user/edit', $scope.shop)
                                 .success(function (data) {
+                                        $scope.upload();
                                     $timeout(function () {
                                         $location.path("#/shopDetailsView");
                                     }, 100);
@@ -76,10 +75,6 @@ angular.module('myApp.controllers', []).
 
                 };
                 
-         $scope.filesChanged = function(elm){
-             $scope.files = elm.files;
-             $scope.$apply();
-
 $scope.upload = function(){
         var fd = new FormData();
         angular.forEach($scope.files, function(file){
@@ -96,7 +91,6 @@ $scope.upload = function(){
                   .success(function(data){
                       console.log(data);
           });
-      };
 
             }])
         .controller('catController', function ($scope) {

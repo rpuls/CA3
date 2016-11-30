@@ -72,6 +72,16 @@
             <artifactId>derby</artifactId>
             <version>10.12.1.1</version>
         </dependency>
+        
+        <!--file-->
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+            <version>1.8</version>
+            <type>jar</type>
+        </dependency>
+        
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>

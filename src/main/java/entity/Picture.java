@@ -34,5 +34,9 @@ public class Picture implements Serializable {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
+    
+    public void setShopId(int shopId){
+        this.shop.setId(shopId);
+    }
 
 }

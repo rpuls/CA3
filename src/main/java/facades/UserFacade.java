@@ -1,6 +1,7 @@
 package facades;
 
 import entity.GoogleUpdated;
+import entity.Picture;
 import entity.Shop;
 import security.IUserFacade;
 import entity.User;
@@ -83,6 +84,14 @@ public class UserFacade implements IUserFacade {
     public void delete(Integer id) throws NonexistentEntityException {
         shopCtrl.destroy(id);
     }
+    
+   public void addFiles(int shopId, List<Picture> images){
+       shopCtrl.addFiles(shopId, images);
+   }
+   
+   public List<Picture> getFilesByShop(int shopId){
+       return shopCtrl.getFilesByShop(shopId);
+   }
 
     @Override
     public boolean needGoogleUpdate() {
@@ -146,4 +155,6 @@ public class UserFacade implements IUserFacade {
         }
         return username;
     }
+    
+    
 }
