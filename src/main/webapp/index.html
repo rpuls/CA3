@@ -46,7 +46,7 @@
         <!-- analytics tools -->
         <script src="app/analytics/googleanalytics.js"></script>
         <!--<script src="bower_components/angular/angular-file-upload.js"></script>-->
-    <!--<script src="bower_components/angular/angular.min.js" type="text/javascript"></script>-->
+        <!--<script src="bower_components/angular/angular.min.js" type="text/javascript"></script>-->
     </head>
     <body ng-app="myApp"> <!--onload="javascript:initGeolocation()"-->
         <div class="">
@@ -70,9 +70,11 @@
                         <li><a href="#/shopDetailsView" ng-show="isUser">Shop details</a></li>
                     </ul>
                     <div ng-controller="catController">
-                        <select name="catergorySelect" id="categorySelect" ng-model="filterItem.category" ng-options="category.name | categoryfilter for category in filterOptions.categories">
-                            <!--<option ng-repeat="category in filterOptions.categories" value="{{category.id}}">{{category.name}}</option>-->
+                        
+                        <select ng-model="filterItem.category" ng-options="category.name | categoryfilter for category  in filterOptions.categories">
+
                         </select>
+                        <h5>Short name: {{$scope.cat=filterItem.category.name}}</h5>
                     </div>
                     <div>
                         <div class="navbar-right" ng-show="isAuthenticated">
@@ -91,6 +93,8 @@
 
                 </div>
             </nav>
+
+            <hr>
             <div ng-view></div>
         </div>
     </body>

@@ -11,8 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.ws.rs.core.Response;
 
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataParam;
+//import com.sun.jersey.core.header.FormDataContentDisposition;
+//import com.sun.jersey.multipart.FormDataParam;
 import entity.Shop;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;

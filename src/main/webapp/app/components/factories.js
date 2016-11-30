@@ -43,6 +43,20 @@ angular.module('myApp.factories', []).
                 }
             };
         })
+        .factory('selectedCatFactory', function () {
+            var selectedCat = {};
+    
+            return {
+                getSelectedCat: function () {
+                    return selectedCat;
+                },
+                setSelectedCat: function (input) {
+                    console.log("set: "+input)
+                    selectedCat = input;
+                    return selectedCat;
+                }
+            };
+        })
 
 
         .factory('selectedShopFac', function () {

@@ -31,15 +31,15 @@ angular.module('myApp.filters', [])
         .filter('hourFilter', function () {
             return function (rawHours) {
                 var formattedHours = rawHours.toString();
-                if(formattedHours == "0"){
+                if (formattedHours == "0") {
                     return "";
                 }
-                if (formattedHours.length<4) {
+                if (formattedHours.length < 4) {
                     formattedHours = "0" + formattedHours
                 }
-                formattedHours = formattedHours.substr(0,2)
-                        +':'
-                        +formattedHours.substring(2, formattedHours.length);
+                formattedHours = formattedHours.substr(0, 2)
+                        + ':'
+                        + formattedHours.substring(2, formattedHours.length);
                 return formattedHours;
             };
         })
@@ -69,6 +69,13 @@ angular.module('myApp.filters', [])
                 return link;
             };
 
+        })
+        .filter('catFilter', function () {
+
+            return function (data) {
+                console.log(data);
+               return data;
+            };
         })
 
         .filter('categoryfilter', function () {
