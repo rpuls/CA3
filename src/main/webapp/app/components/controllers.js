@@ -32,11 +32,14 @@ angular.module('myApp.controllers', []).
         .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
+        
+                $scope.test = function (){
+                    console.log("yeahhhhhhhhhhhhhhhhhhhhhhhh");
+                };
 
                 $scope.saveShop = function () {
                     var isAdmin = userAdminFactory.getIsAdmin();
                     var isUser = userAdminFactory.getIsUser();
-                    console.log(isAdmin);
                     if (isAdmin) {
                         if (angular.isUndefined($scope.shop.id)) {
                             $http.post('api/shop/add', $scope.shop)
@@ -80,7 +83,7 @@ $scope.upload = function(){
         angular.forEach($scope.files, function(file){
             fd.append('file', file);
         });
-         };
+         
           console.log("here at upload()");
       $http.post('api/shop/upload', $scope.files,
       {
@@ -91,6 +94,7 @@ $scope.upload = function(){
                   .success(function(data){
                       console.log(data);
           });
+          };
 
             }])
         .controller('catController', function ($scope) {
