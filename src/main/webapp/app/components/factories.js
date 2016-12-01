@@ -147,7 +147,14 @@ angular.module('myApp.factories', []).
         })
         .factory('mapPositionFactory', function () {
             var positions = [{name: "Nørreport St.", gps_pos: new google.maps.LatLng(55.6831194, 12.5715059), css_pos: {top: "96.5", left: "45"}}];
-            positions.push({name: "Nørrebro St.", gps_pos: new google.maps.LatLng(55.7008504, 12.5356172), css_pos: {top: "3", left: "45"}});
+            positions.push({name: "Nørrebro St.", gps_pos: new google.maps.LatLng(55.7008504, 12.5356172), css_pos: {top: "3.1", left: "38.3"}});
+            positions.push({name: "Lygten", gps_pos: new google.maps.LatLng(55.701644, 12.537584), css_pos: {top: "11", left: "53"}});
+            positions.push({name: "Nørrebro parken", gps_pos: new google.maps.LatLng(55.693760, 12.541583), css_pos: {top: "31,7", left: "19.3"}});
+            positions.push({name: "assistentens kirkegård", gps_pos: new google.maps.LatLng(55.690994, 12.550051), css_pos: {top: "49", left: "38.3"}});
+            positions.push({name: "Rundelen", gps_pos: new google.maps.LatLng(55.694344, 12.548774), css_pos: {top: "31.7", left: "40"}});
+            positions.push({name: "Skt. Hans Torv", gps_pos: new google.maps.LatLng(55.690756, 12.560677), css_pos: {top: "61.4", left: "71.8"}});
+            positions.push({name: "Blågårds Plads", gps_pos: new google.maps.LatLng(55.686393, 12.557151), css_pos: {top: "69", left: "18.4"}});
+            positions.push({name: "Dr. Louises Bro", gps_pos: new google.maps.LatLng(55.686677, 12.563972), css_pos: {top: "90", left: "40"}});
 
             var func = {
                 calculateMapPos: function (realPosition) {
