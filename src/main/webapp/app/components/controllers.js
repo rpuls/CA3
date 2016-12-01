@@ -6,7 +6,7 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac, selectedCatFactory) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getShops().then(
@@ -62,7 +62,7 @@ angular.module('myApp.controllers', []).
                     if (isUser) {
                         $http.post('api/shop/user/edit', $scope.shop)
                                 .success(function (data) {
-                                    $scope.upload();
+                                        $scope.upload();
                                     $timeout(function () {
                                         $location.path("#/shopDetailsView");
                                     }, 100);
@@ -73,30 +73,31 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
-
-                $scope.upload = function () {
-                    var fd = new FormData();
-                    angular.forEach($scope.files, function (file) {
-                        fd.append('file', file);
-                    });
-                    console.log($scope.files);
-                    $http.post('api/shop/upload', $scope.files,
-                            {
-                                transformRequest: angular.identity,
-                                headers: {
-                                    'Content-Type': undefined
-                                }
-                            }
-                    )
-                            .success(function (data) {
-                                console.log(data);
-
-                            });
-
-                };
+                
+$scope.upload = function(){
+        var fd = new FormData();
+        angular.forEach($scope.files, function(file){
+            fd.append('file', file);
+        });
+          console.log($scope.files);
+          console.log("fd: " + fd);
+      $http.post('api/shop/upload', fd,
+      {
+          transformRequest: angular.identity,
+          headers:{
+              'Content-Type': "multipart/form-data"
+          }
+      }
+              )
+                  .success(function(data){
+                      console.log(data);
+              
+          });
+         };
             }])
-        .controller('catController', function ($scope, selectedCatFactory) {
+        .controller('catController', function ($scope) {
             $scope.filterOptions = {
+                
                 categories: [
                     {id: '1', name: 'CUCA'},
                     {id: '2', name: 'FOOD'},
@@ -125,10 +126,7 @@ angular.module('myApp.controllers', []).
             $scope.filterItem = {
                 category: $scope.filterOptions.categories[20]
             };
-            $scope.selectCategory = function (inputData) {
-                selectedCatFactory.setSelectedCat(inputData);
-                console.log('selected category in factory :' + selectedCatFactory.getSelectedCat());
-            };
+
         })
 
 
