@@ -71,10 +71,9 @@
                     </ul>
                     <div ng-controller="catController">
                         
-                        <select ng-model="filterItem.category" ng-options="category.name | categoryfilter for category  in filterOptions.categories">
-
+                        <select ng-model="filterItem.category" ng-options="category.name | categoryfilter for category  in filterOptions.categories" ng-change="selectCategory(filterItem.category.name)">
                         </select>
-                        <h5>Short name: {{$scope.cat=filterItem.category.name}}</h5>
+                        <h5>Short name: {{filterItem.category.name}}</h5>
                     </div>
                     <div>
                         <div class="navbar-right" ng-show="isAuthenticated">
