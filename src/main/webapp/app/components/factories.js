@@ -44,20 +44,21 @@ angular.module('myApp.factories', []).
             };
         })
         .factory('selectedCatFactory', function () {
+
+            console.log('factory initialised');
             var selectedCat = {};
-    
+
             return {
                 getSelectedCat: function () {
                     return selectedCat;
                 },
                 setSelectedCat: function (input) {
-                    console.log("set: "+input)
+
                     selectedCat = input;
                     return selectedCat;
                 }
             };
         })
-
 
         .factory('selectedShopFac', function () {
             var selectedShop = {};
