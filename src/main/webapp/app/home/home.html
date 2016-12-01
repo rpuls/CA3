@@ -29,12 +29,17 @@
         white-space: nowrap;
     }
 
+    .catSelect {
+        position: absolute;
+    }
+
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 </head>
 <body>
-
     <div id="mapDiv" map-dir="">
-        <div  ng-repeat="shop in shops">
+        <div  ng-repeat="shop in shops| filter: shopCatFilter">
             <span ng-click="showDialog(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
                   -webkit-transform: rotate({{shop.angle}}deg); 
                   -moz-transform: rotate({{shop.angle}}deg); 
@@ -46,5 +51,6 @@
             <span>You are {{geolocation.mapPosition.dist| distMeter}}m from {{geolocation.mapPosition.name}}</span>
         </div>
     </div>
+
 
 
