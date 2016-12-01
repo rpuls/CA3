@@ -29,7 +29,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory","filesFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, filesFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -79,6 +79,7 @@ $scope.upload = function(){
         angular.forEach($scope.files, function(file){
             fd.append('file', file);
         });
+        filesFactory.setFiles($scope.files);
           console.log($scope.files);
           console.log("fd: " + fd);
       $http.post('api/shop/upload', fd,
@@ -131,9 +132,10 @@ $scope.upload = function(){
 
 
 
-        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, userFactory) {
+        .controller('userShopCtrl',function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
+            $scope.files = filesFactory.getFiles();
             ShopService.getUserShop(userFactory.getUser()).then(
                     function (response) {
                         $scope.shops = response.data;

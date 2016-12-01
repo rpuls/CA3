@@ -129,6 +129,15 @@
                         </div>
                     </div>
         </fieldset>
+            
+            <fieldset>
+                <legend>Uploaded Pictures:</legend>
+                <div class="form-group">
+                    <li ng-repeat="file in files">
+                            {{{{file.name}}}}
+                    </li>
+                    </div>
+            </fieldset>
             <button ng-click="editShop(shop)">MAKE SOME CHANGES</button>
       </form>
     </div>

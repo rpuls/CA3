@@ -72,6 +72,19 @@ angular.module('myApp.factories', []).
 
             };
         })
+        .factory('filesFactory', function(){
+          var shopFiles = {};
+          return{
+              getFiles: function(){
+                  return shopFiles;
+              },
+              setFiles: function(files){
+                  shopFiles = files;
+                  return shopFiles;
+              }
+          };
+        })
+
         .factory('geolocationFactory', function ($rootScope, $window, $q, mapPositionFactory) {
 
             function supported() {
