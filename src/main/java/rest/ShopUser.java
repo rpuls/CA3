@@ -9,11 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.ws.rs.core.Response;
-
-//import com.sun.jersey.core.header.FormDataContentDisposition;
-//import com.sun.jersey.multipart.FormDataParam;
 import entity.Shop;
+import java.io.BufferedOutputStream;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -27,6 +24,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 /**
  * REST Web Service
  *
@@ -55,17 +55,55 @@ public class ShopUser {
     public void editShop(String content) throws Exception {
         Shop s = gson.fromJson(content, Shop.class);
 
-        if (s.getCategory() == null && s.getName() == null && s.getStreet() == null && s.getHouseNumber() == null && s.getGooglePlaceId() == null && s.getRating() == 0.0) {
+//        if (s.getCategory() == null && s.getName() == null && s.getStreet() == null && s.getHouseNumber() == null && s.getGooglePlaceId() == null && s.getRating() == 0.0) {
             facade.updateShop(s);
-        }
+//        }
     }
     
-    @POST
+       @POST
+       @Path("upload")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
-    @Path("upload")
-    public void uploadFile(String content) throws Exception {
-        
+    @Produces({MediaType.MULTIPART_FORM_DATA})
+    public @ResponseBody void handleFileUpload(MultipartFile file){
+//    public @ResponseBody String handleFileUpload( @RequestParam("name") String name,
+//            @RequestParam("file") MultipartFile file){
+		
+		//String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		String rootDirectory = "C:\\Users\\cherr\\Desktop\\Netbeans_Projects\\Module 3\\CA3";
+		System.out.println("Root Directory "+rootDirectory);
+//		try {
+//			file.transferTo(new File(rootDirectory  + file.getOriginalFilename()));
+//		} catch (IllegalStateException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if (!file.isEmpty()) {
+//            try {
+//                byte[] bytes = file.getBytes();
+//                BufferedOutputStream stream =
+//                        new BufferedOutputStream(new FileOutputStream(new File(name)));
+//                stream.write(bytes);
+//                stream.close();
+//                return "You successfully uploaded " + name + "!";
+//            } catch (Exception e) {
+//                return "You failed to upload " + name + " => " + e.getMessage();
+//            }
+//        } else {
+//            return "You failed to upload " + name + " because the file was empty.";
+//        }
     }
+
+	
+    
+//    @POST
+//    @Consumes({MediaType.MULTIPART_FORM_DATA})
+//    @Path("upload")
+//    public void uploadFile(String content) throws Exception {
+//        
+//    }
     
 //    @POST
 //    @Consumes({MediaType.MULTIPART_FORM_DATA})
@@ -90,6 +128,8 @@ public class ShopUser {
 //    String output = "File uploaded to : " + uploadedFileLocation;
 //
 //    Response.status(200).entity(output).build();
+//    
+//    
 //
 //}
     
