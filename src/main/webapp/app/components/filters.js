@@ -70,20 +70,32 @@ angular.module('myApp.filters', [])
             };
 
         })
-        
+
         .filter('distMeter', function () {
-            return function(decimal){
+            return function (decimal) {
                 return Math.round(decimal / 25) * 25;
             };
         })
-        
-        .filter('catFilter', function () {
-            console.log('filter applied');
-    
-            return function (data) {
-            console.log('hope this works');
-                return data;
-              
+
+        .filter('catFilter', function (selectedCatFactory) {
+            //console.log('filter applied');
+
+            return function (shopData) {
+                var filteredShops = [];
+                var category = selectedCatFactory.getSelectedCat();
+                angular.forEach(shopData, function (value) {
+
+                    if (angular.equals(value.category, category)) {
+                        filteredShops.push(value);
+                        console.log('size of filtered list :' + filteredShops.length);
+                    }
+
+                return filteredShops;
+
+                });
+
+
+
             };
         })
 

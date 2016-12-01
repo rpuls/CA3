@@ -45,7 +45,6 @@ angular.module('myApp.factories', []).
         })
         .factory('selectedCatFactory', function () {
 
-            console.log('factory initialised');
             var selectedCat = {};
 
             return {
