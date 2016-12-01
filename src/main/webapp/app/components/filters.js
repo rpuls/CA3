@@ -78,10 +78,12 @@ angular.module('myApp.filters', [])
         })
         
         .filter('catFilter', function () {
-
+            console.log('filter applied');
+    
             return function (data) {
-                console.log(data);
-               return data;
+            console.log('hope this works');
+                return data;
+              
             };
         })
 
