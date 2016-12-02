@@ -73,16 +73,17 @@ angular.module('myApp.factories', []).
             };
         })
         .factory('filesFactory', function(){
-          var shopFiles = {};
-          return{
-              getFiles: function(){
-                  return shopFiles;
-              },
-              setFiles: function(files){
-                  shopFiles = files;
-                  return shopFiles;
-              }
-          };
+          var files = {};
+         return {
+                getFiles: function () {
+                    return files;
+                },
+                setFiles:function(shopFiles){
+                    files = shopFiles;
+                    return files;
+                }
+            };
+            
         })
 
         .factory('geolocationFactory', function ($rootScope, $window, $q, mapPositionFactory) {

@@ -78,11 +78,20 @@ $scope.upload = function(){
         var fd = new FormData();
         angular.forEach($scope.files, function(file){
             fd.append('file', file);
+//            filesFactory.addFile(file);
+//            console.log("FILE:"+file);
         });
         filesFactory.setFiles($scope.files);
-          console.log($scope.files);
+          console.log(filesFactory.getFiles());
           console.log("fd: " + fd);
-      $http.post('api/shop/upload', fd,
+          
+//          var data ={
+//              name : name,
+//              type : type
+//          };
+//          fd.append("data", JSON.stringify(data));
+//          
+      $http.post('api/shop/upload',fd,
       {
           transformRequest: angular.identity,
           headers:{
@@ -134,8 +143,9 @@ $scope.upload = function(){
 
         .controller('userShopCtrl',function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory) {
             $scope.shops = [];
+            $scope.message = "";
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
-            $scope.files = filesFactory.getFiles();
+            $scope.files = filesFactory.setFiles({});
             ShopService.getUserShop(userFactory.getUser()).then(
                     function (response) {
                         $scope.shops = response.data;
@@ -147,6 +157,12 @@ $scope.upload = function(){
                 selectedShopFac.setSelectedShop(shop);
                 $location.path('/userEditShop');
             };
+            
+            $scope.files = filesFactory.getFiles();
+            console.log("FILES: "+ $scope.files);
+            if($scope.files === null){
+                $scope.message = "You haven't upload pictures yet.";
+            }
         })
 
         .controller('LocationController', function ($scope, geolocationFactory) {
