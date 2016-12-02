@@ -39,7 +39,7 @@
 </head>
 <body>
     <div id="mapDiv" map-dir="">
-        <div  ng-repeat="shop in shops| filter: shopCatFilter">
+        <div  ng-repeat="shop in shops | catFilter">
             <span ng-click="showDialog(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
                   -webkit-transform: rotate({{shop.angle}}deg); 
                   -moz-transform: rotate({{shop.angle}}deg); 

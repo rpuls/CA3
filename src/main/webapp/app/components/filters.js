@@ -79,16 +79,17 @@ angular.module('myApp.filters', [])
 
         .filter('catFilter', function (selectedCatFactory) {
 
-            return function (shopData) {
-                console.log('this is the shop object: ' +shopData);
-                //var filteredShops = [{},{}];
-                var category = selectedCatFactory.getSelectedCat();
+            return function (shopData, category) {
+                console.log('this is the shop object: ' + shopData);
+
+
+//                var filteredShops = [];
+                category = selectedCatFactory.getSelectedCat();
 //                angular.forEach(shopData, function (value, key) {
-//                    //console.log('key part of shopData: ' + key);
 //                    if (angular.equals(value.category, category)) {
 //                        filteredShops.push(value, key);
 //
-//                        console.log('name of added shop :' + value.name + 'and id: ' +key);
+//                        console.log('name of added shop :' + value.name + ' and id : ' + key);
 //                        console.log('size of filtered list :' + filteredShops.length);
 //                    }
 //                    console.log(filteredShops);
@@ -96,7 +97,8 @@ angular.module('myApp.filters', [])
 //                    return filteredShops;
 //
 //                });
-                return shopData;
+//                 return shopData.category === category;
+                 return shopData;
 
 
             };
