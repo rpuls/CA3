@@ -9,7 +9,6 @@ angular.module('myApp.filters', [])
             };
         })
 
-
         .filter('phoneFilter', function () {
 
             return function (rawPhoneNumber) {
@@ -28,6 +27,7 @@ angular.module('myApp.filters', [])
             };
 
         })
+
         .filter('hourFilter', function () {
             return function (rawHours) {
                 var formattedHours = rawHours.toString();
@@ -77,33 +77,22 @@ angular.module('myApp.filters', [])
             };
         })
 
-        .filter('catFilter', function (selectedCatFactory) {
-
-            return function (shopData, category) {
-                console.log('this is the shop object: ' + shopData);
-
-
-//                var filteredShops = [];
-                category = selectedCatFactory.getSelectedCat();
-//                angular.forEach(shopData, function (value, key) {
-//                    if (angular.equals(value.category, category)) {
-//                        filteredShops.push(value, key);
-//
-//                        console.log('name of added shop :' + value.name + ' and id : ' + key);
-//                        console.log('size of filtered list :' + filteredShops.length);
-//                    }
-//                    console.log(filteredShops);
-//
-//                    return filteredShops;
-//
-//                });
-//                 return shopData.category === category;
-                 return shopData;
-
-
+.filter('catFilter', function (selectedCatFactory) {
+          return function (shopData) {
+                var category = selectedCatFactory.getSelectedCat();
+                var filteredShops = shopData.filter(function (shopItem) {
+                    if (angular.equals(shopItem.category, category)) {
+                        return true;
+                    } else if (angular.equals(category, 'uncategorised')) {
+                        return shopData;
+                    }else if(angular.equals(category,'Show All')){
+                        return shopData;
+                    }
+                });
+                return filteredShops;
             };
         })
-
+        
         .filter('categoryfilter', function () {
             return function (input) {
                 var out;
