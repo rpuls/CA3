@@ -29,7 +29,7 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory","filesFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, filesFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", "filesFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, filesFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
@@ -62,7 +62,7 @@ angular.module('myApp.controllers', []).
                     if (isUser) {
                         $http.post('api/shop/user/edit', $scope.shop)
                                 .success(function (data) {
-                                        $scope.upload();
+                                    $scope.upload();
                                     $timeout(function () {
                                         $location.path("#/shopDetailsView");
                                     }, 100);
@@ -73,41 +73,40 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
-                
-$scope.upload = function(){
-        var fd = new FormData();
-        angular.forEach($scope.files, function(file){
-            fd.append('file', file);
+
+                $scope.upload = function () {
+                    var fd = new FormData();
+                    angular.forEach($scope.files, function (file) {
+                        fd.append('file', file);
 //            filesFactory.addFile(file);
 //            console.log("FILE:"+file);
-        });
-        filesFactory.setFiles($scope.files);
-          console.log(filesFactory.getFiles());
-          console.log("fd: " + fd);
-          
+                    });
+                    filesFactory.setFiles($scope.files);
+                    console.log(filesFactory.getFiles());
+                    console.log("fd: " + fd);
+
 //          var data ={
 //              name : name,
 //              type : type
 //          };
 //          fd.append("data", JSON.stringify(data));
 //          
-      $http.post('api/shop/upload',fd,
-      {
-          transformRequest: angular.identity,
-          headers:{
-              'Content-Type': "multipart/form-data"
-          }
-      }
-              )
-                  .success(function(data){
-                      console.log(data);
-              
-          });
-         };
+                    $http.post('api/shop/upload', fd,
+                            {
+                                transformRequest: angular.identity,
+                                headers: {
+                                    'Content-Type': "multipart/form-data"
+                                }
+                            }
+                    )
+                            .success(function (data) {
+                                console.log(data);
+
+                            });
+                };
             }])
-        .controller('catController', function ($scope) {
+        .controller('catController', function ($scope, selectedCatFactory) {
             $scope.filterOptions = {
-                
                 categories: [
                     {id: '1', name: 'CUCA'},
                     {id: '2', name: 'FOOD'},
@@ -137,11 +136,15 @@ $scope.upload = function(){
                 category: $scope.filterOptions.categories[20]
             };
 
+            $scope.selectCategory = function (inputData) {
+                selectedCatFactory.setSelectedCat(inputData);
+            };
+
         })
 
 
 
-        .controller('userShopCtrl',function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory) {
+        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory) {
             $scope.shops = [];
             $scope.message = "";
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
@@ -157,10 +160,10 @@ $scope.upload = function(){
                 selectedShopFac.setSelectedShop(shop);
                 $location.path('/userEditShop');
             };
-            
+
             $scope.files = filesFactory.getFiles();
-            console.log("FILES: "+ $scope.files);
-            if($scope.files === null){
+            console.log("FILES: " + $scope.files);
+            if ($scope.files === null) {
                 $scope.message = "You haven't upload pictures yet.";
             }
         })
