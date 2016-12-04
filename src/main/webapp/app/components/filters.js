@@ -13,17 +13,21 @@ angular.module('myApp.filters', [])
 
             return function (rawPhoneNumber) {
 
+
                 var phoneNumber = rawPhoneNumber;
-                phoneNumber = phoneNumber.replace(/ /g, '');
-                if (phoneNumber[0] != '+') {
-                    phoneNumber = '+45' + phoneNumber;
+                if (!angular.isUndefined(phoneNumber)) {
+                    phoneNumber = phoneNumber.replace(/ /g, '');
+                    if (phoneNumber[0] != '+') {
+                        phoneNumber = '+45' + phoneNumber;
+                    }
+                    phoneNumber = phoneNumber.substr(0, 3) + ' '
+                            + phoneNumber.substr(3, 2) + ' '
+                            + phoneNumber.substr(5, 2) + ' '
+                            + phoneNumber.substr(7, 2) + ' '
+                            + phoneNumber.substring(9, phoneNumber.length);
+                    return phoneNumber;
                 }
-                phoneNumber = phoneNumber.substr(0, 3) + ' '
-                        + phoneNumber.substr(3, 2) + ' '
-                        + phoneNumber.substr(5, 2) + ' '
-                        + phoneNumber.substr(7, 2) + ' '
-                        + phoneNumber.substring(9, phoneNumber.length);
-                return phoneNumber;
+                return "Not available"
             };
 
         })
@@ -49,10 +53,12 @@ angular.module('myApp.filters', [])
             return function (rawLink) {
 
                 var link = rawLink;
-                if (!link.match(/http/)) {
-                    link = 'http://' + link;
+                if (!angular.isUndefined(link)) {
+                    if (!link.match(/http/)) {
+                        link = 'http://' + link;
+                    }
+                    return link;
                 }
-                return link;
             };
 
         })
@@ -62,11 +68,14 @@ angular.module('myApp.filters', [])
             return function (rawLink) {
 
                 var link = rawLink;
-                link = link.replace(/https?:\/\//, '');
-                if (link.length > 17) {
-                    link = "visit website"
+                if (!angular.isUndefined(link)) {
+                    link = link.replace(/https?:\/\//, '');
+                    if (link.length > 17) {
+                        link = "visit website"
+                    }
+                    return link;
                 }
-                return link;
+                return "";
             };
 
         })
@@ -171,50 +180,55 @@ angular.module('myApp.filters', [])
                 return out;
             };
         })
-        
+
         .filter('streetColorFilter', function () {
             return function (input) {
                 var out;
-                switch (input.toUpperCase()) {
-                    case "STEFANSGADE" || "RANTZAUSGADE" || "GRIFFENFELDSGADE" || "ELMEGADE" || "BLEGDAMSVEJ" || "BRAGESGADE":
-                        out = "ef3638";
-                        break;
-                    case "NØRREBROGADE":
-                        out = "2b6a37";
-                        break;
-                    case "MIMERSGADE" || "GULDBERGSGADE" || "SANKT HANS GADE":
-                        out = "ecbe1e";
-                        break;
-                    case "JAGTVEJ":
-                        out = "703092";
-                        break;
-                    case "TAGENSVEJ":
-                        out = "aeb0b0";
-                        break;
-                    case "ÅBOULEVARD":
-                        out = "c3e5db";
-                        break;
-                    case "JÆGERSBORGGADE":
-                        out = "795141";
-                        break;
-                    case "MØLLEGADE":
-                        out = "09bbb5";
-                        break;
-                    case "BIRKEGADE" || "AHORNSGADE":
-                        out = "f6902d";
-                        break;
-                    case "BLÅGÅRDSGADE" || "FÆLLEDVEJ" || "NØRRE ALLE":
-                        out = "253991";
-                        break;
-                    case "RAVNSBORGGADE" || "RYESGADE":
-                        out = "f0569b";
-                        break;
-                    case "WESSELSGADE" || "PEBLINGE DOSSERING" || "SORTEDAM DOSSERING":
-                        out = "63be56";
-                        break;
-                    default:
-                        out = "black";
-                        break;
+                if (angular.isUndefined(input)) {
+                    out = "aaaaaa";
+                    return out;
+                } else {
+                    switch (input.toUpperCase()) {
+                        case "STEFANSGADE" || "RANTZAUSGADE" || "GRIFFENFELDSGADE" || "ELMEGADE" || "BLEGDAMSVEJ" || "BRAGESGADE":
+                            out = "ef3638";
+                            break;
+                        case "NØRREBROGADE":
+                            out = "2b6a37";
+                            break;
+                        case "MIMERSGADE" || "GULDBERGSGADE" || "SANKT HANS GADE":
+                            out = "ecbe1e";
+                            break;
+                        case "JAGTVEJ":
+                            out = "703092";
+                            break;
+                        case "TAGENSVEJ":
+                            out = "aeb0b0";
+                            break;
+                        case "ÅBOULEVARD":
+                            out = "c3e5db";
+                            break;
+                        case "JÆGERSBORGGADE":
+                            out = "795141";
+                            break;
+                        case "MØLLEGADE":
+                            out = "09bbb5";
+                            break;
+                        case "BIRKEGADE" || "AHORNSGADE":
+                            out = "f6902d";
+                            break;
+                        case "BLÅGÅRDSGADE" || "FÆLLEDVEJ" || "NØRRE ALLE":
+                            out = "253991";
+                            break;
+                        case "RAVNSBORGGADE" || "RYESGADE":
+                            out = "f0569b";
+                            break;
+                        case "WESSELSGADE" || "PEBLINGE DOSSERING" || "SORTEDAM DOSSERING":
+                            out = "63be56";
+                            break;
+                        default:
+                            out = "black";
+                            break;
+                    }
                 }
                 return out;
             };

@@ -65,9 +65,6 @@ public class ShopMapper {
             user = null;
         }
         website = shop.getWebsite();
-        if (website == null) {
-            website = "NA";
-        }
         category = shop.getCategory();
         description = shop.getDescription();
         googlePlaceId = shop.getGooglePlaceId();

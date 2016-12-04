@@ -24,7 +24,7 @@ angular.module('myApp.controllers', []).
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
                 $uibModal.open({
                     templateUrl: 'app/home/shop/shop.html',
-                    scope: $scope
+                    scope: $scope,
                 });
             };
         })
