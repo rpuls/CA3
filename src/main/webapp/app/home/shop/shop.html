@@ -54,6 +54,7 @@
             margin: 3px 0px;
         }
     }
+   
 </style>
 <div class="container-fluid">
 
@@ -94,37 +95,37 @@
         </div>
         <div class="col-xs-12 col-md-6 mb10">
             <div class="">
-                <div class="label label-info col-xs-5 mb5">ADDRESS:</div>
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">ADDRESS:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.street}} {{selectedShop.houseNumber}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5 mb5">CITY:</div>
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">CITY:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.cityInfo.zipcode}} {{selectedShop.cityInfo.city}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5 mb5">PHONE:</div>
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">PHONE:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.phone | phoneFilter}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5 mb5">EMAIL:</div>
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">EMAIL:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.email}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5 mb5">OPENING HOURS:</div>
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">OPENING HOURS:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.dayNullOpen | hourFilter}} - {{selectedShop.dayNullClose | hourFilter}}</div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5 mb5">WEBSITE:</div> 
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">WEBSITE:</div> 
                 <div class="spanAsBlock col-xs-7"><a href="{{selectedShop.website | hrefFilter}}">{{selectedShop.website | linkTxtFilter}}</a></div>
                 <div class="clearfix"></div>
             </div>
             <div class="">
-                <div class="label label-info col-xs-5 mb5">RATING:</div>
+                <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street | streetColorFilter}}">RATING:</div>
                 <div class="spanAsBlock col-xs-7">{{selectedShop.rating}}</div>
                 <div class="clearfix"></div>
             </div> <!-- {{selectedGoogleShop.result.rating}}-->

@@ -170,5 +170,53 @@ angular.module('myApp.filters', [])
                 }
                 return out;
             };
+        })
+        
+        .filter('streetColorFilter', function () {
+            return function (input) {
+                var out;
+                switch (input.toUpperCase()) {
+                    case "STEFANSGADE" || "RANTZAUSGADE" || "GRIFFENFELDSGADE" || "ELMEGADE" || "BLEGDAMSVEJ" || "BRAGESGADE":
+                        out = "ef3638";
+                        break;
+                    case "NØRREBROGADE":
+                        out = "2b6a37";
+                        break;
+                    case "MIMERSGADE" || "GULDBERGSGADE" || "SANKT HANS GADE":
+                        out = "ecbe1e";
+                        break;
+                    case "JAGTVEJ":
+                        out = "703092";
+                        break;
+                    case "TAGENSVEJ":
+                        out = "aeb0b0";
+                        break;
+                    case "ÅBOULEVARD":
+                        out = "c3e5db";
+                        break;
+                    case "JÆGERSBORGGADE":
+                        out = "795141";
+                        break;
+                    case "MØLLEGADE":
+                        out = "09bbb5";
+                        break;
+                    case "BIRKEGADE" || "AHORNSGADE":
+                        out = "f6902d";
+                        break;
+                    case "BLÅGÅRDSGADE" || "FÆLLEDVEJ" || "NØRRE ALLE":
+                        out = "253991";
+                        break;
+                    case "RAVNSBORGGADE" || "RYESGADE":
+                        out = "f0569b";
+                        break;
+                    case "WESSELSGADE" || "PEBLINGE DOSSERING" || "SORTEDAM DOSSERING":
+                        out = "63be56";
+                        break;
+                    default:
+                        out = "black";
+                        break;
+                }
+                return out;
+            };
         });
 
