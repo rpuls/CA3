@@ -77,22 +77,29 @@ angular.module('myApp.filters', [])
             };
         })
 
-.filter('catFilter', function (selectedCatFactory) {
-          return function (shopData) {
+        .filter('catFilter', function (selectedCatFactory) {
+            return function (shopData) {
                 var category = selectedCatFactory.getSelectedCat();
-                var filteredShops = shopData.filter(function (shopItem) {
-                    if (angular.equals(shopItem.category, category)) {
-                        return true;
-                    } else if (angular.equals(category, 'uncategorised')) {
-                        return shopData;
-                    }else if(angular.equals(category,'Show All')){
-                        return shopData;
+                if (!angular.isUndefined(category)) {
+                    var filteredShops = shopData.filter(function (shopItem) {
+
+                        if (angular.equals(shopItem.category, category)) {
+                            return true;
+                        } else if (angular.equals(category, 'uncategorised')) {
+                            return shopData;
+                        } else if (angular.equals(category, 'Show All')) {
+                            return shopData;
+                        }
+                    });
+                    if (filteredShops.length > 0) {
+                        return filteredShops;
                     }
-                });
-                return filteredShops;
+                }
+                return shopData;
+
             };
         })
-        
+
         .filter('categoryfilter', function () {
             return function (input) {
                 var out;
