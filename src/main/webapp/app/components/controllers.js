@@ -6,7 +6,7 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, ShopService, selectedShopFac) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, $window, ShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             ShopService.getShops().then(
@@ -24,7 +24,10 @@ angular.module('myApp.controllers', []).
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
                 $uibModal.open({
                     templateUrl: 'app/home/shop/shop.html',
-                    scope: $scope,
+                    scope: $scope
+                })
+                .closed.then(function () {
+                    $window.document.getElementsByName('viewport')[0].content = "width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes";
                 });
             };
         })
@@ -187,4 +190,4 @@ angular.module('myApp.controllers', []).
             $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
 
-
+        ;
