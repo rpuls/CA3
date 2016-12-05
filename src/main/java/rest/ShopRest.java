@@ -105,8 +105,6 @@ public class ShopRest {
                     }
                 }
 
-                shop.setStreet(url);
-
 //                    shop.setDayNullOpen(result.get("place.opening_hours.periods[1].open.time").getAsInt());
 //                    shop.setDayNullClose(0);
 //                    shop.getDayOneOpen();
