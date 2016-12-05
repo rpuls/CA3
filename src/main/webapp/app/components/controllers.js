@@ -94,7 +94,7 @@ angular.module('myApp.controllers', []).
 //          };
 //          fd.append("data", JSON.stringify(data));
 //          
-                    $http.post('api/shop/upload', fd,
+                    $http.post('/FilesController', fd,
                             {
                                 transformRequest: angular.identity,
                                 headers: {
