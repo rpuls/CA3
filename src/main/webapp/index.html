@@ -73,7 +73,7 @@
                     </ul>
                     <div ng-controller="catController">
 
-                        <select ng-model="filterItem.category" ng-options="category.name |  categoryfilter for category  in filterOptions.categories" ng-change="selectCategory(filterItem.category.name)">
+                        <select class="form-control" ng-model="filterItem.category" ng-options="category.name |  categoryfilter for category  in filterOptions.categories" ng-change="selectCategory(filterItem.category.name)">
                         </select>
                     </div>
                     <div>
