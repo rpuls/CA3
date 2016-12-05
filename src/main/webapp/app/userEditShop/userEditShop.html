@@ -106,18 +106,6 @@
                     </div>
                 </fieldset>
             </div>
-
-            <!--IMAGES UPLOAD-->
-                <div class="form-group">
-                    <label for="picture">Upload Images:</label> 
-                    <input type="file" 
-                           file-input="files" multiple />
-                    <li ng-repeat="file in files">{{file.name}}</li>
-
-                
-            </div>
-                <br>
-                <br>
                 <button class="btn btn-primary" ng-click="saveShop()"ng-confirm-click="Are you sure you want save changes?">Save</button>
 
         </form>

@@ -12,19 +12,14 @@ angular.module('myApp.directives', [])
 
                     angular.element(document).ready(function () {
                         mapDiv.height(mapDiv.width() * 1.45);
-
                     });
-
                     function onResize() {
                         mapDiv.height(mapDiv.width() * 1.45);
                     }
-
                     onResize();
                     angular.element($window).on('resize', onResize);
-
                 }
             };
-
         })
         .directive('ngConfirmClick', [
             function () {
@@ -59,6 +54,6 @@ angular.module('myApp.directives', [])
                     });
                 }
             };
-        });
+        })
 ;
 

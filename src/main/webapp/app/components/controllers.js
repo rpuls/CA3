@@ -26,9 +26,9 @@ angular.module('myApp.controllers', []).
                     templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
                 })
-                .closed.then(function () {
-                    $window.document.getElementsByName('viewport')[0].content = "width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes";
-                });
+                        .closed.then(function () { //sets meta tags back to scalable state
+                            $window.document.getElementsByName('viewport')[0].content = "width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes";
+                        });
             };
         })
 
@@ -94,7 +94,7 @@ angular.module('myApp.controllers', []).
 //          };
 //          fd.append("data", JSON.stringify(data));
 //          
-                    $http.post('api/shop/upload', fd,
+                    $http.post('/FilesController', fd,
                             {
                                 transformRequest: angular.identity,
                                 headers: {
@@ -105,7 +105,7 @@ angular.module('myApp.controllers', []).
                             .success(function (data) {
                                 console.log(data);
 
-                            });
+                    });
                 };
             }])
         .controller('catController', function ($scope, selectedCatFactory) {
@@ -190,4 +190,4 @@ angular.module('myApp.controllers', []).
             $scope.error = geolocationFactory.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
         });
 
-        ;
+;
