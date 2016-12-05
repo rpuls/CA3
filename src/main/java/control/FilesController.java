@@ -5,22 +5,37 @@
  */
 package control;
 
+import entity.Picture;
+import facades.ShopJpaController;
+import facades.UserFacade;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
+import security.IUserFacade;
+import security.UserFacadeFactory;
 
 /**
  *
  * @author Cherry Rose Semeña
  */
-@WebServlet(name = "FilesController", urlPatterns = {"/FilesController"})
+@WebServlet(urlPatterns = {"/upload"})
 public class FilesController extends HttpServlet {
 
     /**
@@ -35,13 +50,37 @@ public class FilesController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Collection<Part> parts = null;
-        if (ServletFileUpload.isMultipartContent(request)) {
-            parts = request.getParts();            //Extracts the part of the form that has files and parameters
+       
+        if (!ServletFileUpload.isMultipartContent(request)) {
+
+            return;
         }
+        IUserFacade facade = UserFacadeFactory.getInstance();
         
-        String url ="/home.html";
-        
+        FileItemFactory itemfactory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(itemfactory);
+        try {
+            List<FileItem> items = upload.parseRequest(request);
+            List<Picture> files= new ArrayList();
+            for (FileItem fileItem : items) {
+                String contentType = fileItem.getContentType();
+                String fileName = fileItem.getName();
+                String description = ""; //create a field for caption
+                InputStream input = fileItem.getInputStream();
+                byte[] bytes = IOUtils.toByteArray(input);
+                Picture file = new Picture(fileName, description, contentType, bytes);
+                files.add(file);
+            }
+            facade.addFiles(124, files); //should get the shopId from user - shop when logged in
+            for (Picture file : files) {
+                System.out.println("FILE: " + file.getName());
+            }
+            System.out.println("ADD FILE");
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
     }
 

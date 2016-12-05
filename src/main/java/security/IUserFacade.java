@@ -6,6 +6,7 @@
 package security;
 
 import entity.CityInfo;
+import entity.Picture;
 import entity.Shop;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
@@ -38,6 +39,9 @@ public interface IUserFacade {
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception;
     
     public void delete(Integer id) throws NonexistentEntityException;
+    
     public List<Shop> getShopByUser(String username);
+     
+    public void addFiles(int shopId, List<Picture> images);
     
 }

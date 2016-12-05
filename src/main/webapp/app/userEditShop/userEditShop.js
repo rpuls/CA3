@@ -8,7 +8,8 @@ angular.module('myApp.userEditShop', ['ngRoute'])
                     controller: 'addShopCtrl'
                 }),
                 $routeProvider.when('/addFiles',{
-                    templateUrl: 'app/userEditShop/addFiles.html'        
+                    templateUrl: 'app/userEditShop/addFiles.html',
+                    controller: 'fileCtrl'
                 })
                 ;
             }]);

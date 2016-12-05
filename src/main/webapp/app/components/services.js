@@ -28,6 +28,30 @@ angular.module('myApp.services', [])
             };
             return shop;
 
-        });
+        })
+        .service('fileUpload', ['$http', function ($http, $location) {
+                this.uploadFileToUrl = function (files, uploadUrl) {
+                    var fd = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                        fd.append('file', files[i]);
+                    }
+
+                    $http({
+                        method: 'POST',
+                        url: uploadUrl, // The URL to Post.
+                        headers: {'Content-Type': undefined}, // Set the Content-Type to undefined always.
+                        data: fd,
+                        transformRequest: function (data, headersGetterFunction) {
+                            return data;
+                        }
+                    })
+                            .success(function (data, status) {
+                                console.log("succes");
+                            })
+                            .error(function (data, status) {
+
+                            });
+                };
+            }]);
 
   

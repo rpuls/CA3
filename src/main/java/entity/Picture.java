@@ -42,6 +42,17 @@ public class Picture implements Serializable {
     @JoinColumn(name = "SHOP_ID")
     private Shop shop;
 
+    public Picture(){
+        
+    }
+    
+    public Picture(String name, String description, String type, byte[] content) {
+        this.name = name;
+        this.description = description;
+        this.type = type;
+        this.content = content;
+    }
+
     public Integer getId() {
         return id;
     }
