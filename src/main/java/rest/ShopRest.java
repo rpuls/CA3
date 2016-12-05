@@ -72,58 +72,93 @@ public class ShopRest {
 
     public void googleUpdate() throws IOException, Exception {
 
-        //if (facade.needGoogleUpdate()) {
-        List<entity.Shop> shops = facade.getAllShops();
-        for (Shop shop : shops) {
-            String placeId = shop.getGooglePlaceId();
-            if (placeId != null) {
-                String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
-                        + placeId + "&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0";
-                JsonObject jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
-                JsonObject result = jsonObject.get("result").getAsJsonObject();
-                shop.setRating(result.get("rating").getAsDouble());
-                shop.setPhone(result.get("international_phone_number").getAsString());
-                shop.setWebsite(result.get("website").getAsString());
+        if (facade.needGoogleUpdate()) {
+            List<entity.Shop> shops = facade.getAllShops();
+            for (Shop shop : shops) {
+                String placeId = shop.getGooglePlaceId();
+                if (placeId != null) {
+                    String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
+                            + placeId + "&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0";
+                    JsonObject jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
+                    JsonObject result = jsonObject.get("result").getAsJsonObject();
+                    if (result.get("rating") != null) {
+                        shop.setRating(result.get("rating").getAsDouble());
+                    }
+                    if (result.get("international_phone_number") != null) {
+                        shop.setPhone(result.get("international_phone_number").getAsString());
+                    }
+                    if (result.get("website") != null) {
+                        shop.setWebsite(result.get("website").getAsString());
+                    }
 
-                JsonArray adressComponents = result.get("address_components").getAsJsonArray();
-
-                for (int i = 0; i < adressComponents.size(); i++) {
-                    JsonArray types = adressComponents.get(i).getAsJsonObject().get("types").getAsJsonArray();
-                    for (int j = 0; j < types.size(); j++) {
-                        if (types.get(j).getAsString().equalsIgnoreCase("street_number")) {
-                            String houseNumber = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
-                            shop.setHouseNumber(houseNumber);
-                        }
-                        if (types.get(j).getAsString().equalsIgnoreCase("route")) {
-                            String streetName = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
-                            shop.setStreet(streetName);
-                        }
-                        if (types.get(j).getAsString().equalsIgnoreCase("postal_code")) {
-                            String zipCode = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
-                            shop.setCityInfo(facade.findCityInfo(zipCode));
+                    //FETCHING ADDRESS COMPONENTS, street, housenumber, zip code.
+                    if (result.get("address_components") != null) {
+                        JsonArray adressComponents = result.get("address_components").getAsJsonArray();
+                        for (int i = 0; i < adressComponents.size(); i++) {
+                            JsonArray types = adressComponents.get(i).getAsJsonObject().get("types").getAsJsonArray();
+                            for (int j = 0; j < types.size(); j++) {
+                                if (types.get(j).getAsString().equalsIgnoreCase("street_number")) {
+                                    String houseNumber = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
+                                    shop.setHouseNumber(houseNumber);
+                                }
+                                if (types.get(j).getAsString().equalsIgnoreCase("route")) {
+                                    String streetName = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
+                                    shop.setStreet(streetName);
+                                }
+                                if (types.get(j).getAsString().equalsIgnoreCase("postal_code")) {
+                                    String zipCode = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
+                                    shop.setCityInfo(facade.findCityInfo(zipCode));
+                                }
+                            }
                         }
                     }
-                }
 
-//                    shop.setDayNullOpen(result.get("place.opening_hours.periods[1].open.time").getAsInt());
-//                    shop.setDayNullClose(0);
-//                    shop.getDayOneOpen();
-//                    shop.getDayOneClose();
-//                    shop.getDayTwoOpen();
-//                    shop.getDayTwoClose();
-//                    shop.getDayThreeOpen();
-//                    shop.getDayThreeClose();
-//                    shop.getDayFourOpen();
-//                    shop.getDayFourClose();
-//                    shop.getDayFiveOpen();
-//                    shop.getDayFiveClose();
-//                    shop.getDaySixOpen();
-//                    shop.getDaySixClose();
-                facade.updateShop(shop);
+                    JsonElement hoursElement = result.get("opening_hours");
+                    if (hoursElement != null) {
+                        JsonObject openingHours = result.get("opening_hours").getAsJsonObject();
+                        JsonArray days = openingHours.get("periods").getAsJsonArray();
+                        for (int i = 0; i < days.size(); i++) {
+                            JsonObject open = (JsonObject) days.get(i).getAsJsonObject().getAsJsonObject("open");
+                            JsonObject close = days.get(i).getAsJsonObject().getAsJsonObject("close");
+
+                            if (close.get("day").getAsString().equalsIgnoreCase("0")) {
+                                shop.setDayNullClose(open.get("time").getAsInt());
+                            } else if (close.get("day").getAsString().equalsIgnoreCase("1")) {
+                                shop.setDayOneClose(close.get("time").getAsInt());
+                            } else if (close.get("day").getAsString().equalsIgnoreCase("2")) {
+                                shop.setDayTwoClose(close.get("time").getAsInt());
+                            } else if (close.get("day").getAsString().equalsIgnoreCase("3")) {
+                                shop.setDayThreeClose(close.get("time").getAsInt());
+                            } else if (close.get("day").getAsString().equalsIgnoreCase("4")) {
+                                shop.setDayFourClose(close.get("time").getAsInt());
+                            } else if (close.get("day").getAsString().equalsIgnoreCase("5")) {
+                                shop.setDayFiveClose(close.get("time").getAsInt());
+                            } else if (close.get("day").getAsString().equalsIgnoreCase("6")) {
+                                shop.setDaySixClose(close.get("time").getAsInt());
+                            }
+
+                            if (open.get("day").getAsString().equalsIgnoreCase("0")) {
+                                shop.setDayNullOpen(open.get("time").getAsInt());
+                            } else if (open.get("day").getAsString().equalsIgnoreCase("1")) {
+                                shop.setDayOneOpen(open.get("time").getAsInt());
+                            } else if (open.get("day").getAsString().equalsIgnoreCase("2")) {
+                                shop.setDayTwoOpen(open.get("time").getAsInt());
+                            } else if (open.get("day").getAsString().equalsIgnoreCase("3")) {
+                                shop.setDayThreeOpen(open.get("time").getAsInt());
+                            } else if (open.get("day").getAsString().equalsIgnoreCase("4")) {
+                                shop.setDayFourOpen(open.get("time").getAsInt());
+                            } else if (open.get("day").getAsString().equalsIgnoreCase("5")) {
+                                shop.setDayFiveOpen(open.get("time").getAsInt());
+                            } else if (open.get("day").getAsString().equalsIgnoreCase("6")) {
+                                shop.setDaySixOpen(open.get("time").getAsInt());
+                            }
+                        }
+                    }
+                    facade.updateShop(shop);
+                }
             }
+            facade.googleUpdated();
         }
-        facade.googleUpdated();
-        //}
     }
 
     @GET
