@@ -1,10 +1,15 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -19,24 +24,70 @@ public class Picture implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
+
+    @Column(name = "description", length = 255)
+    private String description;
+
+    @Column(name = "type", length = 100, nullable = false)
+    private String type;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "content", nullable = false)
+    private byte[] content;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "SHOP_ID")
     private Shop shop;
-    private String imgPath;
 
     public Integer getId() {
         return id;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public void setShopId(int shopId) {
+        this.shop.setId(shopId);
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+    public String getName() {
+        return name;
     }
-    
-    public void setShopId(int shopId){
-        this.shop.setId(shopId);
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
 }

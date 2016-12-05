@@ -51,11 +51,5 @@ public class ShopUser {
 //        }
     }
 //    
-       @POST
-       @Path("upload")
-    @Consumes({MediaType.MULTIPART_FORM_DATA})
-    @Produces({MediaType.APPLICATION_JSON})
-    public void handleFileUpload(String file){
-    }
 
    }

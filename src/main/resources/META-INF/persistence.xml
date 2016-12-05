@@ -7,7 +7,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://46.101.219.35:3306/CA3DB?zeroDateTimeBehavior=convertToNull"/>
             <property name="javax.persistence.jdbc.user" value="CAuser"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.password" value="30SP11"/>
+            <property name="javax.persistence.jdbc.password" value="12SP02"/>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="eclipselink.canonicalmodel.subpackage" value="development"/>
         </properties>

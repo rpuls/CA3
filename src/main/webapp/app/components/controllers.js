@@ -94,14 +94,16 @@ angular.module('myApp.controllers', []).
 //          };
 //          fd.append("data", JSON.stringify(data));
 //          
-                    $http.post('api/shop/upload', fd, {
-                        transformRequest: angular.identity,
-                        headers: {
-                            'Content-Type': "multipart/form-data"
-                        }
-                    })
-                    .success(function (data) {
-                        console.log(data);
+                    $http.post('/FilesController', fd,
+                            {
+                                transformRequest: angular.identity,
+                                headers: {
+                                    'Content-Type': "multipart/form-data"
+                                }
+                            }
+                    )
+                            .success(function (data) {
+                                console.log(data);
 
                     });
                 };
