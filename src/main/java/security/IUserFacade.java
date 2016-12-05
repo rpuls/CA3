@@ -5,6 +5,7 @@
  */
 package security;
 
+import entity.CityInfo;
 import entity.Shop;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
@@ -30,11 +31,13 @@ public interface IUserFacade {
     
     public Shop createShop(Shop shop);
     
+    public CityInfo findCityInfo(String zipCode);
+    
     public List<Shop> getAllShops();
     
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception;
     
     public void delete(Integer id) throws NonexistentEntityException;
-     public List<Shop> getShopByUser(String username);
+    public List<Shop> getShopByUser(String username);
     
 }

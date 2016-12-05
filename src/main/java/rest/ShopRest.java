@@ -7,7 +7,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import entity.CityInfo;
 import entity.Shop;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,17 +71,42 @@ public class ShopRest {
     }
 
     public void googleUpdate() throws IOException, Exception {
-        
-        if (facade.needGoogleUpdate()) {
-            List<entity.Shop> shops = facade.getAllShops();
-            for (Shop shop : shops) {
-                String placeId = shop.getGooglePlaceId();
-                if (placeId != null) {
-                    String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
-                            + placeId + "&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0";
-                    JsonObject jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
-                    JsonObject result = jsonObject.get("result").getAsJsonObject();
-                    shop.setRating(result.get("rating").getAsDouble());
+
+        //if (facade.needGoogleUpdate()) {
+        List<entity.Shop> shops = facade.getAllShops();
+        for (Shop shop : shops) {
+            String placeId = shop.getGooglePlaceId();
+            if (placeId != null) {
+                String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
+                        + placeId + "&key=AIzaSyCk7blviPaQ3wPLGzDt7Dndzikj4bNeLI0";
+                JsonObject jsonObject = ExternalURLRESTCall.readJsonFromUrl(url);
+                JsonObject result = jsonObject.get("result").getAsJsonObject();
+                shop.setRating(result.get("rating").getAsDouble());
+                shop.setPhone(result.get("international_phone_number").getAsString());
+                shop.setWebsite(result.get("website").getAsString());
+
+                JsonArray adressComponents = result.get("address_components").getAsJsonArray();
+
+                for (int i = 0; i < adressComponents.size(); i++) {
+                    JsonArray types = adressComponents.get(i).getAsJsonObject().get("types").getAsJsonArray();
+                    for (int j = 0; j < types.size(); j++) {
+                        if (types.get(j).getAsString().equalsIgnoreCase("street_number")) {
+                            String houseNumber = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
+                            shop.setHouseNumber(houseNumber);
+                        }
+                        if (types.get(j).getAsString().equalsIgnoreCase("route")) {
+                            String streetName = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
+                            shop.setStreet(streetName);
+                        }
+                        if (types.get(j).getAsString().equalsIgnoreCase("postal_code")) {
+                            String zipCode = adressComponents.get(i).getAsJsonObject().get("long_name").getAsString();
+                            shop.setCityInfo(facade.findCityInfo(zipCode));
+                        }
+                    }
+                }
+
+                shop.setStreet(url);
+
 //                    shop.setDayNullOpen(result.get("place.opening_hours.periods[1].open.time").getAsInt());
 //                    shop.setDayNullClose(0);
 //                    shop.getDayOneOpen();
@@ -93,11 +121,11 @@ public class ShopRest {
 //                    shop.getDayFiveClose();
 //                    shop.getDaySixOpen();
 //                    shop.getDaySixClose();
-                    facade.updateShop(shop);
-                }
+                facade.updateShop(shop);
             }
-            facade.googleUpdated();
         }
+        facade.googleUpdated();
+        //}
     }
 
     @GET
@@ -114,7 +142,7 @@ public class ShopRest {
 
         return gson.toJson(shopmappers);
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("usershop/{user}")
@@ -139,7 +167,5 @@ public class ShopRest {
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
     }
-
-    
 
 }

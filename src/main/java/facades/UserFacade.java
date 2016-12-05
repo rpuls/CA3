@@ -1,5 +1,6 @@
 package facades;
 
+import entity.CityInfo;
 import entity.GoogleUpdated;
 import entity.Picture;
 import entity.Shop;
@@ -20,11 +21,13 @@ public class UserFacade implements IUserFacade {
     EntityManagerFactory emf;
     ShopJpaController shopCtrl;
     GoogleUpdatedJpaController googleUpdated;
+    CityInfoJpaController cityCtrl;
     final static int updateIntervalHours = 12;
 
     public UserFacade(EntityManagerFactory emf) {
         this.emf = emf;
         shopCtrl = new ShopJpaController(emf);
+        cityCtrl = new CityInfoJpaController(emf);
         googleUpdated = new GoogleUpdatedJpaController(emf);
     }
 
@@ -71,6 +74,10 @@ public class UserFacade implements IUserFacade {
     @Override
     public List<Shop> getShopByUser(String username) {
         return shopCtrl.findShopByUser(username);
+    }
+    
+    public CityInfo findCityInfo(String zipCode) {
+        return cityCtrl.findCityInfo(zipCode);
     }
 
     //Update
