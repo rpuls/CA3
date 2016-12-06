@@ -76,38 +76,24 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
-
-                $scope.upload = function () {
-                    var fd = new FormData();
-                    angular.forEach($scope.files, function (file) {
-                        fd.append('file', file);
-//            filesFactory.addFile(file);
-//            console.log("FILE:"+file);
-                    });
-                    filesFactory.setFiles($scope.files);
-                    console.log(filesFactory.getFiles());
-                    console.log("fd: " + fd);
-
-//          var data ={
-//              name : name,
-//              type : type
-//          };
-//          fd.append("data", JSON.stringify(data));
-//          
-                    $http.post('/FilesController', fd,
-                            {
-                                transformRequest: angular.identity,
-                                headers: {
-                                    'Content-Type': "multipart/form-data"
-                                }
-                            }
-                    )
-                            .success(function (data) {
-                                console.log(data);
-
-                    });
-                };
             }])
+
+        .controller('fileCtrl', ['$scope', 'fileUpload','$window', function ($scope, fileUpload, $window) {
+                $scope.uploadFile = function () {
+                    var files = $scope.myFile;
+
+                    console.log('file is ');
+                    console.dir(files);
+
+                    var uploadUrl = "upload";
+                    fileUpload.uploadFileToUrl(files, uploadUrl);
+                    $window.location.href ="#/home";
+                    
+                    
+                };
+                
+            }])
+
         .controller('catController', function ($scope, selectedCatFactory) {
             $scope.filterOptions = {
                 categories: [
