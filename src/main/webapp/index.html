@@ -70,10 +70,12 @@
                         <li><a href="#/shopsList" ng-show="isAdmin">Shop list</a></li>
                         <li><a href="#/positionTool" ng-show="isAdmin">Position tool</a></li>
                         <li><a href="#/shopDetailsView" ng-show="isUser">Shop details</a></li>
-                        <li><select ng-controller="catController" class="form-control col-xs-3" style="margin-top: 5%" ng-model="filterItem.category" ng-options="category.name |   categoryfilter for category  in filterOptions.categories" ng-change="selectCategory(filterItem.category.name)">
-                        </select></li>
+                        <li>
+                            <select ng-controller="catController" class="form-control col-md-3" style="margin-top: 5%" ng-model="filterItem.category" ng-options="category.name |     categoryfilter for category  in filterOptions.categories" ng-change="setSelectCategory(filterItem.category.name)">
+                            </select>
+                        </li>
                     </ul>
-                   
+
                     <div>
                         <div class="navbar-right" ng-show="isAuthenticated">
 
@@ -88,12 +90,6 @@
                         <li><a href="#/login" ng-show="!isAuthenticated">Login</a></li>
                         <li><a href="#/doc">Documentation</a></li>
                     </ul>
-                     <div ng-controller="catController">
-
-                        <select class="form-control col-md-3" ng-model="filterItem.category" ng-options="category.name |   categoryfilter for category  in filterOptions.categories" ng-change="setSelectCategory(filterItem.category.name)">
-                        </select>
-                    </div>
-
                 </div>
             </nav>
 
