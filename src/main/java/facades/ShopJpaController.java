@@ -42,7 +42,7 @@ public class ShopJpaController implements Serializable {
             em.getTransaction().commit();
         } finally {
 //            if (em != null) {
-                em.close();
+            em.close();
 //            }
         }
         return shop;
@@ -124,12 +124,12 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public List<Shop> findShopByUser(String user) {
         EntityManager em = getEntityManager();
         try {
             String query = "SELECT s FROM Shop s WHERE s.user.userName=:user";
-           Query q = em.createQuery(query);
+            Query q = em.createQuery(query);
             q.setParameter("user", user);
             return q.getResultList();
 
@@ -150,22 +150,22 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
-    
-    public void addShopWithUser(User user,Shop shop) {
+
+    public void addShopWithUser(User user, Shop shop) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(shop);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("ROLLBACK!!!!"+e.getMessage());
-             em.getTransaction().rollback();   
+            System.out.println("ROLLBACK!!!!" + e.getMessage());
+            em.getTransaction().rollback();
         } finally {
             em.close();
         }
     }
-    
-    public void setUserToAShop(User user,int shopId){
+
+    public void setUserToAShop(User user, int shopId) {
         EntityManager em = getEntityManager();
         try {
             Shop shop = em.find(Shop.class, shopId);
@@ -176,35 +176,42 @@ public class ShopJpaController implements Serializable {
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("ROLLBACK!!!!" + e.getMessage());
-            em.getTransaction().rollback();  
-            
+            em.getTransaction().rollback();
+
         } finally {
             em.close();
         }
     }
-    
-    public void addFiles(int shopId, List<Picture> images){
+
+    public void addFiles(int shopId, List<Picture> images) {
         EntityManager em = getEntityManager();
         try {
-            em.getTransaction().begin();
-            for (Picture image : images) {
-                image.setShopId(shopId);
-                em.persist(image);
+            if (images == null) {
+                System.out.println("THIS IS NULL");
+            } else {
+                System.out.println("NOT NULL");
             }
-            em.getTransaction().commit();
+            for (Picture image : images) {
+                em.getTransaction().begin();
+                Shop shop = findShop(shopId);
+                image.setShop(shop);
+                em.persist(image);
+                System.out.println("IMAGE:" + image.getName());
+                em.getTransaction().commit();
+            }
         } catch (Exception e) {
-            System.out.println("ROLLBACK!!!!"+e.getMessage());
-             em.getTransaction().rollback();   
+            System.out.println("ROLLBACK!!!!" + e.getMessage() + e.toString());
+            em.getTransaction().rollback();
         } finally {
             em.close();
         }
     }
-    
-    public List<Picture> getFilesByShop(int shopId){
+
+    public List<Picture> getFilesByShop(int shopId) {
         EntityManager em = getEntityManager();
         try {
             String query = "SELECT p FROM Picture p WHERE p.shop.id=:shopId";
-           Query q = em.createQuery(query);
+            Query q = em.createQuery(query);
             q.setParameter("shopId", shopId);
             return q.getResultList();
 
@@ -212,7 +219,5 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
-    
-    
-    
+
 }

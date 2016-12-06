@@ -1,12 +1,13 @@
 
             <!--IMAGES UPLOAD-->
-            <form action="FilesController" method="POST">
+            <form>
                     <label for="picture">Upload Images:</label> 
                     <input type="file" 
-                           file-input="files" multiple />
+                           file-input="myFile" multiple />
                     <li ng-repeat="file in files">{{file.name}}</li>
-
-                    <input type="submit" value="UPLOAD" name="command"/>
+                    <br>
+                    <br>
+         <button ng-click = "uploadFile()">upload me</button>
             </form>
                 <br>
                 <br>

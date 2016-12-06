@@ -4,8 +4,10 @@ import entity.CityInfo;
 import entity.GoogleUpdated;
 import entity.Picture;
 import entity.Shop;
+import entity.Social;
 import security.IUserFacade;
 import entity.User;
+import enums.SocialMedia;
 import facades.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
@@ -22,12 +24,14 @@ public class UserFacade implements IUserFacade {
     ShopJpaController shopCtrl;
     GoogleUpdatedJpaController googleUpdated;
     CityInfoJpaController cityCtrl;
+    SocialJpaController socialCtrl;
     final static int updateIntervalHours = 12;
 
     public UserFacade(EntityManagerFactory emf) {
         this.emf = emf;
         shopCtrl = new ShopJpaController(emf);
         cityCtrl = new CityInfoJpaController(emf);
+        socialCtrl = new SocialJpaController(emf);
         googleUpdated = new GoogleUpdatedJpaController(emf);
     }
 
@@ -64,6 +68,10 @@ public class UserFacade implements IUserFacade {
     public Shop createShop(Shop shop) {
         return shopCtrl.create(shop);
     }
+    
+    public void create(Social social) {
+        socialCtrl.create(social);
+    }
 
     //Retrieve
     @Override
@@ -85,6 +93,8 @@ public class UserFacade implements IUserFacade {
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception {
         shopCtrl.edit(shop);
     }
+    
+    
 
     //Delete
     @Override

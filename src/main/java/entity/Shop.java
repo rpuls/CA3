@@ -42,6 +42,8 @@ public class Shop implements Serializable {
     private String description;
 
     private String website;
+//    private String facebookURL;
+//    private String instagramURL;
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -123,6 +125,9 @@ public class Shop implements Serializable {
         this.phone = phone;
         this.description = description;
         this.website = website;
+       // this.facebookURL = website;
+       // this.instagramURL = website;
+        
         this.category = category;
         this.street = street;
         this.houseNumber = houseNumber;
@@ -391,5 +396,22 @@ public class Shop implements Serializable {
     public void setUsername(String username){
         this.user.setUserName(username);
     }
+//
+//    public String getFacebookURL() {
+//        return facebookURL;
+//    }
+//
+//    public void setFacebookURL(String facebookURL) {
+//        this.facebookURL = facebookURL;
+//    }
+//
+//    public String getInstagramURL() {
+//        return instagramURL;
+//    }
+//
+//    public void setInstagramURL(String instagramURL) {
+//        this.instagramURL = instagramURL;
+//    }
+//    
 
 }

@@ -6,7 +6,9 @@
 package security;
 
 import entity.CityInfo;
+import entity.Picture;
 import entity.Shop;
+import entity.Social;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -31,6 +33,8 @@ public interface IUserFacade {
     
     public Shop createShop(Shop shop);
     
+    public void create(Social social);
+    
     public CityInfo findCityInfo(String zipCode);
     
     public List<Shop> getAllShops();
@@ -38,6 +42,9 @@ public interface IUserFacade {
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception;
     
     public void delete(Integer id) throws NonexistentEntityException;
+    
     public List<Shop> getShopByUser(String username);
+     
+    public void addFiles(int shopId, List<Picture> images);
     
 }

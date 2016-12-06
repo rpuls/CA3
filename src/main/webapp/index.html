@@ -88,6 +88,12 @@
                         <li><a href="#/login" ng-show="!isAuthenticated">Login</a></li>
                         <li><a href="#/doc">Documentation</a></li>
                     </ul>
+                     <div ng-controller="catController">
+
+                        <select class="form-control col-md-3" ng-model="filterItem.category" ng-options="category.name |   categoryfilter for category  in filterOptions.categories" ng-change="setSelectCategory(filterItem.category.name)">
+                        </select>
+                    </div>
+
                 </div>
             </nav>
 

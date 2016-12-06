@@ -86,10 +86,11 @@ angular.module('myApp.filters', [])
             };
         })
 
-        .filter('catFilter', function (selectedCatFactory) {
-            return function (shopData) {
-                var category = selectedCatFactory.getSelectedCat();
-                if (!angular.isUndefined(category)) {
+        .filter('catFilter', ['selectedCatFactory', function (selectedCatFactory) {
+                return function (shopData) {
+                    var category = selectedCatFactory.getSelectedCat();
+                    console.log(category);
+
                     var filteredShops = shopData.filter(function (shopItem) {
 
                         if (angular.equals(shopItem.category, category)) {
@@ -99,15 +100,13 @@ angular.module('myApp.filters', [])
                         } else if (angular.equals(category, 'Show All')) {
                             return shopData;
                         }
-                    });
-                    if (filteredShops.length > 0) {
-                        return filteredShops;
-                    }
-                }
-                return shopData;
 
-            };
-        })
+                    });
+
+                    return filteredShops;
+
+                };
+            }])
 
         .filter('categoryfilter', function () {
             return function (input) {
