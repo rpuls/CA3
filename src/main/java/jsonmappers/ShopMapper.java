@@ -24,7 +24,11 @@ public class ShopMapper {
     private String houseNumber;
     private String phone;
     private String email;
+
+    
     private String website;
+    private String facebookURL;
+    private String instagramURL;
     private Category category;
     private String description;
     private String googlePlaceId;
@@ -65,6 +69,9 @@ public class ShopMapper {
             user = null;
         }
         website = shop.getWebsite();
+        facebookURL = shop.getWebsite();
+        instagramURL = shop.getWebsite();
+        
         category = shop.getCategory();
         description = shop.getDescription();
         googlePlaceId = shop.getGooglePlaceId();
@@ -328,6 +335,22 @@ public class ShopMapper {
 
     public void setAngle(double angle) {
         this.angle = angle;
+    }
+    
+    public String getFacebookURL() {
+        return facebookURL;
+    }
+
+    public void setFacebookURL(String facebookURL) {
+        this.facebookURL = facebookURL;
+    }
+
+    public String getInstagramURL() {
+        return instagramURL;
+    }
+
+    public void setInstagramURL(String instagramURL) {
+        this.instagramURL = instagramURL;
     }
 
 }
