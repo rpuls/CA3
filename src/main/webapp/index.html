@@ -88,7 +88,7 @@
                     </ul>
                      <div ng-controller="catController">
 
-                        <select class="form-control col-md-3" ng-model="filterItem.category" ng-options="category.name |   categoryfilter for category  in filterOptions.categories" ng-change="selectCategory(filterItem.category.name)">
+                        <select class="form-control col-md-3" ng-model="filterItem.category" ng-options="category.name |   categoryfilter for category  in filterOptions.categories" ng-change="setSelectCategory(filterItem.category.name)">
                         </select>
                     </div>
 

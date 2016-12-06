@@ -139,7 +139,7 @@ angular.module('myApp.controllers', []).
                 category: $scope.filterOptions.categories[20]
             };
 
-            $scope.selectCategory = function (inputData) {
+            $scope.setSelectCategory = function (inputData) {
                 selectedCatFactory.setSelectedCat(inputData);
             };
 

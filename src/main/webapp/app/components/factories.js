@@ -45,16 +45,14 @@ angular.module('myApp.factories', []).
         })
         .factory('selectedCatFactory', function () {
 
-            var selectedCat = {};
+            var selectedCat = 'Show All'; 
 
             return {
                 getSelectedCat: function () {
                     return selectedCat;
                 },
                 setSelectedCat: function (input) {
-
                     selectedCat = input;
-                    return selectedCat;
                 }
             };
         })
