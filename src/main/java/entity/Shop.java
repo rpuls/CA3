@@ -42,6 +42,8 @@ public class Shop implements Serializable {
     private String description;
 
     private String website;
+    private String facebookURL;
+    private String instagramURL;
 
     @Enumerated(EnumType.STRING)
     private Category category;
