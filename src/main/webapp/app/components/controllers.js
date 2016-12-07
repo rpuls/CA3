@@ -65,7 +65,6 @@ angular.module('myApp.controllers', []).
                     if (isUser) {
                         $http.post('api/shop/user/edit', $scope.shop)
                                 .success(function (data) {
-                                    $scope.upload();
                                     $timeout(function () {
                                         $location.path("#/shopDetailsView");
                                     }, 100);
