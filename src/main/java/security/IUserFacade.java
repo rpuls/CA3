@@ -8,7 +8,6 @@ package security;
 import entity.CityInfo;
 import entity.Picture;
 import entity.Shop;
-import entity.Social;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -32,8 +31,6 @@ public interface IUserFacade {
     public void googleUpdated();
     
     public Shop createShop(Shop shop);
-    
-    public void create(Social social);
     
     public CityInfo findCityInfo(String zipCode);
     

@@ -42,13 +42,14 @@ public class Shop implements Serializable {
     private String description;
 
     private String website;
-//    private String facebookURL;
-//    private String instagramURL;
+    private String facebookURL;
+    private String instagramURL;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
     private String googlePlaceId;
+    private boolean needGoogle;
     private double rating;
     
 
@@ -90,13 +91,20 @@ public class Shop implements Serializable {
     private double x;
     private double y;
     private double angle;
-
+    
+    //statistics
+    private int visits;
+    private int fbVisits;
+    private int instaVisits;
+    
+        
     public Shop(String name, String email, String phone, String description, String website,
             Category category, Date updated, String street, String houseNumber,
             int dayNullOpen, int dayNullClose, int dayOneOpen, int dayOneClose, int dayTwoOpen, int dayTwoClose,
             int dayThreeOpen, int dayThreeClose, int dayFourOpen, int dayFourClose, int dayFiveOpen,
-            int dayFiveClose, int daySixOpen, int daySixClose, String googlePlaceId, double rating, double x, double y, double angle) {
-        this(name, email, phone, description, website, category, street, houseNumber, updated);
+            int dayFiveClose, int daySixOpen, int daySixClose, String googlePlaceId, double rating, double x, double y, double angle, 
+            String facebookURL, String instagramURL, boolean needGoogle, int visits, int fbVisits, int instaVisits) {
+        this(name, email, phone, description, website, facebookURL, instagramURL, category, street, houseNumber);
         this.dayNullOpen = dayNullOpen;
         this.dayNullClose = dayNullClose;
         this.dayOneOpen = dayOneOpen;
@@ -116,22 +124,26 @@ public class Shop implements Serializable {
         this.x = x;
         this.y = y;
         this.angle = angle;
+        this.facebookURL = facebookURL;
+        this.instagramURL = instagramURL;
+        this.needGoogle = needGoogle;
+        this.visits = visits;
+        this.fbVisits = fbVisits;
+        this.instaVisits = instaVisits;
     }
 
     public Shop(String name, String email, String phone, String description, String website,
-            Category category, String street, String houseNumber, Date updated) {
+            String facebookURL, String instagramURL, Category category, String street, String houseNumber) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.description = description;
         this.website = website;
-       // this.facebookURL = website;
-       // this.instagramURL = website;
-        
+        this.facebookURL = facebookURL;
+        this.instagramURL = instagramURL;;
         this.category = category;
         this.street = street;
         this.houseNumber = houseNumber;
-        this.updated = updated;
     }
 
     public Shop() {
@@ -396,22 +408,64 @@ public class Shop implements Serializable {
     public void setUsername(String username){
         this.user.setUserName(username);
     }
-//
-//    public String getFacebookURL() {
-//        return facebookURL;
-//    }
-//
-//    public void setFacebookURL(String facebookURL) {
-//        this.facebookURL = facebookURL;
-//    }
-//
-//    public String getInstagramURL() {
-//        return instagramURL;
-//    }
-//
-//    public void setInstagramURL(String instagramURL) {
-//        this.instagramURL = instagramURL;
-//    }
-//    
+
+    public String getFacebookURL() {
+        return facebookURL;
+    }
+
+    public void setFacebookURL(String facebookURL) {
+        this.facebookURL = facebookURL;
+    }
+
+    public String getInstagramURL() {
+        return instagramURL;
+    }
+
+    public void setInstagramURL(String instagramURL) {
+        this.instagramURL = instagramURL;
+    }
+
+    public boolean isNeedGoogle() {
+        return needGoogle;
+    }
+
+    public void setNeedGoogle(boolean needGoogle) {
+        this.needGoogle = needGoogle;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    public int getVisits() {
+        return visits;
+    }
+
+    public void setVisits(int visits) {
+        this.visits = visits;
+    }
+
+    public int getFbVisits() {
+        return fbVisits;
+    }
+
+    public void setFbVisits(int fbVisits) {
+        this.fbVisits = fbVisits;
+    }
+
+    public int getInstaVisits() {
+        return instaVisits;
+    }
+
+    public void setInstaVisits(int instaVisits) {
+        this.instaVisits = instaVisits;
+    }
+    
+    
+    
 
 }

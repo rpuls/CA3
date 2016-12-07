@@ -25,14 +25,14 @@ public class Structure
 //        
 //        Persistence.generateSchema("PU", null);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
-        UserFacade facade = new UserFacade(emf);
-        Role r = new Role("User");
-        User p1 = new User("susu_user","test");
-        p1.addRole(r);
+//        UserFacade facade = new UserFacade(emf);
+//        Role r = new Role("User");
+//        User p1 = new User("susu_user","test");
+//        p1.addRole(r);
 //        facade.addUser(p1);
-
-        ShopJpaController ctrl = new ShopJpaController(emf);
-        ctrl.setUserToAShop(p1, 298);
+//
+//        ShopJpaController ctrl = new ShopJpaController(emf);
+//        ctrl.setUserToAShop(p1, 298);
         
     }
 }

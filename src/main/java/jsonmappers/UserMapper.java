@@ -19,26 +19,26 @@ import javax.persistence.OneToMany;
 public class UserMapper {
 
     private String userName;
-    private String passwordHash;
-    private List<RoleMapper> roles;
-    private List<Shop> shops;
+//    private String passwordHash;
+//    private List<RoleMapper> roles;
+//    private List<Shop> shops;
 
     public UserMapper(User user) {
         if (user != null) {
             if (user.getUserName() != null) {
                 userName = user.getUserName();
             }
-            if (user.getPassword() != null) {
-                passwordHash = user.getPassword();
-            }
-            roles = new ArrayList<>();
-            if (user.getRoles() != null) {
-                List<Role> rolesTmp = user.getRoles();
-                for (Role role : rolesTmp) {
-                    roles.add(new RoleMapper(role));
-                }
-            }
-            shops=user.getShops();
+//            if (user.getPassword() != null) {
+//                passwordHash = user.getPassword();
+//            }
+//            roles = new ArrayList<>();
+//            if (user.getRoles() != null) {
+//                List<Role> rolesTmp = user.getRoles();
+//                for (Role role : rolesTmp) {
+//                    roles.add(new RoleMapper(role));
+//                }
+//            }
+//            shops=user.getShops();
         }
 
         //passwordHash=user.getPassword();

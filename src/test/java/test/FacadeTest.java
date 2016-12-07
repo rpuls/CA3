@@ -51,7 +51,7 @@ public class FacadeTest {
     
     @Test
     public void setAUserToAShop() throws PasswordStorage.CannotPerformOperationException{
-        Shop s = new Shop("ToysRUS", "email@em.dk", "12345678", "Toy store", "www.trs.dk", Category.PAPE, "street", "houseNumber", new Date());
+        Shop s = new Shop("ToysRUS", "email@em.dk", "12345678", "Toy store", "www.trs.dk","www.facebook.com/test","www.instagram.com/test", Category.PAPE, "street", "123 abd");
         facade.createShop(s);
         User user= new User("user","test");
         Role role = new Role("User");
@@ -79,7 +79,7 @@ public class FacadeTest {
   @Test
     public void createShopTest() {
         
-        Shop s = new Shop("ToysRUS", "email@em.dk", "12345678", "Toy store", "www.trs.dk", Category.PAPE, "street", "houseNumber", new Date());
+        Shop s = new Shop("ToysRUS", "email@em.dk", "12345678", "Toy store", "www.trs.dk","www.facebook.com/test","www.instagram.com/test", Category.PAPE, "street", "123 abd");
         Shop found = facade.createShop(s);
         assertEquals(found.getName(),"ToysRUS");
     }
