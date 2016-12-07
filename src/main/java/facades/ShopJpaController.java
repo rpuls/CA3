@@ -141,9 +141,10 @@ public class ShopJpaController implements Serializable {
     public List<Shop> findShopsToUpdate() {
         EntityManager em = getEntityManager();
         try {
-            String query = "SELECT s FROM Shop s WHERE s.NEEDGOOGLE:tinyint";
+            String query = "SELECT s FROM Shop s WHERE s.needGoogle=:tinyint";
             Query q = em.createQuery(query);
-            q.setParameter("tinyint", "1");
+            q.setParameter("tinyint", true);
+            
             return q.getResultList();
 
         } finally {
