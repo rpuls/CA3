@@ -89,7 +89,6 @@ angular.module('myApp.filters', [])
         .filter('catFilter', ['selectedCatFactory', function (selectedCatFactory) {
                 return function (shopData) {
                     var category = selectedCatFactory.getSelectedCat();
-                    console.log(category);
 
                     var filteredShops = shopData.filter(function (shopItem) {
 
