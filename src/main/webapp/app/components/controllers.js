@@ -9,12 +9,15 @@ angular.module('myApp.controllers', []).
         .controller('ShopCtrl', function ($scope, $location, $uibModal, $window, ShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
+
+            $scope.isUndefinedOrNull = function (val) {
+                return angular.isUndefined(val) || val === null;
+            };
             ShopService.getShops().then(
                     function (response) {
                         $scope.shops = response.data;
                     },
                     function (response) {
-                        console.log(response.data.toString());
                     });
             $scope.editShop = function (shop) {
                 selectedShopFac.setSelectedShop(shop);
@@ -77,7 +80,7 @@ angular.module('myApp.controllers', []).
                 };
             }])
 
-        .controller('fileCtrl', ['$scope', 'fileUpload','$window', function ($scope, fileUpload, $window) {
+        .controller('fileCtrl', ['$scope', 'fileUpload', '$window', function ($scope, fileUpload, $window) {
                 $scope.uploadFile = function () {
                     var files = $scope.myFile;
 
@@ -86,11 +89,11 @@ angular.module('myApp.controllers', []).
 
                     var uploadUrl = "upload";
                     fileUpload.uploadFileToUrl(files, uploadUrl);
-                    $window.location.href ="#/home";
-                    
-                    
+                    $window.location.href = "#/home";
+
+
                 };
-                
+
             }])
 
         .controller('catController', function ($scope, selectedCatFactory) {

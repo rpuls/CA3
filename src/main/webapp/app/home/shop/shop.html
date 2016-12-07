@@ -135,10 +135,10 @@
             <div class="">
                 <div class="badge col-xs-5 mb5" style="background-color: #{{selectedShop.street| streetColorFilter}}; margin-right: 12px;">SOCIAL:</div> 
                 <div>
-                    <a ng-show="true" class="btn btn-default" href="{{selectedShop.facebokURL}}" aria-label="Facebook">
+                    <a ng-hide="isUndefinedOrNull(selectedShop.facebookURL)" class="btn btn-default" href="{{selectedShop.facebookURL}}" aria-label="Facebook">
                         <i class="fa fa-facebook-official" aria-hidden="true"></i>
                     </a>
-                    <a ng-show="true" class="btn btn-default" href="{{selectedShop.instagramURL}}" aria-label="Instagram">
+                    <a ng-hide="isUndefinedOrNull(selectedShop.instagramURL)" class="btn btn-default" href="{{selectedShop.instagramURL}}" aria-label="Instagram">
                         <i class="fa fa-instagram" aria-hidden="true"></i>
                     </a>
                 </div>
