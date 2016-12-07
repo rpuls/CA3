@@ -12,6 +12,7 @@ import entity.User;
 import facades.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
+import jsonmappers.TinyShopMapper;
 
 /**
  *
@@ -46,7 +47,7 @@ public interface IUserFacade {
      
     public void addFiles(int shopId, List<Picture> images);
 
-    public List<Shop> getTinyShops();
+    public List<TinyShopMapper> getTinyShops();
     
     public List<Picture> getFilesByShop(int shopId);
     

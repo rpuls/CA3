@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import jsonmappers.TinyShopMapper;
 import security.IUser;
 import security.PasswordStorage;
 
@@ -86,7 +87,7 @@ public class UserFacade implements IUserFacade {
         return cityCtrl.findCityInfo(zipCode);
     }
     
-    public List<Shop> getTinyShops() {
+    public List<TinyShopMapper> getTinyShops() {
         return shopCtrl.findTinyShops();
     }
 

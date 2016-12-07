@@ -12,13 +12,12 @@ public class TinyShopMapper {
     private double x;
     private double y;
     private double angle;
-    
-     public TinyShopMapper(Shop shop) {
-        name = shop.getName();
-        x = shop.getX();
-        y = shop.getY();
-        angle = shop.getAngle();
 
+    public TinyShopMapper(String name, double x, double y, double angle) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
     }
 
     public String getName() {
@@ -52,5 +51,5 @@ public class TinyShopMapper {
     public void setAngle(double angle) {
         this.angle = angle;
     }
-    
+
 }

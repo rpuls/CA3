@@ -13,12 +13,12 @@ angular.module('myApp.controllers', []).
             $scope.isUndefinedOrNull = function (val) {
                 return angular.isUndefined(val) || val === null;
             };
-//            CompressedShopService.getShops().then(
-//                    function (response) {
-//                        $scope.shops = response.data;
-//                    },
-//                    function (response) {
-//                    });
+            CompressedShopService.getShops().then(
+                    function (response) {
+                        $scope.shops = response.data;
+                    },
+                    function (response) {
+                    });
             ShopService.getShops().then(
                     function (response) {
                         $scope.shops = response.data;

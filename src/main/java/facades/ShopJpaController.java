@@ -10,6 +10,7 @@ import entity.Shop;
 import entity.User;
 import facades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +18,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import jsonmappers.TinyShopMapper;
 
 /**
  *
@@ -137,14 +139,14 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public List<Shop> findShopsToUpdate() {
         EntityManager em = getEntityManager();
         try {
             String query = "SELECT s FROM Shop s WHERE s.needGoogle=:tinyint";
             Query q = em.createQuery(query);
             q.setParameter("tinyint", true);
-            
+
             return q.getResultList();
 
         } finally {
@@ -234,14 +236,21 @@ public class ShopJpaController implements Serializable {
         }
     }
 
-    List<Shop> findTinyShops() {
+    public List<TinyShopMapper> findTinyShops() {
         EntityManager em = getEntityManager();
         try {
             String query = "SELECT s.name, s.x, s.y, s.angle FROM Shop s";
             Query q = em.createQuery(query);
-            
-            return q.getResultList();
-
+            List<Object[]> sl = q.getResultList();
+            List<TinyShopMapper> shops = new ArrayList<>();
+            for (Object[] shop : sl) {
+                String name = (String) shop[0];
+                double x = (double) shop[1];
+                double y = (double) shop[2];
+                double angle = (double) shop[3];
+                shops.add(new TinyShopMapper(name, x, y, angle));
+            }
+            return shops;
         } finally {
             em.close();
         }
