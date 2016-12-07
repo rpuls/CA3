@@ -56,6 +56,7 @@ public class ShopAdmin {
     @Path("edit")
     public void editShop(String content) throws Exception {
         Shop s = gson.fromJson(content, Shop.class);
+        s.setNeedGoogle(false);
         facade.updateShop(s);
     }
 

@@ -45,7 +45,7 @@ public class ShopUser {
     @Path("user/edit")
     public void editShop(String content) throws Exception {
         Shop s = gson.fromJson(content, Shop.class);
-
+        s.setNeedGoogle(false);
 //        if (s.getCategory() == null && s.getName() == null && s.getStreet() == null && s.getHouseNumber() == null && s.getGooglePlaceId() == null && s.getRating() == 0.0) {
             facade.updateShop(s);
 //        }
