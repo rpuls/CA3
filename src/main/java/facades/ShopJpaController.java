@@ -137,6 +137,18 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Shop> findShopsToUpdate() {
+        EntityManager em = getEntityManager();
+        try {
+            String query = "SELECT s FROM Shop s WHERE s.needgoogle=1";
+            Query q = em.createQuery(query);
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
 
     public int getShopCount() {
         EntityManager em = getEntityManager();

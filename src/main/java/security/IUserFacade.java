@@ -36,6 +36,8 @@ public interface IUserFacade {
     
     public List<Shop> getAllShops();
     
+    public List<Shop> findShopsToUpdate();
+    
     public void updateShop(Shop shop) throws NonexistentEntityException, Exception;
     
     public void delete(Integer id) throws NonexistentEntityException;

@@ -77,6 +77,11 @@ public class UserFacade implements IUserFacade {
         return shopCtrl.findShopByUser(username);
     }
     
+    @Override
+    public List<Shop> findShopsToUpdate() {
+        return shopCtrl.findShopsToUpdate();
+    }
+    
     public CityInfo findCityInfo(String zipCode) {
         return cityCtrl.findCityInfo(zipCode);
     }
