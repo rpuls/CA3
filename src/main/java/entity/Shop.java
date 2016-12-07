@@ -131,6 +131,13 @@ public class Shop implements Serializable {
         this.fbVisits = fbVisits;
         this.instaVisits = instaVisits;
     }
+    
+    public Shop(String name, double x, double y, double angle){
+        this.name = name;
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
+    }
 
     public Shop(String name, String email, String phone, String description, String website,
             String facebookURL, String instagramURL, Category category, String street, String houseNumber) {

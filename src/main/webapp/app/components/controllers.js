@@ -6,13 +6,19 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, $window, ShopService, selectedShopFac) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, $window, ShopService, CompressedShopService, selectedShopFac) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
 
             $scope.isUndefinedOrNull = function (val) {
                 return angular.isUndefined(val) || val === null;
             };
+//            CompressedShopService.getShops().then(
+//                    function (response) {
+//                        $scope.shops = response.data;
+//                    },
+//                    function (response) {
+//                    });
             ShopService.getShops().then(
                     function (response) {
                         $scope.shops = response.data;

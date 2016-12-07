@@ -177,20 +177,19 @@ public class ShopRest {
         return gson.toJson(shopmappers);
     }
     
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("compressed")
-    public String getCompressedShops() throws IOException, Exception {
-        googleUpdate();
-        List<entity.Shop> shops = facade.getTinyShops();
-        List<TinyShopMapper> tinyShops = new ArrayList<>();
-
-        for (entity.Shop shop : shops) {
-            tinyShops.add(new TinyShopMapper(shop));
-        }
-
-        return gson.toJson(tinyShops);
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("compressed")
+//    public String getCompressedShops() throws IOException, Exception {
+//        List<entity.Shop> shops = facade.getTinyShops();
+//        List<jsonmappers.TinyShopMapper> tinyShops = new ArrayList<>();
+//
+//        for (entity.Shop shop : shops) {
+//            tinyShops.add(new jsonmappers.TinyShopMapper(shop));
+//        }
+//
+//        return gson.toJson(tinyShops);
+//    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
