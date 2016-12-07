@@ -45,5 +45,7 @@ public interface IUserFacade {
     public List<Shop> getShopByUser(String username);
      
     public void addFiles(int shopId, List<Picture> images);
+
+    public List<Shop> getTinyShops();
     
 }

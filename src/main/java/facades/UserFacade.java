@@ -85,6 +85,10 @@ public class UserFacade implements IUserFacade {
     public CityInfo findCityInfo(String zipCode) {
         return cityCtrl.findCityInfo(zipCode);
     }
+    
+    public List<Shop> getTinyShops() {
+        return shopCtrl.findTinyShops();
+    }
 
     //Update
     @Override

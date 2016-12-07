@@ -234,4 +234,17 @@ public class ShopJpaController implements Serializable {
         }
     }
 
+    List<Shop> findTinyShops() {
+        EntityManager em = getEntityManager();
+        try {
+            String query = "SELECT s.name, s.x, s.y, s.angle FROM Shop s";
+            Query q = em.createQuery(query);
+            
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+
 }

@@ -16,6 +16,24 @@ angular.module('myApp.services', [])
             } else {
                 return input;
             }
+        }).service('ShopService', function ($http) {
+            var shop = {};
+            shop.getShops = function () {
+                return $http.get('api/shop/all'); //<--<-- rest API
+            };
+            shop.getUserShop = function (username) {
+                var url = 'api/shop/usershop/' + username;
+                return $http.get(url); //<--<-- rest API
+            };
+            return shop;
+
+        })
+        .service('CompressedShopService', function ($http) {
+            var shop = {};
+            shop.getShops = function () {
+                return $http.get('api/shop/compressed'); 
+            };
+            return shop;
         })
         .service('ShopService', function ($http) {
             var shop = {};

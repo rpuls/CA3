@@ -26,6 +26,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jsonmappers.ShopMapper;
+import jsonmappers.TinyShopMapper;
 import security.IUserFacade;
 import security.UserFacadeFactory;
 import utils.ExternalURLRESTCall;
@@ -167,13 +168,28 @@ public class ShopRest {
     public String getAllShops() throws IOException, Exception {
         googleUpdate();
         List<entity.Shop> shops = facade.getAllShops();
-        List<jsonmappers.ShopMapper> shopmappers = new ArrayList<>();
+        List<ShopMapper> shopmappers = new ArrayList<>();
 
         for (entity.Shop shop : shops) {
             shopmappers.add(new ShopMapper(shop));
         }
 
         return gson.toJson(shopmappers);
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("compressed")
+    public String getCompressedShops() throws IOException, Exception {
+        googleUpdate();
+        List<entity.Shop> shops = facade.getTinyShops();
+        List<TinyShopMapper> tinyShops = new ArrayList<>();
+
+        for (entity.Shop shop : shops) {
+            tinyShops.add(new TinyShopMapper(shop));
+        }
+
+        return gson.toJson(tinyShops);
     }
 
     @GET
