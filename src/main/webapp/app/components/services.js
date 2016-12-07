@@ -47,7 +47,7 @@ angular.module('myApp.services', [])
             return shop;
 
         })
-        .service('fileUpload', ['$http', function ($http, $location) {
+        .service('fileUpload', ['$http', function ($http) {
                 this.uploadFileToUrl = function (files, uploadUrl) {
                     var fd = new FormData();
                     for (var i = 0; i < files.length; i++) {
@@ -70,6 +70,33 @@ angular.module('myApp.services', [])
 
                             });
                 };
-            }]);
+            }])
+        .service('fileService', ['$http', function ($http) {
 
-  
+                this.getFiles = function () {
+                        $http.get('upload')
+                            .success(function (data) {
+                                var files = data;
+                                console.dir(data);
+                                var fd = new FormData();
+
+                                for (var i = 0; i < files.length; i++) {
+                                    var blob = new Blob([files[i]], {type: 'undefined'});
+//                                    var file =blobToFile(blob,"IMAGE"+i);
+                                    fd.append('file', blob);
+//                                    console.log(blob);
+                                }
+                                return fd;
+                            })
+                            .error(function (data, status) {
+
+                            });
+
+                };
+                function blobToFile(theBlob, fileName) {
+                    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+                    theBlob.lastModifiedDate = new Date();
+                    theBlob.name = fileName;
+                    return theBlob;
+                }
+            }]);

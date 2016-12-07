@@ -48,4 +48,6 @@ public interface IUserFacade {
 
     public List<Shop> getTinyShops();
     
+    public List<Picture> getFilesByShop(int shopId);
+    
 }

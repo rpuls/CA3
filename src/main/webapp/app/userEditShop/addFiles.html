@@ -1,13 +1,19 @@
+<div class="container">
+    <div>
+        <label for="picture">Uploaded Images:</label> 
+    <ul ng-repeat = "image in filesFromDB">
+        <li>{{image.name}}</li>
+    </ul>
+    </div>
+    <br>
+    <br>
+    <form>
+        <input type="file" 
+               file-input="myFile" multiple />
+        <li ng-repeat="file in myFile">{{file.name}}</li>
+        <br>
+        <br>
+        <button ng-click = "uploadFile()">UPLOAD</button>
+    </form>
 
-            <!--IMAGES UPLOAD-->
-            <form>
-                    <label for="picture">Upload Images:</label> 
-                    <input type="file" 
-                           file-input="myFile" multiple />
-                    <li ng-repeat="file in files">{{file.name}}</li>
-                    <br>
-                    <br>
-         <button ng-click = "uploadFile()">upload me</button>
-            </form>
-                <br>
-                <br>
+</div>

@@ -86,18 +86,20 @@ angular.module('myApp.controllers', []).
                 };
             }])
 
-        .controller('fileCtrl', ['$scope', 'fileUpload', '$window', function ($scope, fileUpload, $window) {
-                $scope.uploadFile = function () {
+        .controller('fileCtrl', ['$scope', 'fileUpload','$window','fileService', function ($scope, fileUpload, $window, fileService, filesFactory) {
+                    console.log("FROM CONTROLLER:");
+                    console.dir(fileService.getFiles());
+//                    $scope.myFile = filesFactory.setFiles( fileService.getFiles());
+                    $scope.filesFromDB =  fileService.getFiles();
+                    
+                    $scope.uploadFile = function () {
                     var files = $scope.myFile;
 
-                    console.log('file is ');
                     console.dir(files);
 
                     var uploadUrl = "upload";
                     fileUpload.uploadFileToUrl(files, uploadUrl);
-                    $window.location.href = "#/home";
-
-
+                    $window.location.href ="#/home";
                 };
 
             }])
@@ -141,7 +143,7 @@ angular.module('myApp.controllers', []).
 
 
 
-        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory) {
+      .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory) {
             $scope.shops = [];
             $scope.message = "";
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
@@ -157,12 +159,6 @@ angular.module('myApp.controllers', []).
                 selectedShopFac.setSelectedShop(shop);
                 $location.path('/userEditShop');
             };
-
-            $scope.files = filesFactory.getFiles();
-            console.log("FILES: " + $scope.files);
-            if ($scope.files === null) {
-                $scope.message = "You haven't upload pictures yet.";
-            }
         })
 
         .controller('LocationController', function ($scope, geolocationFactory) {
