@@ -73,7 +73,7 @@ public class ShopRest {
     public void googleUpdate() throws IOException, Exception {
 
         if (facade.needGoogleUpdate()) {
-            List<entity.Shop> shops = facade.getAllShops();
+            List<entity.Shop> shops = facade.findShopsToUpdate();
             for (Shop shop : shops) {
                 String placeId = shop.getGooglePlaceId();
                 if (placeId != null) {
