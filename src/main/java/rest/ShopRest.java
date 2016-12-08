@@ -11,6 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import entity.CityInfo;
+import entity.Picture;
 import entity.Shop;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -176,7 +177,21 @@ public class ShopRest {
 
         return gson.toJson(shopmappers);
     }
-    
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("images/{shopID}")
+    public String getAllImagesFromShop(@PathParam("shopID") int shopID) throws IOException, Exception {
+        List<Picture> pictures = facade.getFilesByShop(shopID);
+        if (!pictures.isEmpty()) {
+            Shop s = facade.findShop(shopID);
+            s.setPictures(pictures);
+            List<String> filePaths = s.getImagesAsFilePaths();
+            return gson.toJson(filePaths);
+        }
+        return "{Error: 'No images'}";
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("compressed")

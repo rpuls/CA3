@@ -1,7 +1,12 @@
 package entity;
 
 import enums.Category;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -18,6 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.validation.constraints.Size;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -51,7 +57,6 @@ public class Shop implements Serializable {
     private String googlePlaceId;
     private boolean needGoogle;
     private double rating;
-    
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updated;
@@ -70,7 +75,7 @@ public class Shop implements Serializable {
     // @Column(name = "CITYINFO")
     @JoinColumn(name = "CITYINFO", referencedColumnName = "ZIP")
     private CityInfo cityInfo;
-    
+
     //open/close hours
     private int dayNullOpen;
     private int dayNullClose;
@@ -91,18 +96,17 @@ public class Shop implements Serializable {
     private double x;
     private double y;
     private double angle;
-    
+
     //statistics
     private int visits;
     private int fbVisits;
     private int instaVisits;
-    
-        
+
     public Shop(String name, String email, String phone, String description, String website,
             Category category, Date updated, String street, String houseNumber,
             int dayNullOpen, int dayNullClose, int dayOneOpen, int dayOneClose, int dayTwoOpen, int dayTwoClose,
             int dayThreeOpen, int dayThreeClose, int dayFourOpen, int dayFourClose, int dayFiveOpen,
-            int dayFiveClose, int daySixOpen, int daySixClose, String googlePlaceId, double rating, double x, double y, double angle, 
+            int dayFiveClose, int daySixOpen, int daySixClose, String googlePlaceId, double rating, double x, double y, double angle,
             String facebookURL, String instagramURL, boolean needGoogle, int visits, int fbVisits, int instaVisits) {
         this(name, email, phone, description, website, facebookURL, instagramURL, category, street, houseNumber);
         this.dayNullOpen = dayNullOpen;
@@ -131,8 +135,8 @@ public class Shop implements Serializable {
         this.fbVisits = fbVisits;
         this.instaVisits = instaVisits;
     }
-    
-    public Shop(String name, double x, double y, double angle){
+
+    public Shop(String name, double x, double y, double angle) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -411,8 +415,8 @@ public class Shop implements Serializable {
     public void setAngle(double angle) {
         this.angle = angle;
     }
-    
-    public void setUsername(String username){
+
+    public void setUsername(String username) {
         this.user.setUserName(username);
     }
 
@@ -471,8 +475,15 @@ public class Shop implements Serializable {
     public void setInstaVisits(int instaVisits) {
         this.instaVisits = instaVisits;
     }
-    
-    
-    
+
+    public List<String> getImagesAsFilePaths() throws IOException {
+        List<String> filePaths = new ArrayList<>();
+        for (Picture picture : pictures) {
+            String filePath = "c:/images/"+picture.getName(); //Path to tmp folder
+            FileUtils.writeByteArrayToFile(new File(filePath), picture.getContent());
+            filePaths.add(filePath);
+        }
+        return filePaths;
+    }
 
 }

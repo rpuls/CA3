@@ -44,6 +44,8 @@ public interface IUserFacade {
     public void delete(Integer id) throws NonexistentEntityException;
     
     public List<Shop> getShopByUser(String username);
+    
+    public Shop findShop(Integer id);
      
     public void addFiles(int shopId, List<Picture> images);
 

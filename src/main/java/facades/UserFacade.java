@@ -72,6 +72,11 @@ public class UserFacade implements IUserFacade {
     public List<Shop> getAllShops() {
         return shopCtrl.findShopEntities();
     }
+    
+    @Override
+    public Shop findShop(Integer id){
+        return shopCtrl.findShop(id);
+    }
     //Retrieve
     @Override
     public List<Shop> getShopByUser(String username) {
