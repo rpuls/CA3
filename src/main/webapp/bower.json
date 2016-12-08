@@ -1,10 +1,10 @@
 {
-  "name": "AngularSeed for 3. semester Computer Science at cphbusiness",
+  "name": "Nørrebro on the ground",
   "version": "0.0.0",
   "authors": [
-    "LMO <lam@cphbusiness.dk>"
+    "RP <some@email.com>"
   ],
-  "description": "Semesterseed for exercises and project",
+  "description": "Nørrebro on the ground",
   "license": "MIT",
   "ignore": [
     "**/.*",
