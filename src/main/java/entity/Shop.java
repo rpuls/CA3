@@ -480,8 +480,9 @@ public class Shop implements Serializable {
         List<String> filePaths = new ArrayList<>();
         for (Picture picture : pictures) {
             String filePath = "c:/images/"+picture.getName(); //Path to tmp folder
+            String serverPath = "images/"+picture.getName();
             FileUtils.writeByteArrayToFile(new File(filePath), picture.getContent());
-            filePaths.add(filePath);
+            filePaths.add(serverPath);
         }
         return filePaths;
     }

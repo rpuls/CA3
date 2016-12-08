@@ -9,7 +9,7 @@ angular.module('myApp.userEditShop', ['ngRoute'])
                 }),
                 $routeProvider.when('/addFiles',{
                     templateUrl: 'app/userEditShop/addFiles.html',
-                    controller: 'fileCtrl'
+                    controller: 'userShopCtrl'
                 })
                 ;
             }]);

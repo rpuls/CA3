@@ -1,9 +1,9 @@
 <div class="container">
     <div>
         <label for="picture">Uploaded Images:</label> 
-    <ul ng-repeat = "image in filesFromDB">
-        <li>{{image.name}}</li>
-    </ul>
+    <div ng-repeat = "image in filesFromDB">
+        <img ng-src="{{image}}" height = "100">
+    </div>
     </div>
     <br>
     <br>
