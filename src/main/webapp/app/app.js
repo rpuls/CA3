@@ -14,7 +14,6 @@ angular.module('myApp', [
   'myApp.shopsList',
   'myApp.userEditShop',
   'myApp.positionTool',
-  'myApp.documentation',
   'myApp.filters',
   'myApp.directives',
   'myApp.factories',
