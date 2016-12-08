@@ -86,30 +86,6 @@ angular.module('myApp.controllers', []).
                 };
             }])
 
-        .controller('fileCtrl', ['$scope', 'fileUpload', '$window', 'fileService', 'selectedShopFac', function ($scope, fileUpload, $window, fileService, selectedShopFac) {
-
-                var selShop = selectedShopFac.getSelectedShop();
-                console.log("" + selShop);
-//                    angular.forEach($scope.selectedShop, function(value,key){
-//                        if(angular.equals(key,"id")){
-//                            console.log(value);
-//                        }
-                console.log($scope.selectedShop);
-//                    });
-//                    $scope.filesFromDB =  fileService.getFiles(selShop.id);
-
-                $scope.uploadFile = function () {
-                    var files = $scope.myFile;
-
-                    console.dir(files);
-
-                    var uploadUrl = "upload";
-                    fileUpload.uploadFileToUrl(files, uploadUrl);
-                    $window.location.href = "#/home";
-                };
-
-            }])
-
         .controller('catController', function ($scope, selectedCatFactory) {
             $scope.filterOptions = {
                 categories: [
@@ -160,19 +136,9 @@ angular.module('myApp.controllers', []).
                         $scope.shops = response.data;
                         var shop = selectedShopFac.setSelectedShop($scope.shops[0]);
                         fileService.getFiles(shop.id).success(function(data){
-//                            var s ="";
-//                            var files =[];
-//                            s=data;
-//                            var res = s.split("/");
-//                            for (var i = 0; i < res.length; i++) {
-//                                if(angular.equals(res[i],"images")){
-//                                    files.push(res[i]+"/"+res[i+1]);
-//                                }
-//                            }
-                            $scope.filesFromDB=  data;    
+                                $scope.filesFromDB=  data;
                         })
                         ;
-                        console.log($scope.filesFromDB);
                     },
                     function (response) {
                         console.log(response.data.toString());

@@ -1,15 +1,15 @@
 <div class="container">
-    <div>
-        <label for="picture">Uploaded Images:</label> 
-    <div ng-repeat = "image in filesFromDB">
-        <img ng-src="{{image}}" height = "100">
+    <label for="picture">Images:</label> 
+        <div class="row-fluid" ng-repeat = "image in filesFromDB">
+            <div class="col-xs-2 thumbnail">
+            <img style="width: 200px; height: 200px" ng-src="{{image}}"/>
     </div>
     </div>
     <br>
     <br>
     <form>
         <input type="file" 
-               file-input="myFile" multiple />
+               file-input="myFile" maxlength="2" multiple />
         <li ng-repeat="file in myFile">{{file.name}}</li>
         <br>
         <br>

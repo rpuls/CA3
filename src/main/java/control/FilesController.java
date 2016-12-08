@@ -94,28 +94,7 @@ public class FilesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        
-//        IUserFacade facade = UserFacadeFactory.getInstance();
-//         List<Picture> files = facade.getFilesByShop(124);
-//         List<byte[]> images = new ArrayList();
-//        for (Picture image : files) {
-//            byte[] fileBytes = image.getContent();
-////            String fileName = image.getName();
-////            Shop shopId = image.getShop();
-////                FileOutputStream output =
-////                  new FileOutputStream("myFile");
-////	    output.write(fileBytes);
-////	    output.close();
-////            
-//            images.add(fileBytes);
-//            
-//        }
-//        
-//
-//                
-//                String json = new Gson().toJson(images);
-//                response.setContentType("application/json");
-//                response.getWriter().write(json);
+        processRequest(request, response);
     }
 
     /**

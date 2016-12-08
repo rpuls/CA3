@@ -31,10 +31,7 @@ angular.module('myApp.directives', [])
                             if (window.confirm(msg)) {
                                 scope.$eval(clickAction);
                                 event.preventDefault();
-//                            $location.path('/shopDetailsView');
                             }
-//                        if(event && !confirmed){
-//                        }
                         });
                     }
                 };
@@ -48,6 +45,12 @@ angular.module('myApp.directives', [])
                     var modelSetter = model.assign;
 
                     element.bind('change', function () {
+                        if(this.files.length>4){
+                            element[0].files = null;
+                            alert('TOO MANY FILES. Please select 4 images only.');
+                            scope = "";
+                            element[0].files = "";
+                        }
                         scope.$apply(function () {
                             modelSetter(scope, element[0].files);
                         });
