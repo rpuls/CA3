@@ -125,20 +125,23 @@ angular.module('myApp.controllers', []).
 
 
 
-        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, userFactory, filesFactory, $window, fileUpload, fileService) {
+        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, jwtHelper, filesFactory, $window, fileUpload, fileService) {
             $scope.shops = [];
             $scope.message = "";
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             $scope.files = filesFactory.setFiles({});
             $scope.filesFromDB = {};
-            ShopService.getUserShop(userFactory.getUser()).then(
+            var token = $window.sessionStorage.id_token;
+            var tokenPayload = jwtHelper.decodeToken(token);
+            var username = tokenPayload.username;
+            ShopService.getUserShop(username).then(
                     function (response) {
                         $scope.shops = response.data;
                         var shop = selectedShopFac.setSelectedShop($scope.shops[0]);
-                        fileService.getFiles(shop.id).success(function(data){
-                                $scope.filesFromDB=  data;
+                        fileService.getFiles(shop.id).success(function (data) {
+                            $scope.filesFromDB = data;
                         })
-                        ;
+                                ;
                     },
                     function (response) {
                         console.log(response.data.toString());

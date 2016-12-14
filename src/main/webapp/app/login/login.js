@@ -9,12 +9,11 @@ angular.module('myApp.login', ['ngRoute'])
                 });
             }])
 
-        .controller('LogInCtrl', ["$window", "$rootScope", "$location", "$http", "$scope", "$timeout", "userFactory", "userAdminFactory","jwtHelper", function ($window, $rootScope, $location, $http, $scope, $timeout, userFactory, userAdminFactory, jwtHelper) {
+        .controller('LogInCtrl', function ($window, $rootScope, $location, $http, $scope, $timeout, userAdminFactory, jwtHelper) {
 
                 $scope.login = function () {
                     $http.post('api/login', $scope.user)
                             .success(function (data) {
-                                userFactory.setUser($scope.user.username);
                                 $window.sessionStorage.id_token = data.token;
                                 $rootScope.$broadcast("loginEvent", {token: data.token, status: true});
                                 
@@ -40,4 +39,4 @@ angular.module('myApp.login', ['ngRoute'])
 //                      clearUserDetails($scope);
                             });
                 };
-            }]);
+            });
