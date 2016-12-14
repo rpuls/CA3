@@ -12,28 +12,32 @@ angular.module('myApp.factories', []).
             };
         })
 
-        .factory('userAdminFactory', function () {
-            var isAdmin = false;
-            var isUser = false;
+        .factory('loginFactory', function ($window, jwtHelper) {
             return {
-                getIsAdmin: function () {
-                    return isAdmin;
-                },
-                setIsAdmin: function (input) {
-                    isAdmin = input;
-                },
-                getIsUser: function () {
-                    return isUser;
-                },
-                setIsUser: function (input) {
-                    isUser = input;
+                setLoginInfoOnScope: function ($scope) {
+                    $scope.username = "";
+                    $scope.isAuthenticated = false;
+                    $scope.isAdmin = false;
+                    $scope.isUser = false;
+                    var token = $window.sessionStorage.id_token;
+                    if (token) {
+                        var tokenPayload = jwtHelper.decodeToken(token);
+                        $scope.username = tokenPayload.username;
+                        $scope.isAuthenticated = true;
+                        tokenPayload.roles.forEach(function (r) {
+                            if (r === "Admin") {
+                                $scope.isAdmin = true;
+                            } else if (r === "User") {
+                                $scope.isUser = true;
+                            }
+                        });
+                    }
                 }
             };
         })
         .factory('selectedCatFactory', function () {
 
-            var selectedCat = 'Show All'; 
-
+            var selectedCat = 'Show All';
             return {
                 getSelectedCat: function () {
                     return selectedCat;
@@ -57,18 +61,17 @@ angular.module('myApp.factories', []).
 
             };
         })
-        .factory('filesFactory', function(){
-          var files = {};
-         return {
+        .factory('filesFactory', function () {
+            var files = {};
+            return {
                 getFiles: function () {
                     return files;
                 },
-                setFiles:function(shopFiles){
+                setFiles: function (shopFiles) {
                     files = shopFiles;
                     return files;
                 }
             };
-            
         })
 
         .factory('geolocationFactory', function ($rootScope, $window, $q, mapPositionFactory) {
@@ -141,7 +144,6 @@ angular.module('myApp.factories', []).
                 },
                 position: {}
             };
-
             return retVal;
         })
         .factory('mapPositionFactory', function () {
@@ -154,7 +156,6 @@ angular.module('myApp.factories', []).
             positions.push({name: "Skt. Hans Torv", gps_pos: new google.maps.LatLng(55.690756, 12.560677), css_pos: {top: "61.4", left: "71.8"}});
             positions.push({name: "Blågårds Plads", gps_pos: new google.maps.LatLng(55.686393, 12.557151), css_pos: {top: "69", left: "18.4"}});
             positions.push({name: "Dr. Louises Bro", gps_pos: new google.maps.LatLng(55.686677, 12.563972), css_pos: {top: "90", left: "40"}});
-
             var func = {
                 calculateMapPos: function (realPosition) {
                     var yourCord = realPosition.coords;

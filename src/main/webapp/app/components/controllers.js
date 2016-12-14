@@ -41,14 +41,13 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "userAdminFactory", "filesFactory", function ($location, $http, $scope, $timeout, selectedShopFac, userAdminFactory, filesFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "loginFactory", "filesFactory", function ($location, $http, $scope, $timeout, selectedShopFac, loginFactory, filesFactory) {
 
                 $scope.shop = selectedShopFac.getSelectedShop();
 
                 $scope.saveShop = function () {
-                    isAdmin = userAdminFactory.getIsAdmin();
-                    isUser = userAdminFactory.getIsUser();
-                    if (isAdmin) {
+                    loginFactory.setLoginInfoOnScope($scope);
+                    if ($scope.isAdmin) {
                         if (angular.isUndefined($scope.shop.id)) {
                             $http.post('api/shop/add', $scope.shop)
                                     .success(function (data) {
@@ -71,7 +70,7 @@ angular.module('myApp.controllers', []).
                                     });
                         }
                     }
-                    if (isUser) {
+                    if ($scope.isUser) {
                         $http.post('api/shop/user/edit', $scope.shop)
                                 .success(function (data) {
                                     $timeout(function () {
@@ -125,16 +124,14 @@ angular.module('myApp.controllers', []).
 
 
 
-        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, jwtHelper, filesFactory, $window, fileUpload, fileService) {
+        .controller('userShopCtrl', function ($scope, $location, ShopService, selectedShopFac, filesFactory, $window, fileUpload, fileService, loginFactory) {
             $scope.shops = [];
             $scope.message = "";
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
             $scope.files = filesFactory.setFiles({});
             $scope.filesFromDB = {};
-            var token = $window.sessionStorage.id_token;
-            var tokenPayload = jwtHelper.decodeToken(token);
-            var username = tokenPayload.username;
-            ShopService.getUserShop(username).then(
+            loginFactory.setLoginInfoOnScope($scope);
+            ShopService.getUserShop($scope.username).then(
                     function (response) {
                         $scope.shops = response.data;
                         var shop = selectedShopFac.setSelectedShop($scope.shops[0]);

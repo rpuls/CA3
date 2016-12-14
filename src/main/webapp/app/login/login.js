@@ -9,34 +9,20 @@ angular.module('myApp.login', ['ngRoute'])
                 });
             }])
 
-        .controller('LogInCtrl', function ($window, $rootScope, $location, $http, $scope, $timeout, userAdminFactory, jwtHelper) {
+        .controller('LogInCtrl', function ($window, $rootScope, $location, $http, $scope, $timeout, jwtHelper) {
 
-                $scope.login = function () {
-                    $http.post('api/login', $scope.user)
-                            .success(function (data) {
-                                $window.sessionStorage.id_token = data.token;
-                                $rootScope.$broadcast("loginEvent", {token: data.token, status: true});
-                                
-                                var tokenPayload = jwtHelper.decodeToken(data.token);
-                                tokenPayload.roles.forEach(function (role) {
-                                if (role === "Admin") {
-                                    userAdminFactory.setIsAdmin(true);
-                                    console.log(role);
-                                }
-                                if (role === "User") {
-                                    userAdminFactory.setIsUser(true);
-                                    console.log(role);
-                                }
-                                });
-                                $timeout(function () {
-
-                                    $location.path("#/home");
-                                }, 100);
-                            })
-                            .error(function (data) {
-                                delete $window.sessionStorage.id_token;
-                                $rootScope.$broadcast("loginEvent", {token: null, status: false});
-//                      clearUserDetails($scope);
-                            });
-                };
-            });
+            $scope.login = function () {
+                $http.post('api/login', $scope.user)
+                        .success(function (data) {
+                            $window.sessionStorage.id_token = data.token;
+                            $rootScope.$broadcast("loginEvent", {token: data.token, status: true});
+                            $timeout(function () {
+                                $location.path("#/home");
+                            }, 100);
+                        })
+                        .error(function (data) {
+                            delete $window.sessionStorage.id_token;
+                            $rootScope.$broadcast("loginEvent", {token: null, status: false});
+                        });
+            };
+        });
