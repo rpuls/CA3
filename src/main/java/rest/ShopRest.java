@@ -167,7 +167,7 @@ public class ShopRest {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
     public String getAllShops() throws IOException, Exception {
-        googleUpdate();
+        //googleUpdate();
         List<entity.Shop> shops = facade.getAllShops();
         List<ShopMapper> shopmappers = new ArrayList<>();
 
@@ -204,7 +204,7 @@ public class ShopRest {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("usershop/{user}")
     public String getUserShop(@PathParam("user") String user) throws IOException, Exception {
-        googleUpdate();
+        //googleUpdate();
         List<entity.Shop> shops = facade.getShopByUser(user);
         List<jsonmappers.ShopMapper> shopmappers = new ArrayList<>();
 
