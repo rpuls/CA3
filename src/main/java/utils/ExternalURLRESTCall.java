@@ -11,9 +11,11 @@ import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.json.JsonException;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -29,7 +31,10 @@ public class ExternalURLRESTCall {
 
         // Convert to a JSON object to print data
         JsonParser jp = new JsonParser(); //from gson
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+        InputStream is = (InputStream) request.getContent();
+        String encoding = request.getContentEncoding();
+        InputStreamReader isr = new InputStreamReader(is, encoding);
+        JsonElement root = jp.parse(isr); //Convert the input stream to a json element
         JsonObject rootobj = root.getAsJsonObject();
         return rootobj;
     }
