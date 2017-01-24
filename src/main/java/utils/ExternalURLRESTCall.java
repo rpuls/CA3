@@ -23,7 +23,7 @@ import org.apache.commons.io.IOUtils;
  */
 public class ExternalURLRESTCall {
     
-    public static JsonObject readJsonFromUrl(String sURL) throws IOException, JsonException {
+    public static JsonObject readJsonFromUrl(String sURL, String encoding) throws IOException, JsonException {
         // Connect to the URL using java's native library
         URL url = new URL(sURL);
         HttpURLConnection request = (HttpURLConnection) url.openConnection();
@@ -32,7 +32,6 @@ public class ExternalURLRESTCall {
         // Convert to a JSON object to print data
         JsonParser jp = new JsonParser(); //from gson
         InputStream is = (InputStream) request.getContent();
-        String encoding = request.getContentEncoding();
         InputStreamReader isr = new InputStreamReader(is, encoding);
         JsonElement root = jp.parse(isr); //Convert the input stream to a json element
         JsonObject rootobj = root.getAsJsonObject();
