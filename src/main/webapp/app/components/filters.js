@@ -189,13 +189,20 @@ angular.module('myApp.filters', [])
                     return out;
                 } else {
                     switch (input.toUpperCase()) {
-                        case "STEFANSGADE" || "RANTZAUSGADE" || "GRIFFENFELDSGADE" || "ELMEGADE" || "BLEGDAMSVEJ" || "BRAGESGADE":
-                            out = "ef3638";
+                        case "ELMEGADE":
+                        case "STEFANSGADE":
+                        case "RANTZAUSGADE":
+                        case "GRIFFENFELDSGADE":
+                        case "BLEGDAMSVEJ":
+                        case "BRAGESGADE":
+                            out = "e01c2e";
                             break;
                         case "NØRREBROGADE":
                             out = "2b6a37";
                             break;
-                        case "MIMERSGADE" || "GULDBERGSGADE" || "SANKT HANS GADE":
+                        case "MIMERSGADE":
+                        case "GULDBERGSGADE":
+                        case "SANKT HANS GADE":
                             out = "ecbe1e";
                             break;
                         case "JAGTVEJ":
@@ -213,16 +220,22 @@ angular.module('myApp.filters', [])
                         case "MØLLEGADE":
                             out = "09bbb5";
                             break;
-                        case "BIRKEGADE" || "AHORNSGADE":
+                        case "BIRKEGADE":
+                        case "AHORNSGADE":
                             out = "f6902d";
                             break;
-                        case "BLÅGÅRDSGADE" || "FÆLLEDVEJ" || "NØRRE ALLE":
+                        case "BLÅGÅRDSGADE":
+                        case "FÆLLEDVEJ":
+                        case "NØRRE ALLE":
                             out = "253991";
                             break;
                         case "RAVNSBORGGADE" || "RYESGADE":
+                        case "RYESGADE":
                             out = "f0569b";
                             break;
-                        case "WESSELSGADE" || "PEBLINGE DOSSERING" || "SORTEDAM DOSSERING":
+                        case "WESSELSGADE":
+                        case "PEBLINGE DOSSERING":
+                        case "SORTEDAM DOSSERING":
                             out = "63be56";
                             break;
                         default:
