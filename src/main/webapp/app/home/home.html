@@ -1,6 +1,13 @@
 <style>
+    @font-face { font-family: Futura-Medium; src: url('ufonts.com_futura-medium.ttf'); }
+
+    @font-face {
+        font-family: "Futura-Medium";
+        src: url(ufonts.com_futura-medium.ttf) format("truetype");
+    }
+
     #mapDiv {
-        background-image: url("app/home/images/clean-map.png");
+        background-image: url("app/home/images/vectormap.svg");
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -11,6 +18,31 @@
         width:100%;
     }
 
+    #infoBox {
+        width: 25%;
+        left: 1.75%;
+        position: absolute;
+    }
+    
+    #infoHeader {
+        text-align: center;
+        font-size: 3vw;
+    }
+    
+    #infoTitle {
+        text-align: center;
+        font-size: 1.8vw;
+    }
+    
+    #infoCuratist {
+        text-align: center;
+        font-size: 1.1vw;
+    }
+
+    #infoText {
+        font-size: 1vw;
+        text-align: justify;
+    }
     .shop {
         position: absolute;
         font-size: 0.7vw;
@@ -34,9 +66,23 @@
     }
 
 </style>
+
 </head>
 <body>
     <div id="mapDiv" map-dir="">
+
+        <div id="infoBox">
+            <div id="infoHeader">N Ø R R E B RO</div>
+            <div id="infoTitle">ON-THE-GROUND</div>
+            <div id="infoCuratist">CURATED BY VINTRO 2017<br><br></div>
+            <div id="infoText">
+                Nørrebro is Copenhagen’s smallest and most 
+                densely populated neighbourhood. In the 1850s,
+                Nørrebro was developed to accommodate workers, artisans and factories. Today 100.000 people, 60 different cultures and nationalities, live or work side by side in Nørrebro’s tiny 2 by 2 km. Nørrebro is raw, dynamic and full of noise and contrasts. Social initiative, entrepreneurial edge and outspoken tolerance make pensioners, students, hipsters, foreigners, artists and outlaws care for and help each other. This map is 
+                designed to help you get lost and get around. Ask any local shopkeeper for advice, shortcuts and unmapped secrets.
+            </div>
+        </div>
+
         <div  ng-repeat="shop in shops| catFilter">
             <span ng-click="showDialog(shop)" class="shop" style="left: {{shop.x}}%; top: {{shop.y}}%; 
                   -webkit-transform: rotate({{shop.angle}}deg); 
@@ -44,10 +90,10 @@
                   -o-transform: rotate({{shop.angle}}deg);
                   transform: rotate({{shop.angle}}deg);">{{shop.name}}</span>
         </div>
-<!--        <div ng-controller="LocationController" class="yourPos" style="left: {{geolocation.mapPosition.css_pos.left}}%; top: {{geolocation.mapPosition.css_pos.top}}%;">
-            <img class="dot" ng-src="app/home/images/dot.png"/>
-            <span>You are {{geolocation.mapPosition.dist| distMeter}}m from {{geolocation.mapPosition.name}}</span>
-        </div>-->
+        <!--        <div ng-controller="LocationController" class="yourPos" style="left: {{geolocation.mapPosition.css_pos.left}}%; top: {{geolocation.mapPosition.css_pos.top}}%;">
+                    <img class="dot" ng-src="app/home/images/dot.png"/>
+                    <span>You are {{geolocation.mapPosition.dist| distMeter}}m from {{geolocation.mapPosition.name}}</span>
+                </div>-->
     </div>
 
 

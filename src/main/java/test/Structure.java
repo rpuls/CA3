@@ -13,18 +13,17 @@ import javax.persistence.Persistence;
 import security.IUser;
 import security.PasswordStorage;
 
-public class Structure
-{
-    public static void main(String[] args) throws PasswordStorage.CannotPerformOperationException
-    {
+public class Structure {
+
+    public static void main(String[] args) throws PasswordStorage.CannotPerformOperationException {
 //        HashMap<String, Object> puproperties = new HashMap();
 //        
 //        //puproperties.put("javax.persistence.sql-load-script-source", "scripts/ClearDB.sql");
 //        
-//        //Persistence.generateSchema("pu", puproperties);
+        Persistence.generateSchema("PU", null);
 //        
 //        Persistence.generateSchema("PU", null);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
 //        UserFacade facade = new UserFacade(emf);
 //        Role r = new Role("User");
 //        User p1 = new User("susu_user","test");
@@ -33,6 +32,6 @@ public class Structure
 //
 //        ShopJpaController ctrl = new ShopJpaController(emf);
 //        ctrl.setUserToAShop(p1, 298);
-        
+
     }
 }
