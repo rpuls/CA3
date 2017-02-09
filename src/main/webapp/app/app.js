@@ -8,6 +8,7 @@ angular.module('myApp', [
   'ui.bootstrap',
   'myApp.security',
   'myApp.home',
+  'myApp.contact',
   'myApp.login',
   'myApp.addShop',
   'myApp.shopDetailsView',
