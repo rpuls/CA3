@@ -72,11 +72,13 @@ angular.module('myApp.services', [])
                 };
             }])
         .service('fileService', ['$http','selectedShopFac', function ($http) {
-
-                this.getFiles = function (id) {
+                var files = {};
+                files.getFiles = function (id) {
                     var url = 'api/shop/images/' + id;
                     return $http.get(url); 
                 };
+                
+                return files;
 //                function blobToFile(theBlob, fileName) {
 //                    //A Blob() is almost a File() - it's just missing the two properties below which we will add
 //                    theBlob.lastModifiedDate = new Date();

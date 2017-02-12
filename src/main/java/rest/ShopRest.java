@@ -101,6 +101,9 @@ public class ShopRest {
             Shop s = facade.findShop(shopID);
             s.setPictures(pictures);
             List<String> filePaths = s.getImagesAsFilePaths();
+            for (String filePath : filePaths) {
+                System.out.println("PATHS:" + filePath);
+            }
             return gson.toJson(filePaths);
         }
         return "{Error: 'No images'}";

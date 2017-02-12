@@ -6,9 +6,11 @@ angular.module('myApp.controllers', []).
         controller('AppCtrl', function () {
 
         })
-        .controller('ShopCtrl', function ($scope, $location, $uibModal, $window, ShopService, CompressedShopService, selectedShopFac) {
+        .controller('ShopCtrl', function ($scope, $location, $uibModal, $window, ShopService, CompressedShopService, selectedShopFac, filesFactory, fileService) {
             $scope.shops = [];
             $scope.selectedShop = selectedShopFac.setSelectedShop({});
+            $scope.files = filesFactory.setFiles({});
+            $scope.filesFromDB = {};
 
             $scope.isUndefinedOrNull = function (val) {
                 return angular.isUndefined(val) || val === null;
@@ -31,6 +33,11 @@ angular.module('myApp.controllers', []).
             };
             $scope.showDialog = function (shop) {
                 $scope.selectedShop = selectedShopFac.setSelectedShop(shop);
+                fileService.getFiles(shop.id).success(function (data) {
+                            $scope.filesFromDB = data;
+                            console.dir($scope.filesFromDB);
+                        })
+                                ;
                 $uibModal.open({
                     templateUrl: 'app/home/shop/shop.html',
                     scope: $scope
@@ -153,8 +160,9 @@ angular.module('myApp.controllers', []).
                 var files = $scope.myFile;
 
                 console.dir(files);
-
+//                files.shop = selectedShopFac.getSelectedShop();
                 var uploadUrl = "upload";
+                console.dir(files);
                 fileUpload.uploadFileToUrl(files, uploadUrl);
                 $window.location.href = "#/home";
             };

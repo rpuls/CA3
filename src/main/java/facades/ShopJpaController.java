@@ -126,7 +126,7 @@ public class ShopJpaController implements Serializable {
             em.close();
         }
     }
-
+    
     public List<Shop> findShopByUser(String user) {
         EntityManager em = getEntityManager();
         try {

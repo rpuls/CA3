@@ -24,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.validation.constraints.Size;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -486,5 +487,20 @@ public class Shop implements Serializable {
         }
         return filePaths;
     }
+//    
+//    public String getAppPath()
+//{
+//    java.net.URL r = this.getClass().getClassLoader().getResource("web.xml");
+//    String filePath = r.getFile();
+//    String result = new File(new File(new File(filePath).getParent()).getParent()).getParent();
+//
+//    if (! filePath.contains("WEB-INF"))
+//    {
+//        // Assume we need to add the "WebContent" folder if using Jetty.
+//        result = FilenameUtils.concat(result, "WebContent");
+//    }
+//
+//    return result;
+//}
 
 }

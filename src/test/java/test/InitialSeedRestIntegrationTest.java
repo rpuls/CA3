@@ -196,7 +196,7 @@ public class InitialSeedRestIntegrationTest {
      * Test for adding a shop of class ShopRest
      */
     @Test
-    @Ignore //This is only ignored as we don't want to add same new shop everytime we run the test
+    @Ignore//This is only ignored as we don't want to add same new shop everytime we run the test
     public void testAddShop(){
         Category c = null;
         Shop newshop = new Shop("ToysRUS", "email@em.dk", "12345678", "Toy store", "www.trs.dk","www.facebook.com/test","www.instagram.com/test", Category.PAPE, "street", "123 abd");

@@ -77,11 +77,11 @@
             </div>
             <div class="row mb10 mt10">
                 <div class="col-xs-12">
-                    <div class="col-xs-3 nopad pr5">
-                        <img class="thumpnail-img pr5 invisible" src="app/home/images/vintro1.PNG" alt=""/>
-                        <div class="thumpnail-img-div" style="background-image: url(app/home/images/vintro1.PNG);"></div>
+                    <div class="col-xs-3 nopad pr5" ng-repeat = "image in filesFromDB">
+                        <img class="thumpnail-img pr5 invisible" ng-src="{{image}}" alt=""/>
+                        <div class="thumpnail-img-div" style="background-image: url({{image}});"></div>
                     </div>
-                    <div class="col-xs-3 nopad pr5">
+<!--                    <div class="col-xs-3 nopad pr5">
                         <img class="thumpnail-img pr5 invisible" src="app/home/images/vintro2.PNG" alt=""/>
                         <div class="thumpnail-img-div" style="background-image: url(app/home/images/vintro2.PNG);"></div>
                     </div>
@@ -92,9 +92,10 @@
                     <div class="col-xs-3 nopad">
                         <img class="thumpnail-img invisible" src="app/home/images/vintro1.PNG" alt=""/>
                         <div class="thumpnail-img-div" style="background-image: url(app/home/images/vintro1.PNG);"></div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
+        </div>
         </div>
         <div class="col-xs-12 col-md-6 mb10">
             <div class="">

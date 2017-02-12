@@ -59,6 +59,10 @@ public class FilesController extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(itemfactory);
         try {
             List<FileItem> items = upload.parseRequest(request);
+//            String[] shop = request.getParameterValues("shop");
+//            for (String str : shop) {
+//                System.out.println("REQUEST PARAM" + str);
+//            }
             List<Picture> files= new ArrayList();
             for (FileItem fileItem : items) {
                 String contentType = fileItem.getContentType();
