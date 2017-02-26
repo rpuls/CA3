@@ -181,5 +181,8 @@ public class UserFacade implements IUserFacade {
         return username;
     }
     
+    public Shop finShopById(int shopId){
+        return shopCtrl.findShop(shopId);
+    }
     
 }

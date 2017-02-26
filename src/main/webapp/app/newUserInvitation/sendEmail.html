@@ -1,0 +1,41 @@
+
+<div class="vertical-middle">
+
+    <div class="container">
+        <div class="col-md-12"  style="border: thin lightblue solid; border-radius: 5px;padding: 1em;">
+            <form class="form-horizontal">
+                <div class="col-md-6">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="ShopId" class="control-label col-xs-3"><span class="label label-info">SHOP ID:</span></label>
+                            <div class="col-xs-9">
+                                <input type="number" ng-model="email.shopId" class="form-control" id="shopId" placeholder="Shop's ID (e.g. 124)" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="EmailTo" class="control-label col-xs-3"><span class="label label-info">TO:</span></label>
+                            <div class="col-xs-9">
+                                <input rows="4" type="email" ng-model="email.emailTo" class="form-control" id="emailTo" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Subject" class="control-label col-xs-3"><span class="label label-info">SUBJECT: </span></label>
+                            <div class="col-xs-9">
+                                <input ng-model="email.subject" type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Message" class="control-label col-xs-3"><span class="label label-info">Message:</span></label>
+                            <div class="col-xs-9">
+                                <textarea rows="4" ng-model="email.message" class="form-control" id="message" placeholder="You can use html here for styling..." maxlength="500"></textarea>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                        <button ng-click="sendEmail()" > SEND </button>
+                </div>
+            </form>
+        </div>
+
+    </div>  
+</div>  

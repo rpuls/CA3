@@ -19,7 +19,8 @@ angular.module('myApp', [
   'myApp.directives',
   'myApp.factories',
   'myApp.services',
-  'myApp.controllers'
+  'myApp.controllers',
+  'myApp.newUserInvitation'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});

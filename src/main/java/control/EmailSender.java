@@ -14,23 +14,23 @@ public class EmailSender {
 	private MimeMessage generateMailMessage;
  
 //	public static void main(String args[]) throws AddressException, MessagingException {
-//		generateAndSendEmail("noreply.polygonproject@gmail.com", "Vintro");
+//		sendEmail("noreply.polygonproject@gmail.com", "Vintro");
 //	}
  
-	public void generateAndSendEmail(String msgTo, String shopName){
+	public void sendEmail(Mail inv){
             
             try{
 		mailServerProperties = System.getProperties();
 		mailServerProperties.put("mail.smtp.port", "587");
 		mailServerProperties.put("mail.smtp.auth", "true");
 		mailServerProperties.put("mail.smtp.starttls.enable", "true");
-//		System.out.println("MESSAGE SENT");
+		System.out.println("MESSAGE SENT" + inv.getEmailTo());
  
 		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
 		generateMailMessage = new MimeMessage(getMailSession);
-		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(msgTo)); //this should be changed
-		String subj = shopName + " NBROG Account";
-		String emailBody = getMessage();
+		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(inv.getEmailTo())); //this should be changed
+		String subj = inv.getSubject();
+		String emailBody = inv.getMessage();
                 generateMailMessage.setSubject(subj);
 		generateMailMessage.setContent(emailBody, "text/html");
 		Transport transport = getMailSession.getTransport("smtp");
@@ -41,12 +41,12 @@ public class EmailSender {
                 System.out.println(ex.getMessage());
             }
 	}
-
-    public String getMessage() {
-        return "To our valued shop owner,<br><br>" +
-                "Thank you for being part of Nørrebro-On-The-Ground. You can now login with the user name <b>VintroUser</b>"+
-                " and password <b>test</b>.<br><br> You can also change your password <a href=" + "--LINK HERE--"+
-                ">here.</a>" +
-                "<br><br> Regards, <br>NBROG Team"; //the generated password and new user name should be in here + link for update pw page
-    }
+//
+//    public String getMessage() {
+//        return "To our valued shop owner,<br><br>" +
+//                "Thank you for being part of Nørrebro-On-The-Ground. You can now login with the user name <b>VintroUser</b>"+
+//                " and password <b>test</b>.<br><br> You can also change your password <a href=" + "--LINK HERE--"+
+//                ">here.</a>" +
+//                "<br><br> Regards, <br>NBROG Team"; //the generated password and new user name should be in here + link for update pw page
+//    }
 }

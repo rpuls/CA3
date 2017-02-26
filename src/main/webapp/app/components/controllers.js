@@ -48,9 +48,10 @@ angular.module('myApp.controllers', []).
             };
         })
 
-        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "loginFactory", "filesFactory", function ($location, $http, $scope, $timeout, selectedShopFac, loginFactory, filesFactory) {
+        .controller('addShopCtrl', ["$location", "$http", "$scope", "$timeout", "selectedShopFac", "loginFactory","emailFactory", function ($location, $http, $scope, $timeout, selectedShopFac, loginFactory, emailFactory) {
 
-                $scope.shop = selectedShopFac.getSelectedShop();
+            $scope.shop = selectedShopFac.getSelectedShop();
+            $scope.email = emailFactory.getEmailInfo();
 
                 $scope.saveShop = function () {
                     loginFactory.setLoginInfoOnScope($scope);
@@ -90,6 +91,24 @@ angular.module('myApp.controllers', []).
                     }
 
                 };
+                $scope.sendEmail = function (){
+                $scope.email = emailFactory.setEmailInfo($scope.email);
+                console.dir($scope.email);
+                loginFactory.setLoginInfoOnScope($scope);
+                    if ($scope.isAdmin) {
+                        if (angular.isDefined($scope.email)) {
+                            $http.post('api/shop/email', $scope.email)
+                                    .success(function (data) {
+                                        $timeout(function () {
+                                            $location.path("#/home");
+                                        }, 100);
+                                    })
+                                    .error(function (data) {
+                                        console.log("ERROR");
+                                    });
+                                };
+                                };
+                                };
             }])
 
         .controller('catController', function ($scope, selectedCatFactory) {

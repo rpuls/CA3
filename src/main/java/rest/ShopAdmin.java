@@ -5,6 +5,8 @@
  */
 package rest;
 
+import control.EmailSender;
+import control.Mail;
 import entity.Shop;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -32,6 +34,7 @@ public class ShopAdmin {
     @Context
     private UriInfo context;
     private IUserFacade facade;
+     EmailSender sender = new EmailSender();
 
     /**
      * Creates a new instance of ShopAdmin
@@ -58,6 +61,16 @@ public class ShopAdmin {
         Shop s = gson.fromJson(content, Shop.class);
         s.setNeedGoogle(false);
         facade.updateShop(s);
+    }
+    
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("email")
+    public void sendEmail(String content) throws Exception {
+        Mail i = gson.fromJson(content, Mail.class);
+        System.out.println("EMAIL:" + i.getEmailTo());
+        sender.sendEmail(i);
     }
 
     

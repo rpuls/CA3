@@ -46,6 +46,7 @@
         <script src="app/components/factories.js"></script>
         <script src="app/components/services.js"></script>   
         <script src="app/components/controllers.js"></script>
+        <script src="app/newUserInvitation/email.js"></script>
         <!-- analytics tools -->
         <script src="app/analytics/googleanalytics.js"></script>
     </head>
@@ -69,6 +70,7 @@
                         <li><a href="#/shopsList" ng-show="isAdmin">Shop list</a></li>
                         <li><a href="#/positionTool" ng-show="isAdmin">Position tool</a></li>
                         <li><a href="#/shopDetailsView" ng-show="isUser">Shop details</a></li>
+                        <li><a href="#/sendEmail" ng-show="isAdmin">Send Invitation</a></li>
                         <li>
                             <select ng-controller="catController" class="form-control col-md-3" style="margin-top: 5%" ng-model="filterItem.category" ng-options="category.name |     categoryfilter for category  in filterOptions.categories" ng-change="setSelectCategory(filterItem.category.name)">
                             </select>

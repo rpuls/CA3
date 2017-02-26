@@ -48,6 +48,18 @@ angular.module('myApp.factories', []).
             };
         })
 
+        .factory('emailFactory', function () {
+            var email = {};
+            return {
+                getEmailInfo: function () {
+                    return email;
+                },
+                setEmailInfo: function (emailInfo) {
+                    email = emailInfo;
+                    return email;
+                }
+            };
+        })
         .factory('selectedShopFac', function () {
             var selectedShop = {};
             return {
