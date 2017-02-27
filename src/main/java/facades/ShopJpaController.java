@@ -185,7 +185,7 @@ public class ShopJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             Shop shop = em.find(Shop.class, shopId);
-
+            
             em.getTransaction().begin();
             shop.setUser(user);
             shop.setUsername(user.getUserName());

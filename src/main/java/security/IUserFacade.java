@@ -52,5 +52,7 @@ public interface IUserFacade {
     public List<TinyShopMapper> getTinyShops();
     
     public List<Picture> getFilesByShop(int shopId);
+
+    public void addUser(User user, int shopId);
     
 }

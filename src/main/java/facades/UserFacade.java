@@ -185,4 +185,11 @@ public class UserFacade implements IUserFacade {
         return shopCtrl.findShop(shopId);
     }
     
+    @Override
+    public void addUser(User user, int shopId) {
+        addUser(user);
+        shopCtrl.setUserToAShop(user, shopId);
+        System.out.println("USER FACADE -->");
+    }
+    
 }

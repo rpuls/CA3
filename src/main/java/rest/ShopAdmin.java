@@ -34,13 +34,14 @@ public class ShopAdmin {
     @Context
     private UriInfo context;
     private IUserFacade facade;
-     EmailSender sender = new EmailSender();
+     EmailSender sender;
 
     /**
      * Creates a new instance of ShopAdmin
      */
     public ShopAdmin() {
         facade = UserFacadeFactory.getInstance();
+        sender = new EmailSender();
     }
     
     @POST
@@ -69,6 +70,7 @@ public class ShopAdmin {
     @Path("email")
     public void sendEmail(String content) throws Exception {
         Mail i = gson.fromJson(content, Mail.class);
+        //i.createUser();
         System.out.println("EMAIL:" + i.getEmailTo());
         sender.sendEmail(i);
     }

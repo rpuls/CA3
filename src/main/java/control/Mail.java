@@ -1,10 +1,9 @@
 
 package control;
 
+import entity.Role;
 import entity.Shop;
-import facades.ShopJpaController;
-import facades.UserFacade;
-import javax.persistence.Persistence;
+import entity.User;
 import security.IUserFacade;
 import security.UserFacadeFactory;
 
@@ -44,7 +43,20 @@ public class Mail {
         return emailTo;
     }
 
-    
-    
-    
+    public void createUser(){
+        String username = shop.getName() + "_user";
+        String password = "test";
+        this.message = this.message + "<br><br>You can now login with the user name <b>" + username +
+                "</b> and password <b>" + password + "</b>.<br><a href = 'nbrog.dk'> nbrog.dk </a>";
+        try{
+        User user = new User(username, password);
+        Role userRole = new Role("User");
+        user.addRole(userRole);
+        facade.addUser(user, shopId);
+        }catch(Exception ex){
+            System.out.println("MAIL: CREATE USER ERROR "+ex.getMessage());
+        }
+        
+    }
+
 }
